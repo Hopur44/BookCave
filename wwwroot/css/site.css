@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: lightgray;
 }
 
 /* Wrapping element */
@@ -32,4 +33,16 @@
     .carousel-caption {
         display: none;
     }
+}
+
+footer{
+    background-color: gray;
+}
+
+footer > p {
+    color: white;
+}
+
+footer > a {
+    color: white;
 }
