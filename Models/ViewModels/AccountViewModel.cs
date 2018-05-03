@@ -1,6 +1,6 @@
-namespace BookCave.Models.EntityModels
+namespace BookCave.Models.ViewModels
 {
-    public class AccountEntityModel
+    public class AccountViewModel
     {
         public int Id {get; set;}
 
@@ -11,8 +11,6 @@ namespace BookCave.Models.EntityModels
         public string Image {get; set;}
 
         public string Email {get; set;}
-
-        public string Password {get; set;}
 
         public string FavouriteBook {get; set;}
     }
