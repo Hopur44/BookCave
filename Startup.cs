@@ -38,8 +38,8 @@ namespace BookCave
             services.ConfigureApplicationCookie(options =>{
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromHours(1);
-                options.LoginPath = "/Account/Index";
-                options.AccessDeniedPath = "/Account/Index";
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
 
