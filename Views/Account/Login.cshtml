@@ -1,0 +1,26 @@
+@model BookCave.Models.ViewModels.LoginViewModel
+<div class="container">
+    <div class="row">
+        <div class="panel panel-login col-md-6">
+            <div class="panel-heading">
+                <div class="panel-title">Sign In</div>
+            </div> 
+            <form asp-controller="Account" asp-action="Login" class="form-horizontal">
+                <div class="panel-body">
+                    <input class="form-control" type="email" placeholder="Email" asp-for="Email"/>
+                    <span asp-validation-for="Email"></span>
+                    <br/>
+                    <input class="form-control" type="password" placeholder="Password" asp-for="Password"/>
+                    <span asp-validation-for="Password"></span>
+                    <br/>
+                    <input type="checkbox" asp-for="RememberMe"/> Remember Me
+                    <br/>
+                    <input type="submit" value="Login" class="btn btn-default" />
+                </div>
+            </form>
+            <div class="panel panel-footer">
+                <a asp-area="" asp-controller="Account" asp-action="Register">Don't have an account?</a>
+            </div>
+        </div>
+    </div>
+</div>

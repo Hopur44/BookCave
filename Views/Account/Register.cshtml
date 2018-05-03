@@ -1,0 +1,27 @@
+@model BookCave.Models.ViewModels.RegisterViewModel
+<div class="container">
+    <div class="row">
+        <div class="panel panel-login col-md-6"> 
+            <div class="panel-heading">
+                <div class="panel-title">Sign Up</div>
+            </div> 
+            <form asp-controller="Account" asp-action="Register" class="form-horizontal">
+                <div class="panel-body">
+                    <input class="form-control" type="email" placeholder="Email" asp-for="Email">
+                    <span asp-validation-for="Email"></span>
+                    <br/>
+                    <input class="form-control" type="text" placeholder="Name" asp-for="FirstName">
+                    <span asp-validation-for="FirstName"></span>
+                    <br/>
+                    <input class="form-control" type="text" placeholder="password" asp-for="LastName">
+                    <span asp-validation-for="LastName"></span>
+                    <br/>
+                    <input class="form-control" type="password" placeholder="Password" asp-for="Password">
+                    <span asp-validation-for="Password"></span>
+                    <br/>
+                    <input type="submit" value="Register" class="btn btn-default">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
