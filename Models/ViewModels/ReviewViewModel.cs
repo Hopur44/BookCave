@@ -5,6 +5,6 @@ namespace BookCave.Models.ViewModels
         public int bookID { get; set; }
         public int customerID { get; set; }
         public int rating { get; set; }
-        public long comment { get; set; }
+        public string comment { get; set; }
     }
 }

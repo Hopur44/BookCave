@@ -1,3 +1,13 @@
-@model BookCave.Models.ViewModels.BookViewModel
-
-<h1>Ello m8</h1>
+@model BookCave.Models.ViewModels.BookDetailViewModel
+    <h1>@Model.Title</h1>
+    <h2>@Model.Author</h2>
+    <img src="@Model.Image" alt="Image of @Model.Title" height="300" width="200"> 
+    <p>@Model.Description</p>  <!-->Þarf að bæta desciption í allar bækur <\!--> 
+    <p>Buy Now @Model.Price$$$</p>
+<div id="reviewSection">
+    <h3>Reviews</h3>
+        @foreach(var Review in Model.ReviewList)
+        {
+            <p>[@Review.rating/5] @Review.comment</p>
+        }
+</div>
