@@ -29,8 +29,6 @@ namespace BookCave.Services
         }
         public List<BookViewModel> GetBooksByString(string SearchString)
         {
-
-
             var books = (from b in _db.Books
 
                             select new BookViewModel
@@ -49,5 +47,21 @@ namespace BookCave.Services
                        }
             return books;
         }
+        public BookViewModel GetBooksByID(int id)
+        {
+            var book = (from b in _db.Books
+            where b.Id == id
+                select new BookViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Price = b.Price,
+                    Rating = 5,
+                    Image = b.ImageLink,
+                    Author = b.Author
+                }).SingleOrDefault();
+            return book;
+        }
+        
     }
 }

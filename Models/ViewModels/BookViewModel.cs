@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace BookCave.Models.ViewModels
 {
     public class BookViewModel
@@ -14,6 +16,6 @@ namespace BookCave.Models.ViewModels
 
         public string Author {get; set;}
 
-        public int ReviewId {get; set;}
+        public List<ReviewViewModel> ReviewList {get; set;}
     }
 }

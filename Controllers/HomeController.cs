@@ -22,9 +22,10 @@ namespace BookCave.Controllers
             return View(books);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int Id)
         {
-            return View();
+            var book = _bookService.GetBooksByID(Id);
+            return View(book);
         }
         public IActionResult About()
         {
