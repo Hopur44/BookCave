@@ -1,0 +1,12 @@
+@model BookCave.Models.ViewModels.AccountViewModel
+<div class="row">
+    <h2>@Model.Name</h2>
+    <div class="col-md-3">
+        <img src="@Model.Image" alt="Image of MonkaShake" height="400" width="240"> 
+    </div>
+    <div class="col-md-3">
+        <p>Address: @Model.Address</p>
+        <p>Email: @Model.Email</p>
+        <p>Favourite Book: @Model.FavouriteBook</p>
+    </div>
+</div>

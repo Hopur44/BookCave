@@ -6,11 +6,11 @@ namespace BookCave.Models.EntityModels
 
         public string StreetName {get; set;}
 
-        public int houseNumber {get; set;}
+        public int HouseNumber {get; set;}
 
-        public int City {get; set;}
+        public string  City {get; set;}
 
-        public string country {get; set;}
+        public string Country {get; set;}
 
         public int ZipCode {get; set;}
     }
