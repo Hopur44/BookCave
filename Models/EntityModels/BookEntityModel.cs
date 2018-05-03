@@ -18,7 +18,7 @@ namespace BookCave.Models.EntityModels
 
         public string ImageLink {get; set;}
 
-        public DateTime PublishDate {get; set;}
+        public string PublishDate {get; set;}
 
         public int PageNumber {get; set;}
     }

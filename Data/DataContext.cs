@@ -7,6 +7,10 @@ namespace BookCave.Data
     {
         public DbSet<AccountEntityModel> Accounts {get; set;}
         public DbSet<BillingEntityModel> Billings {get; set;}
+        public DbSet<BookEntityModel> Books {get; set;}
+        public DbSet<OrderEntityModel> Orders {get; set;}
+        public DbSet<ReviewEntityModel> Reviews {get; set;}
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

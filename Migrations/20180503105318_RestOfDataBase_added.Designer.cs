@@ -11,9 +11,10 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180503105318_RestOfDataBase_added")]
+    partial class RestOfDataBase_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,15 +48,15 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("City");
-
-                    b.Property<string>("Country");
-
-                    b.Property<int>("HouseNumber");
+                    b.Property<int>("City");
 
                     b.Property<string>("StreetName");
 
                     b.Property<int>("ZipCode");
+
+                    b.Property<string>("country");
+
+                    b.Property<int>("houseNumber");
 
                     b.HasKey("Id");
 
@@ -79,7 +80,7 @@ namespace BookCave.Migrations
 
                     b.Property<int>("Price");
 
-                    b.Property<string>("PublishDate");
+                    b.Property<DateTime>("PublishDate");
 
                     b.Property<string>("Title");
 

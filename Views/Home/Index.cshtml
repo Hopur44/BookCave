@@ -1,0 +1,12 @@
+@model List<BookCave.Models.ViewModels.BookViewModel>
+<div class="container">
+        @foreach(var book in Model)
+        {    
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <img src="@book.Image" alt="Image of @book.Title" height="150" width="100"> 
+                <p>@book.Title</p><br/>
+                <p>@book.Rating</p><br/>
+                <p>@book.Price</p><br/>
+            </div>
+        }
+</div>
