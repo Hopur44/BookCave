@@ -47,21 +47,34 @@ namespace BookCave.Services
                        }
             return books;
         }
-        public BookViewModel GetBooksByID(int id)
+        public BookDetailViewModel GetBooksByID(int id)
         {
             var book = (from b in _db.Books
             where b.Id == id
-                select new BookViewModel
+                select new BookDetailViewModel
                 {
                     Id = b.Id,
                     Title = b.Title,
                     Price = b.Price,
                     Rating = 5,
                     Image = b.ImageLink,
-                    Author = b.Author
-                }).SingleOrDefault();
+                    Author = b.Author,
+                    ReviewList = GetReviewsByBookID(id)
+                }).SingleOrDefault(); 
             return book;
         }
-        
+        public List<ReviewViewModel> GetReviewsByBookID(int id)
+        {
+            var reviews = (from r in _db.Reviews
+            where r.BookId == id
+            select new ReviewViewModel
+            {
+                bookID = r.BookId,
+                customerID = r.CustomerId,
+                rating = r.Rating,
+                comment = r.comment
+            }).ToList();
+            return reviews;
+        }        
     }
 }
