@@ -16,9 +16,9 @@ namespace BookCave.Controllers
         {
             _bookService = new BookService();
         }
-        public IActionResult Index()
+        public IActionResult Index(string SearchString)
         {
-            var books = _bookService.GetAllBooks();
+            var books = _bookService.GetBooksByString(SearchString);
             return View(books);
         }
 
@@ -40,5 +40,7 @@ namespace BookCave.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
