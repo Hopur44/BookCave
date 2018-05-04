@@ -41,12 +41,28 @@ namespace BookCave.Services
                         Address = "", 
                         Image = "http://i0.kym-cdn.com/entries/icons/original/000/022/713/4.png",
                         Email = createAccount.Email,
-                        Password = createAccount.Password,
                         FavouriteBook = ""
                     };
                     _db.Add(newAccount);
                     _db.SaveChanges();
                     Console.WriteLine("new account Success");
+        }
+
+         public void EditAccount(EditAccountInputModel editAccount, string email)
+        {
+                    var account = GetAccount(email);
+                    var editedAccount = new AccountEntityModel
+                    {
+                        Id = account.Id,
+                        Name = account.Name,
+                        Email = account.Email,
+                        Address = editAccount.Address, 
+                        Image = editAccount.Image,
+                        FavouriteBook = editAccount.FavouriteBook
+                    };
+                    _db.Update(editedAccount);
+                    _db.SaveChanges();
+                    Console.WriteLine("Account was Successfully Edited");
         }
     }
 }

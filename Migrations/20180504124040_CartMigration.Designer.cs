@@ -11,9 +11,10 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180504124040_CartMigration")]
+    partial class CartMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +35,8 @@ namespace BookCave.Migrations
                     b.Property<string>("Image");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("Password");
 
                     b.HasKey("Id");
 
@@ -97,8 +100,6 @@ namespace BookCave.Migrations
 
                     b.Property<bool>("Finished");
 
-                    b.Property<int>("Quantity");
-
                     b.HasKey("Id");
 
                     b.ToTable("Cart");
@@ -114,8 +115,6 @@ namespace BookCave.Migrations
                     b.Property<int>("BookId");
 
                     b.Property<int>("CustomerId");
-
-                    b.Property<int>("Quantity");
 
                     b.HasKey("Id");
 

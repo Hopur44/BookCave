@@ -1,16 +1,12 @@
-namespace BookCave.Models.EntityModels
+namespace BookCave.Models.InputModels
 {
-    public class AccountEntityModel
+    public class EditAccountInputModel
     {
         public int Id {get; set;}
-
-        public string Name {get; set;}
-
+        
         public string Address  {get; set;}
 
         public string Image {get; set;}
-
-        public string Email {get; set;}
 
         public string FavouriteBook {get; set;}
     }
