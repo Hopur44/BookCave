@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BookCave.Controllers
 {
-    [Authorize]
     public class CartController : Controller
     {
         public IActionResult Index()
