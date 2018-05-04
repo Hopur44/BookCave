@@ -32,7 +32,7 @@
             <div class="navbar-collapse collapse">
                 <div class="col-sm-5 col-md-6">
                 <form asp-controller="Home" asp-action="Index" method="get">
-                    <div class="input-group">
+                    <div class="input-group search-bar">
                         <p>
                             <input type="text" class="form-control" placeholder="Search" name="SearchString">
                             <div class="input-group-btn">
@@ -44,10 +44,7 @@
                     </div>
                 </form>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Login">login/sign-up</a></li>
-                </ul>
+                @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>
