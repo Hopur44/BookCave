@@ -43,8 +43,9 @@ namespace BookCave.Services
                             }).ToList();
                         if(!string.IsNullOrEmpty(SearchString))
                         {
-                            books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) || b.Author.ToLower().Contains(SearchString.ToLower()) || b.Genre.ToLower().Contains(SearchString.ToLower())).ToList();
-                                  
+                            books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) 
+                            || b.Author.ToLower().Contains(SearchString.ToLower()) 
+                            || b.Genre.ToLower().Contains(SearchString.ToLower())).ToList();      
                        }
             return books;
         }

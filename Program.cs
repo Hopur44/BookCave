@@ -40,7 +40,6 @@ namespace BookCave
                         Address = "Heimili 22", 
                         Image = "http://i0.kym-cdn.com/entries/icons/original/000/022/713/4.png",
                         Email = "chunkylover69@hotmail.com",
-                        Password = "MonkaS1",
                         FavouriteBook = "Harry Potter Series"
                     },
                     new AccountEntityModel
@@ -49,7 +48,6 @@ namespace BookCave
                         Address = "Heimili 21", 
                         Image = "http://i0.kym-cdn.com/entries/icons/original/000/022/713/4.png",
                         Email = "seapower@gmail.com",
-                        Password = "MonkaS2",
                         FavouriteBook = "Game of Thrones"
                     }
                 };

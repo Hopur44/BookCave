@@ -9,6 +9,7 @@ using BookCave.Services;
 using Microsoft.AspNetCore.Identity;
 using BookCave.Models.ViewModels;
 using System.Security.Claims;
+using BookCave.Models.InputModels;
 
 namespace BookCave.Controllers
 {
@@ -82,6 +83,18 @@ namespace BookCave.Controllers
             string email = ((ClaimsIdentity) User.Identity).Name;
             var account = _accountService.GetAccount(email);
             return View(account);
+        }
+
+        public IActionResult EditAccount()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EditAccount(EditAccountInputModel model)
+        {
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            _accountService.EditAccount(model, email);
+            return RedirectToAction("MyAccount");
         }
     }
 }
