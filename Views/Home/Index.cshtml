@@ -1,15 +1,32 @@
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
 @model List<BookCave.Models.ViewModels.BookViewModel>
-<div class="container">
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+    @{
+        var claim = ((ClaimsIdentity) User.Identity);
+    }
+
+<div class="grid-container">
         @foreach(var book in Model)
         {   
-            <div class="col-lg-2 col-md-3 col-sm-4">
+            <div class="grid-items">
                 <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id"> 
                 <img src="@book.Image" alt="Image of @book.Title" height="150" width="100"> 
                 </a>
-                <p>@book.Title</p><br/>
-                <p>@book.Rating</p><br/>
-                <p>@book.Price</p><br/>
-                <button class="add-book" data-book=@book.Id data-price=@book.Price> add me</button>
+                <div class="grid-book-title">@book.Title</div>
+                <div>@book.Rating</div>
+                <div>@book.Price</div>
+                @if(SignInManager.IsSignedIn(User))
+                {
+                    <button class="add-user-book btn btn-success" data-book=@book.Id data-price=@book.Price> im logged in add</button>
+                }
+                else 
+                {
+                    <button class="add-book btn btn-danger" data-book=@book.Id data-price=@book.Price> im not logged in add</button>
+                }
+                
             </div>       
         }
 </div>
