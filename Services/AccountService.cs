@@ -31,7 +31,13 @@ namespace BookCave.Services
                             }).FirstOrDefault();
             return account;
         }
-
+         public int GetAccountId(string email)
+         {
+             var id = (from a in _db.Accounts
+                            where a.Email == email
+                            select a.Id).FirstOrDefault();
+            return id;
+         }
         public void CreateAccount(RegisterViewModel createAccount)
         {
                     string name = createAccount.FirstName + " " + createAccount.LastName;
