@@ -24,7 +24,7 @@ namespace BookCave.Services
                                 Rating = 5,
                                 Image = b.ImageLink,
                                 Author = b.Author
-                            }).ToList();
+                            }).OrderBy(b => b.Title).ToList();
             return books;
         }
         public List<BookViewModel> GetBooksByString(string SearchString)
@@ -38,12 +38,14 @@ namespace BookCave.Services
                                 Price = b.Price,
                                 Rating = 5,
                                 Image = b.ImageLink,
-                                Author = b.Author
+                                Author = b.Author,
+                                Genre = b.Genre
                             }).ToList();
                         if(!string.IsNullOrEmpty(SearchString))
                         {
-                            books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) ||
-                                        b.Author.ToLower().Contains(SearchString.ToLower())).ToList();
+                            books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) 
+                            || b.Author.ToLower().Contains(SearchString.ToLower()) 
+                            || b.Genre.ToLower().Contains(SearchString.ToLower())).ToList();      
                        }
             return books;
         }
@@ -75,6 +77,6 @@ namespace BookCave.Services
                 comment = r.comment
             }).ToList();
             return reviews;
-        }        
+        }  
     }
 }
