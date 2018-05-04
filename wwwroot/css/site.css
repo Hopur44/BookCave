@@ -46,3 +46,6 @@ footer > p {
 footer > a {
     color: white;
 }
+.search-bar {
+    padding-top:8px;
+}

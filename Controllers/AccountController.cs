@@ -42,6 +42,7 @@ namespace BookCave.Controllers
                 // add the concatenated first and last name as fullName in claims
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _signInManager.SignInAsync(user, false);
+                _accountService.CreateAccount(model);
                 return RedirectToAction("Index", "Home");
             }
             return View();
@@ -78,7 +79,8 @@ namespace BookCave.Controllers
 
         public IActionResult MyAccount()
         {
-            var account = _accountService.GetAccount();
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            var account = _accountService.GetAccount(email);
             return View(account);
         }
     }

@@ -1,7 +1,10 @@
 using BookCave.Data;
 using System.Linq;
 using BookCave.Models.ViewModels;
+using BookCave.Models.InputModels;
 using System.Collections.Generic;
+using BookCave.Models.EntityModels;
+using System;
 
 namespace BookCave.Services
 {
@@ -13,10 +16,10 @@ namespace BookCave.Services
             _db = new DataContext();
         }
 
-        public AccountViewModel GetAccount()
+        public AccountViewModel GetAccount(string email)
         {
             var account = (from a in _db.Accounts
-                            where a.Id == 1
+                            where a.Email == email
                             select new AccountViewModel
                             {
                                 Id = a.Id,
@@ -27,6 +30,23 @@ namespace BookCave.Services
                                 FavouriteBook = a.FavouriteBook
                             }).FirstOrDefault();
             return account;
+        }
+
+        public void CreateAccount(RegisterViewModel createAccount)
+        {
+                    string name = createAccount.FirstName + " " + createAccount.LastName;
+                    var newAccount = new AccountEntityModel
+                    {
+                        Name = name, 
+                        Address = "", 
+                        Image = "http://i0.kym-cdn.com/entries/icons/original/000/022/713/4.png",
+                        Email = createAccount.Email,
+                        Password = createAccount.Password,
+                        FavouriteBook = ""
+                    };
+                    _db.Add(newAccount);
+                    _db.SaveChanges();
+                    Console.WriteLine("new account Success");
         }
     }
 }
