@@ -1,4 +1,6 @@
-﻿body {
+﻿body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;padding-right:15px}.carousel-caption p{font-size:20px;line-height:1.4}.carousel-inner .item img[src$=".svg"]{width:100%}#qrCode{margin:15px}@media screen and (max-width:767px){.carousel-caption{display:none}}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: lightgray;
@@ -81,20 +83,137 @@ footer > a {
   }
 
 .grid-container {
-    
+    margin: 5px;
     display:  flex;
-    flex-wrap: wrap
-  }
-
-.grid-container >.grid-items {
-    border-style: solid;
-    /*background-color: blue;*/
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: center;
     
   }
 
-  .grid-container >.grid-items > .grid-book-title {
-    border-style: solid;
-    /*background-color: blue;*/
+.grid-container > .grid-items {
     
-  }
+    border-style: solid;
+    border-radius: 5%;
+    padding: 5px;
+    margin: 3px;
+    background-color: rgba(221, 221, 221, 0.651);
+    height: 350px;
+    width: 250px;
+    display: grid;
+    /*flex-wrap: wrap;
+    /*align-self: center;
+    justify-content: end;
+    /*background-color: blue;*/
+        
+}
+
+.grid-container >.grid-items > a {
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 5%;
+    background-color: rgba(161, 161, 154, 0.623);
+}
+
+.grid-container >.grid-items > a > img{
+    height: 200px; 
+    /*width: 150px;*/ 
+}
+
+
+.grid-container >.grid-items > .grid-book-title {
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    /*background-color: blue;*/
+
+}
+
+.grid-container >.grid-items > .grid-book-price {
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    /*background-color: blue;*/
+
+}
+
+.grid-container > .grid-items > .grid-book-rating {
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    /*background-color: blue;*/
+
+}
+
+.detail-grid-container {
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.grid-cart {
+    
+    border-radius: 5%;
+    
+    display: grid;
+    /*align-content: space-around;
+    justify-content: space-between;*/
+}
+
+.grid-cart-item:nth-child(odd) {
+    background-color: rgb(220, 232, 245, 0.5);
+    
+}
+
+.grid-cart-item:nth-child(even) {
+    
+    background-color: rgba(220, 245, 231, 0.836);
+}
+
+    
+.grid-cart > .grid-cart-item {
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /*flex: 1;*/
+    min-width: 0;
+}
+
+.grid-cart > .grid-cart-item > div {
+    display: flex;
+    align-items: center;
+}
+
+
+.grid-cart > .grid-cart-item > .grid-cart-item-title {
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: bold;  
+}
+.grid-cart > .grid-cart-item > .grid-cart-buttons {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: auto auto;
+    
+}
+
+.grid-cart > .grid-cart-item > .grid-cart-item-price > div {
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    /*text-overflow: ellipsis; virkar ekki*/
+}
+
+.grid-cart > .grid-cart-item > .grid-cart-buttons > div {
+    padding: 1px;
+    
+}
+
 

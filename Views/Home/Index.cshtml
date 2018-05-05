@@ -13,11 +13,12 @@
         {   
             <div class="grid-items">
                 <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id"> 
-                <img src="@book.Image" alt="Image of @book.Title" height="150" width="100"> 
+                    <img src="@book.Image" alt="Image of @book.Title"> 
                 </a>
                 <div class="grid-book-title">@book.Title</div>
-                <div>@book.Rating</div>
-                <div>@book.Price</div>
+                <div class="grid-book-rating">@book.Rating</div>
+                <div class="grid-book-price">@book.Price</div>
+
                 @if(SignInManager.IsSignedIn(User))
                 {
                     <button class="add-user-book btn btn-success" data-book=@book.Id data-price=@book.Price> im logged in add</button>

@@ -1,5 +1,5 @@
 ﻿// Write your JavaScript code.
-console.log("hello javascript code .js");
+console.log("hello javascript code min.js");
 //console.log("hello javascript code min.js");
 /*
 /* sign-in  
@@ -72,6 +72,20 @@ if ($("#cart").length > 0)  {
                         "<td>" + "<button " + addItemData + " class=\"cart-add btn btn-success\"> add one </button>" + "</td>" + 
                         "<td>" + "<button " + removeItemData + " class=\"cart-remove btn btn-danger\"> remove one </button>" + "</td>" + 
                     "</tr>");
+                //$(".insert-cart-items").show();
+                
+                $(".grid-cart").append(
+                    "<div class=grid-cart-item>" +
+                        "<div class=grid-cart-item-title>" + result[j].title + "</div>" +
+                        "<div class=grid-cart-item-price>" +
+                            "<div>" + "Quantity: " + result[j].quantity + "</div>" +
+                            "<div>" + "Price for each: " + result[j].price + "</div>" +
+                        "</div>" +
+                        "<div class=grid-cart-buttons>" +
+                            "<div>" + "<button " + addItemData + " class=\"cart-add btn btn-success\"> + </button>" + "</div>" +
+                            "<div>" + "<button " + removeItemData + " class=\"cart-remove btn btn-danger\"> - </button>" + "</div>" +
+                        "</div>" +
+                    "</div>");
             }     
             
             getTotalPrice(totalPrice);
