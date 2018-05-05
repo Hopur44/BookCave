@@ -19,6 +19,66 @@ $("#sign-in-disabled").on("click", function(e) {
 
 /* -------- Cart -------- */
 
+$(".user-cart-item-remove").on("click", function(e) {
+    // data -> useritemremove
+    console.log("found logged in user item remove");
+
+    //console.log("found logged in user item add");
+    //var quantity = $("#cart-logged-in-user .user-item-quantity").data("quantity");
+    //var price = $("#cart-logged-in-user .user-item-price").data("price");
+    var quantity = $(this).parent().parent().prev().children(".user-item-quantity").data("quantity");
+    var price = $(this).parent().parent().prev().children(".user-item-price").data("price");
+    var bookId = $(this).data("useritemremove");
+    console.log("Logged in user removing: " + bookId + " and price: " + price + " and quantity: " + quantity);
+    
+    var item = { 
+        itemId: bookId, 
+        quantity: quantity, 
+        price: price,
+        action: false // false is to remove one item
+    };
+
+    console.log(item);
+    sendActionToCartController(item);
+});
+
+$(".user-cart-item-add").on("click", function(e) {
+    // data -> useritemremove
+    console.log("found logged in user item add");
+    //var quantity = $("#cart-logged-in-user .user-item-quantity").data("quantity");
+    //var price = $("#cart-logged-in-user .user-item-price").data("price");
+    var quantity = $(this).parent().parent().prev().children(".user-item-quantity").data("quantity");
+    var price = $(this).parent().parent().prev().children(".user-item-price").data("price");
+    var bookId = $(this).data("useritemadd");
+    console.log("Logged in user adding: " + bookId + " and price: " + price + " and quantity: " + quantity);
+    
+    var item = { 
+        itemId: bookId, 
+        quantity: quantity, 
+        price: price,
+        action: true // true is add one more
+    };
+
+    console.log(item);
+    sendActionToCartController(item);
+    //$(".add-user-book").on("click", function(e) {
+        //console.log("hello user add button")
+});
+// logged in user cart operations
+if($("#cart-logged-in-user").length > 0) {
+
+
+    //$(".add-user-book").on("click", function(e) {
+    //$("#cart-table").on('click', ".cart-add", function() {
+    
+    /*
+    $(".user-cart-add") {
+        // data -> useritemadd
+    }
+    */
+
+};
+
 if ($("#cart").length > 0)  {
     console.log("found cart");
     var allItemsInCart = [];
@@ -180,6 +240,33 @@ function getTotalPrice(total) {
 /* -------------------------------- */
 
 /* Home/Index - the frontpage */
+
+function sendActionToCartController(item) {
+    var dataType = 'application/json; charset=utf-8';
+
+    if(!item && !item.itemId) {
+        return;
+    }
+    else {
+        $.ajax({
+            type: 'POST',
+            url: '/Cart/LoggedInUserCartAction',
+            dataType: 'json',
+            contentType: dataType,
+            data: JSON.stringify(item),
+            success: function(result) {
+    
+                console.log('Data received: ');
+                console.log(result);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Cart/LoggedInUserCartAction Post: Status: " + textStatus + " Error: " + errorThrown);
+            } 
+        }); 
+    } 
+}
+
+// logged in user adds one book to the cart
 $(".add-user-book").on("click", function(e) {
     //console.log("hello user add button");
     var bookId = $(this).data("book");
@@ -188,27 +275,28 @@ $(".add-user-book").on("click", function(e) {
     var item = { 
         itemId: bookId, 
         quantity: 1, 
-        price: price 
-    };
-    
-    var dataType = 'application/json; charset=utf-8';
-    $.ajax({
-        type: 'POST',
-        url: '/Cart/LoggedInUserAdd',
-        dataType: 'json',
-        contentType: dataType,
-        data: JSON.stringify(item),
-        success: function(result) {
-
-            console.log('Data received: ');
-            console.log(result);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log("Cart/LoggedInUserAdd Post: Status: " + textStatus + " Error: " + errorThrown);
-        } 
-    }); 
+        price: price,
+        action: true
+    };  
+    sendActionToCartController(item);
 });
 
+/*
+// logged in user removes one book from the cart
+$(".cart-remove-user-book").on("click", function(e) {
+    //console.log("hello user add button");
+    var bookId = $(this).data("book");
+    var price = $(this).data("price");
+    console.log("Logged in user removes: " + bookId + " and price: " + price);
+    var item = { 
+        itemId: bookId, 
+        quantity: 1, 
+        price: price,
+        action: 
+    };  
+    sendActionToCartController(item);
+});
+*/
 /* -------- Home/Index (frontpage) -------- */
 $(".add-book").on("click", function(e) {
     var bookId = $(this).data("book");

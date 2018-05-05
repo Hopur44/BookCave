@@ -32,19 +32,34 @@ namespace BookCave.Controllers
             //var cartItem2 = new CartViewModel() { ItemId = 2, Quantity = 20 };
             //allCartItems.Add(cartItem1);
             //allCartItems.Add(cartItem2);
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+
+            allCartItems = _cartService.GetUserCartItems(id);
             return View(allCartItems);
         }
 
         [HttpPost]
-        public IActionResult LoggedInUserAdd([FromBody] CartViewModel item)
+        public IActionResult LoggedInUserCartAction([FromBody] CartViewModel item)
         {
             // get items
             string email = ((ClaimsIdentity) User.Identity).Name;
             int id = _accountService.GetAccountId(email);
+            if(string.IsNullOrEmpty(email)) {
+                return Json(false);
+            }
             Console.WriteLine("this item:" + item.ItemId);
             
             //adds the item to the accounts cart
-            _cartService.InsertToCart(item, id);
+            if(item.Action == true) {
+                 _cartService.InsertToCart(item, id);
+            }
+            else 
+            {
+                Console.WriteLine("remove one item from the cart");
+                _cartService.RemoveOneFromCart(item, id); //(item, id);
+            }
+           
 
             var toReturn = true;
             return Json(toReturn);
@@ -105,6 +120,7 @@ namespace BookCave.Controllers
                     new CartViewModel { ItemId = 1, Quantity = 1, Price = 1000, Title = "SomeBook"  },
                     new CartViewModel { ItemId = 2, Quantity = 2, Price = 2000, Title = "AnotherBook" }
                 };
+                //bool item = true;
                 return Json(results);
                 // if the table cart from db is empty then show him the localStorage stuff.
             }

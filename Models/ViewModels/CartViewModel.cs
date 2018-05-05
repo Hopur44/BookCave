@@ -15,5 +15,8 @@ namespace BookCave.Models.ViewModels
 
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
+
+        [JsonProperty(PropertyName = "action")]
+        public bool Action { get; set; }
     }
 }

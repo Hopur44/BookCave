@@ -15,6 +15,20 @@ namespace BookCave.Services
             _db = new DataContext();
         }
 
+        public List<CartViewModel> GetUserCartItems(int userId)
+        {
+            var userCart = (from c in _db.Cart
+            join b in _db.Books on c.BookId equals b.Id 
+            where c.AccountId == userId
+                select new CartViewModel
+                {
+                    ItemId = c.BookId,
+                    Title = b.Title,
+                    Price = b.Price,
+                    Quantity = c.Quantity
+                }).ToList();
+            return userCart;
+        }
         public CartViewModel GetBooksByID(int id)
         {
             var book = (from b in _db.Books
