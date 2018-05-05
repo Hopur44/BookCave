@@ -180,16 +180,14 @@ namespace BookCave
                 {
                     new BillingEntityModel
                     {
-                        StreetName = "Heimili",
-                        HouseNumber = 21,
+                        StreetAddress = "Heimili 21",
                         City = "Reykjavik",
                         Country = "Iceland",
                         ZipCode = 112                        
                     },
                     new BillingEntityModel
                     {
-                        StreetName = "Heimili",
-                        HouseNumber = 22,
+                        StreetAddress = "Heimili 22",
                         City = "Selfoss",
                         Country = "Iceland",
                         ZipCode = 800                        

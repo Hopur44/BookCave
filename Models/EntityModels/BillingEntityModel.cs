@@ -4,9 +4,7 @@ namespace BookCave.Models.EntityModels
     {
         public int Id {get; set;}
 
-        public string StreetName {get; set;}
-
-        public int HouseNumber {get; set;}
+        public string StreetAddress {get; set;}
 
         public string  City {get; set;}
 

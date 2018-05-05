@@ -1,0 +1,31 @@
+@model BookCave.Models.InputModels.BillingInputModel
+<div class="container">
+    <div class="row">
+        <div class="panel panel-login col-md-6"> 
+            <div class="panel-heading">
+                <div class="panel-title">Billing Information</div>
+            </div> 
+            <form asp-controller="Checkout" asp-action="Billing" class="form-horizontal">
+                <div class="panel-body">
+                    <input class="form-control" type="text" placeholder="Street Address" asp-for="StreetAddress">
+                    <span asp-validation-for="StreetAddress"></span>
+                    <br/>
+                    <input class="form-control" type="text" placeholder="City" asp-for="City">
+                    <span asp-validation-for="City"></span>
+                    <br/>
+                    <select class="form-control" asp-for="Country">
+                        <option value="Iceland">Iceland</option>
+                        <option value="England">England</option>
+                        <option value="USA">USA</option>
+                        <option value="Denmark">Denmark</option>
+                    </select>
+                    <br/>
+                    <input class="form-control" type="text" placeholder="Zip Code" asp-for="ZipCode">
+                    <span asp-validation-for="ZipCode"></span>
+
+                    <input type="submit" value="Register" class="btn btn-default">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

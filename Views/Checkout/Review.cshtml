@@ -1,0 +1,8 @@
+@model BookCave.Models.InputModels.BillingViewModel
+<h2>@Model.StreetAddress</h2>
+<h2>@Model.City</h2>
+<h2>@Model.Country</h2>
+<h2>@Model.ZipCode</h2>
+<form asp-controller="Checkout" asp-action="Review" class="form-horizontal">
+    <input type="submit" value="Save" class="btn btn-default">
+</form>
