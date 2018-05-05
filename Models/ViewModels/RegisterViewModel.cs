@@ -12,5 +12,8 @@ namespace BookCave.Models.ViewModels
         public string LastName {get; set;}
         [Required]
         public string Password {get; set;}
+        public string FavouriteBook {get; set;}
+        public string Image {get; set;}
+        public string Address {get; set;}
     }
 }

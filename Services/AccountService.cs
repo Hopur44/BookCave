@@ -44,10 +44,10 @@ namespace BookCave.Services
                     var newAccount = new AccountEntityModel
                     {
                         Name = name, 
-                        Address = "", 
-                        Image = "http://i0.kym-cdn.com/entries/icons/original/000/022/713/4.png",
+                        Address = createAccount.Address, 
+                        Image = createAccount.Image,
                         Email = createAccount.Email,
-                        FavouriteBook = ""
+                        FavouriteBook = createAccount.FavouriteBook
                     };
                     _db.Add(newAccount);
                     _db.SaveChanges();
@@ -57,6 +57,21 @@ namespace BookCave.Services
          public void EditAccount(EditAccountInputModel editAccount, string email)
         {
                     var account = GetAccount(email);
+                    /*three if statements to check if string from the textboxes are empty
+                        and gives them their right values if they are empty
+                    */ 
+                    if(editAccount.Address == null)
+                    {
+                        editAccount.Address = account.Address;
+                    }
+                    if(editAccount.Image == null)
+                    {
+                        editAccount.Image = account.Image;
+                    }
+                    if(editAccount.FavouriteBook == null)
+                    {
+                        editAccount.FavouriteBook = account.FavouriteBook;
+                    }
                     var editedAccount = new AccountEntityModel
                     {
                         Id = account.Id,

@@ -27,35 +27,32 @@ namespace BookCave.Services
                 }).SingleOrDefault();
             return book;
         }
-        public void InsertToCart(CartViewModel model, int id)
-        {
-            /* 
-            if(!_db.Cart.Any()) {
 
-            }
-            */
-            /*
-            var quantity = (from c in _db.Cart
-            where c.Id == id && model.ItemId == c.BookId 
-            select c.Quantity).SingleOrDefault();
+        public int FindQuanity(int accountId, int bookId)
+        {
+            return (from c in _db.Cart
+            where c.AccountId == accountId && c.BookId == bookId && c.Finished == false
+            select c.Quantity).FirstOrDefault();
+        }
+
+        public int FindCartId(int accountId, int bookId)
+        {
+            return (from c in _db.Cart
+            where c.AccountId == accountId && c.BookId == bookId && c.Finished == false
+            select c.Id).First();
+        }
+
+        public void InsertToCart(CartViewModel model, int accountId)
+        {
+            var quantity = FindQuanity(accountId,model.ItemId);
             Console.WriteLine("I'm inserting to cart table in database");
             Console.WriteLine("quantity is: " + quantity);
-            */
-            /*
-            foreach( var item in quantity)
-            {
-                Console.WriteLine("this is inside quantity");
-                Console.WriteLine(item);
-            }
-            */
-            //quantity++;
-
-            /*
+            
             if(quantity == 0) 
             {
                 var newItemInCart = new CartEntityModel
                 {
-                    AccountId = id,
+                    AccountId = accountId,
                     BookId = model.ItemId,
                     Quantity = 1,
                     Finished = false
@@ -65,21 +62,50 @@ namespace BookCave.Services
             } 
             else 
             {
-                //int breyta = quantity.Count() + 1;
+                var cartId = FindCartId(accountId,model.ItemId);
+                quantity++;
                 var newItemInCart = new CartEntityModel
                 {
-                    AccountId = id,
+                    Id = cartId,
+                    AccountId = accountId,
                     BookId = model.ItemId,
-                    Quantity = 99,
+                    Quantity = quantity,
                     Finished = false
                 };
                 _db.Update(newItemInCart);
             }
             
+            _db.SaveChanges();
             
+        }
+        public void RemoveOneFromCart(CartViewModel model, int accountId)
+        {
+            var quantity =  FindQuanity(accountId,model.ItemId);
+            var cartId = FindCartId(accountId,model.ItemId);
+
+            Console.WriteLine("quantity is: " + quantity);
+            
+                quantity--;
+                var newItemInCart = new CartEntityModel
+                {
+                    Id = cartId,
+                    AccountId = accountId,
+                    BookId = model.ItemId,
+                    Quantity = quantity,
+                    Finished = false
+                };
+                if(quantity == 0)
+                {
+                    _db.Remove(newItemInCart);
+                }
+                else
+                {
+                    _db.Update(newItemInCart);
+                }
+                
             
             _db.SaveChanges();
-            */
+            
         }
     }
 }

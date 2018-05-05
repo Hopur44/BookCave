@@ -7,17 +7,23 @@
             </div> 
             <form asp-controller="Account" asp-action="Register" class="form-horizontal">
                 <div class="panel-body">
-                    <input class="form-control" type="email" placeholder="Email" asp-for="Email">
+                    <input class="form-control" type="email" placeholder="Email(REQUIRED)" asp-for="Email">
                     <span asp-validation-for="Email"></span>
                     <br/>
-                    <input class="form-control" type="text" placeholder="First Name" asp-for="FirstName">
+                    <input class="form-control" type="text" placeholder="First Name(REQUIRED)" asp-for="FirstName">
                     <span asp-validation-for="FirstName"></span>
                     <br/>
-                    <input class="form-control" type="text" placeholder="Last Name" asp-for="LastName">
+                    <input class="form-control" type="text" placeholder="Last Name(REQUIRED)" asp-for="LastName">
                     <span asp-validation-for="LastName"></span>
                     <br/>
-                    <input class="form-control" type="password" placeholder="Password" asp-for="Password">
+                    <input class="form-control" type="password" placeholder="Password(REQUIRED)" asp-for="Password">
                     <span asp-validation-for="Password"></span>
+                    <br/>
+                    <input class="form-control" type="text" placeholder="Favourite Book" asp-for="FavouriteBook">
+                    <br/>
+                    <input class="form-control" type="text" placeholder="Your Image URL" asp-for="Image">
+                    <br/>
+                    <input class="form-control" type="text" placeholder="Address" asp-for="Address">
                     <br/>
                     <input type="submit" value="Register" class="btn btn-default">
                 </div>

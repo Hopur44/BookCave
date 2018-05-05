@@ -43,11 +43,8 @@ namespace BookCave.Controllers
             int id = _accountService.GetAccountId(email);
             Console.WriteLine("this item:" + item.ItemId);
             
-
+            //adds the item to the accounts cart
             _cartService.InsertToCart(item,id);
-            /*
-                db add to database cart table
-            */
 
             var toReturn = true;
             return Json(toReturn);

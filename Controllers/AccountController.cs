@@ -96,5 +96,10 @@ namespace BookCave.Controllers
             _accountService.EditAccount(model, email);
             return RedirectToAction("MyAccount");
         }
+
+        public IActionResult EditSuccess()
+        {
+            return Json("Changes Succesfully Made");
+        }
     }
 }
