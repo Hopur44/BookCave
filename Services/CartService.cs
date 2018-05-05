@@ -82,7 +82,10 @@ namespace BookCave.Services
         {
             var quantity =  FindQuanity(accountId,model.ItemId);
             var cartId = FindCartId(accountId,model.ItemId);
-
+            if(quantity == 0)
+            {
+                return;
+            }
             Console.WriteLine("quantity is: " + quantity);
             
                 quantity--;
