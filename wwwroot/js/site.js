@@ -122,7 +122,7 @@ $(".user-cart-item-clear-all").on("click", function(e) {
     $("#cart-logged-in-user .grid-cart").remove(); 
     // we set the price to be 0
     setTotalPrice(0);
-    console.log("not implemented yet");
+    
     //send ajax request to the controller/Cart/ClearCart to remove all
     // alert("we cleared your cart");
 

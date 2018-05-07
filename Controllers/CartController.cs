@@ -147,6 +147,10 @@ namespace BookCave.Controllers
             
             var userCart = _cartService.GetUserCartItems(id);
 
+            foreach(var item in userCart)
+            {
+                _cartService.RemoveCart(item, id);
+            }
             /* 
             // item þarf er model af cartViewModel
             foreach með userCart og nota _.cartService.RemoveCart(item, id) 
