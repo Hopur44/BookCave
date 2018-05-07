@@ -92,5 +92,21 @@ namespace BookCave.Services
             }).ToList();
             return reviews;
         }  
+        public List<BookViewModel> GetTopBooks(int n)
+        {
+            var books = (from b in _db.Books
+                select new BookViewModel
+                    {
+                        Id = b.Id,
+                        Title = b.Title,
+                        Price = b.Price,
+                        Rating = 5,
+                        Image = b.ImageLink,
+                        Author = b.Author
+                    }).OrderByDescending(b => b.Rating).Take(n).ToList();
+
+            return books;
+
+        }
     }
 }

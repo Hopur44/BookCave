@@ -96,5 +96,10 @@ namespace BookCave.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult TopTen()
+        {
+            var TopTenBooks = _bookService.GetTopBooks(10);
+            return View(TopTenBooks);
+        }
     }
 }

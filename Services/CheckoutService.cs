@@ -10,9 +10,11 @@ namespace BookCave.Services
     public class CheckoutService
     {
         private DataContext _db;
+        private CartService _cartService;
         public CheckoutService()
         {
             _db = new DataContext();
+            _cartService = new CartService();
         }
         public int GetBillingId(int accountId)
         {
@@ -26,6 +28,19 @@ namespace BookCave.Services
             return (from b in _db.Billings
                     where b.AccountId == accountId 
                     select b.Id).Any();
+        }
+
+        public BillingInputModel GetBilling(int billingId)
+        {
+            return (from b in _db.Billings
+                    where b.Id == billingId
+                    select new BillingInputModel
+                    {
+                        StreetAddress = b.StreetAddress,
+                        City = b.City,
+                        Country = b.Country,
+                        ZipCode = b.ZipCode
+                    }).FirstOrDefault();
         }
 
         public OrderViewModel GetReviewOrder(BillingInputModel billing, List<CartViewModel> userCart)
@@ -80,6 +95,7 @@ namespace BookCave.Services
                 };
                 _db.Add(newOrder);
                 //required to either delete the Cart or changes cart Finished to True
+                _cartService.RemoveCart(item,accountId);
             }
             _db.SaveChanges();
         }

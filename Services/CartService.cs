@@ -53,7 +53,22 @@ namespace BookCave.Services
         {
             return (from c in _db.Cart
             where c.AccountId == accountId && c.BookId == bookId && c.Finished == false
-            select c.Id).First();
+            select c.Id).FirstOrDefault();
+        }
+        public void RemoveCart(CartViewModel model, int accountId)
+        {
+            int bookId = model.ItemId;
+            var cartId = FindCartId(accountId, bookId);
+            var updateCart = new CartEntityModel
+            {
+                Id = cartId,
+                AccountId = accountId,
+                BookId = model.ItemId,
+                Quantity = model.Quantity,
+                Finished = true
+            };
+            _db.Remove(updateCart);
+            _db.SaveChanges();
         }
 
         public void InsertToCart(CartViewModel model, int accountId)
