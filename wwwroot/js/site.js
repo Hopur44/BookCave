@@ -125,6 +125,39 @@ $(".user-cart-item-clear-all").on("click", function(e) {
     console.log("not implemented yet");
     //send ajax request to the controller/Cart/ClearCart to remove all
     // alert("we cleared your cart");
+
+    //Cart/LoggedInUserCartClear
+
+    var dataType = 'application/json; charset=utf-8';
+    $.ajax({
+        type: 'POST',
+        url: '/Cart/LoggedInUserCartClear',
+        dataType: 'json',
+        contentType: dataType,
+        data: JSON.stringify(1),
+        success: function(result) {
+            console.log('Data received: ');
+            console.log(result);
+            
+            /*
+            $("#user-comments").append(
+                "<div>" + 
+                    "<p>" + result.user + " said:" + result.comment +  " rating: " + result.rating + "</p>" +
+                "</div>"
+            );
+            */
+            /*
+            if(result === false) {
+                window.location.href = "http://localhost:5000/Account/Login";
+            } else {
+                window.location.href = "http://localhost:5000/Checkout";
+            } 
+            */ 
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
+        } 
+    });
 });
 
 // Controller/Cart/Index
@@ -435,6 +468,116 @@ $(".add-book").on("click", function(e) {
     }
 });
 
+
+
+// Controller/Home/Details
+// all users
+// getting all comments
+if ($("#user-comments").length > 0)  {
+    console.log("--- load comments --- ");
+    //var bookId = $(this).find("#review-submit").data("id");
+    var bookId = $("#reviewSection").data("isbn");
+    console.log("book Id " +  bookId);
+    var dataType = 'application/json; charset=utf-8';
+    $.ajax({
+        type: 'POST',
+        url: '/Home/AllReviews',
+        dataType: 'json',
+        contentType: dataType,
+        data: JSON.stringify(bookId),
+        success: function(result) {
+            console.log('Data received: ');
+            console.log(result);
+
+            for(var i = 0; i < result.length; i++) {
+                $("#user-comments").append(
+                    "<div>" + 
+                        "<p> User: " + result[i].customerID + " said: " + result[i].comment +  " rating: " + result[i].rating + "</p>" +
+                    "</div>"
+                );
+            }
+            // for-loop í gegnum öll komment
+            // og appenda þeim inn
+            /*
+            $("#user-comments").append(
+                "<div>" + 
+                    "<p>" + result.user + " said:" + result.comment +  " rating: " + result.rating + "</p>" +
+                "</div>"
+            );
+            */
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
+        } 
+    });
+}
+
+// Controller/Home/Details
+// logged in user 
+// adding rating and comment on book
+$("#book-detail-review-form").on("submit", function(e) {
+    e.preventDefault(); // we prevent browser re-load
+    console.log("/Controller/Home/Details - logged in user - submit rating and comment");
+    console.log($(this).find("#review-submit").data("id"));
+    var bookId = $(this).find("#review-submit").data("id");
+    //console.log($("#user-comment").val());
+    //console.log($("#"))
+    //console.log(e);
+    
+    var dataArray = $("#book-detail-review-form").serializeArray();
+    // parseInt(text, 10);
+    var rating = parseInt(dataArray[0].value, 10);
+    //console.log(dataArray);
+    item = { 
+        id: bookId, 
+        rating: rating, 
+        comment: dataArray[1].value
+    }
+
+    console.log(item);
+
+    // þetta er óþarfi
+    var dataType = 'application/json; charset=utf-8';
+    $.ajax({
+        type: 'POST',
+        url: '/Home/AddComment',
+        dataType: 'json',
+        contentType: dataType,
+        data: JSON.stringify(item),
+        success: function(result) {
+            console.log('Data received: ');
+            console.log(result);
+            $("#user-comments").append(
+                "<div>" + 
+                    "<p>" + result.user + " said:" + result.comment +  " rating: " + result.rating + "</p>" +
+                "</div>"
+            );
+            /*
+            if(result === false) {
+                window.location.href = "http://localhost:5000/Account/Login";
+            } else {
+                window.location.href = "http://localhost:5000/Checkout";
+            } 
+            */ 
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
+        } 
+    });
+    /*
+    var failed = false;
+    $.post("Home/AddComment", dataArray, function(data, status) {
+        console.log(status);
+    }).fail(function(err) {
+        console.log(err);
+        failed = true;
+    });
+    if(failed === false) {
+        var markup = "<div> success </div>";
+        console.log(markup);
+    }
+    */
+});
 
 /*
     var dataType = 'application/json; charset=utf-8';

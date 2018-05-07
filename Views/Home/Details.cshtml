@@ -12,43 +12,79 @@
     <img src="@Model.Image" alt="Image of @Model.Title" height="300" width="200"> 
     <p>@Model.Description</p>
     <p>Buy Now @Model.Price Kr</p>
-<div id="reviewSection">
-    <h3>Reviews</h3>
-     @if(SignInManager.IsSignedIn(User))
-    {
-        <form asp-controller="Home" asp-action="Details" class="form-group row">
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                <label class="col-sm-2 col-form-label"></label>
-                <input type="radio" asp-for="@Model.Rating" value="1">
-                <input type="radio" asp-for="@Model.Rating" value="2">
-                <input type="radio" asp-for="@Model.Rating" value="3">
-                <input type="radio" asp-for="@Model.Rating" value="4">
-                <input type="radio" asp-for="@Model.Rating" value="5">
 
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                <textarea asp-for="@Model.Comment" placeholder="Write a Review" cols="50" rows="5"></textarea>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
-        </form>        
-    }
-    else 
-    {
-        <a asp-controller="Account" asp-action="Login">Login to to Write a review</a>
-    }
-        @foreach(var Review in Model.ReviewList)
+    <div id="reviewSection" data-isbn=@Model.Id>
+        <h3>Reviews</h3>
+        @if(SignInManager.IsSignedIn(User))
         {
-            <p>[@Review.rating/5] @Review.comment</p>
+            <form id="book-detail-review-form" class="form-group row">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <input type="radio" name="rating" value="1">
+                    <input type="radio" name="rating" value="2">
+                    <input type="radio" name="rating" value="3">
+                    <input type="radio" name="rating" value="4">
+                    <input type="radio" name="rating" value="5">
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                    <textarea id="user-comment" name="comment" placeholder="Write a Review" cols="50" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <button id="review-submit" data-id=@Model.Id class="btn btn-primary">Add comment</button>
+                    </div>
+                </div>
+            </form>        
         }
-</div>
+        else 
+        {
+            <a asp-controller="Account" asp-action="Login">Login to to Write a review</a>
+        }
+            <div id="user-comments">
+                <!--
+                @foreach(var Review in Model.ReviewList)
+                {   
+                    <div>
+                        <p>[@Review.rating/5] @Review.comment</p>
+                    </div>  
+                }
+                -->
+            </div>
+
+    </div>
+
+
+    <!--
+    <form asp-controller="Home" asp-action="Details" class="form-group row">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <input type="radio" asp-for="@Model.Rating" value="1">
+                    <input type="radio" asp-for="@Model.Rating" value="2">
+                    <input type="radio" asp-for="@Model.Rating" value="3">
+                    <input type="radio" asp-for="@Model.Rating" value="4">
+                    <input type="radio" asp-for="@Model.Rating" value="5">
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                    <textarea asp-for="@Model.Comment" placeholder="Write a Review" cols="50" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>     
+    -->

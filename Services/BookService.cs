@@ -86,6 +86,7 @@ namespace BookCave.Services
             {
                 bookID = r.BookId,
                 customerID = r.CustomerId,
+                //customerName = r
                 rating = r.Rating,
                 comment = r.comment
             }).ToList();

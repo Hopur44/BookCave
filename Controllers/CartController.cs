@@ -134,6 +134,39 @@ namespace BookCave.Controllers
             return Json(toReturn);
         }
 
+        // Logged in user clearing his cart
+        [HttpPost]
+        public IActionResult LoggedInUserCartClear()
+        {
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+            if(string.IsNullOrEmpty(email)) {
+                return Json(false);
+            }
+            Console.WriteLine("Logged in user clearing his cart");
+            
+            var userCart = _cartService.GetUserCartItems(id);
+
+            /* 
+            // item þarf er model af cartViewModel
+            foreach með userCart og nota _.cartService.RemoveCart(item, id) 
+             */
+            /*
+            //adds the item to the accounts cart
+            if(item.Action == true) {
+                 _cartService.InsertToCart(item, id);
+            }
+            else 
+            {
+                Console.WriteLine("remove one item from the cart");
+                _cartService.RemoveOneFromCart(item, id);
+            }
+            */
+
+            var toReturn = true;
+            return Json(toReturn);
+        }
+
         
         // óþarfi að hafa þetta.. af því að notandi sem er loggaður inn fer aldrei hingað
         // það er aðeins óinnskráður notandi sem kemur hingað.. þannig að óþarfi að nota ajax og
