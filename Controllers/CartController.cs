@@ -40,65 +40,15 @@ namespace BookCave.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoggedInUserCartAction([FromBody] CartViewModel item)
-        {
-            // get items
-            string email = ((ClaimsIdentity) User.Identity).Name;
-            int id = _accountService.GetAccountId(email);
-            if(string.IsNullOrEmpty(email)) {
-                return Json(false);
-            }
-            Console.WriteLine("this item:" + item.ItemId);
-            
-            //adds the item to the accounts cart
-            if(item.Action == true) {
-                 _cartService.InsertToCart(item, id);
-            }
-            else 
-            {
-                Console.WriteLine("remove one item from the cart");
-                _cartService.RemoveOneFromCart(item, id); //(item, id);
-            }
-           
-
-            var toReturn = true;
-            return Json(toReturn);
-        }
-
-        [HttpPost]
-        public IActionResult Buy([FromBody] IEnumerable<CartViewModel> items)
-        {
-            Console.WriteLine("Cart/Buy Post");
-
-            string email = ((ClaimsIdentity) User.Identity).Name;
-            Console.WriteLine(email);
-            var isLoggedIn = false;
-            if(string.IsNullOrEmpty(email)) 
-            {
-                Console.WriteLine("im not logged in");
-                //return RedirectToAction("Login", "Account");
-                
-                return Json(isLoggedIn);
-            } 
-            else 
-            {   
-                isLoggedIn = true;
-
-                // add to Cart table in database...
-                return Json(isLoggedIn);
-                //Console.WriteLine("im logged in");
-            }
-
-        }
-        [HttpPost]
         public IActionResult Index([FromBody] IEnumerable<CartViewModel> items)
         {
-            Console.WriteLine("Cart Post");
+            Console.WriteLine("Cart Post for logged in user");
 
             string email = ((ClaimsIdentity) User.Identity).Name;
             Console.WriteLine(email);
-            /* if the user is not logged in then show him what is in localStorage cart
-            else show the logged in user what is in his cart from the database */
+            
+            //if the user is not logged in then show him what is in localStorage cart
+            //else show the logged in user what is in his cart from the database
             if(string.IsNullOrEmpty(email)) 
             {
                 Console.WriteLine("im not logged in");
@@ -125,6 +75,94 @@ namespace BookCave.Controllers
                 // if the table cart from db is empty then show him the localStorage stuff.
             }
             return Json(allCartItems);
+        } 
+
+        [HttpPost]
+        public IActionResult LoggedInUserCheckCart([FromBody] CartViewModel item)
+        {
+            // get items
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+            if(string.IsNullOrEmpty(email)) {
+                return Json(false);
+            }
+
+            /*
+                1. Við erum hér ef  
+            */
+            
+            //Console.WriteLine("this item:" + item.ItemId);
+            
+            //adds the item to the accounts cart
+            /*
+            if(item.Action == true) {
+                 _cartService.InsertToCart(item, id);
+            }
+            else 
+            {
+                Console.WriteLine("remove one item from the cart");
+                _cartService.RemoveOneFromCart(item, id); //(item, id);
+            }
+            */
+            var toReturn = true;
+            return Json(toReturn);
         }
+
+        // Logged in user sends item through ajax to add it, remove it or clear his cart
+        [HttpPost]
+        public IActionResult LoggedInUserCartAction([FromBody] CartViewModel item)
+        {
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+            if(string.IsNullOrEmpty(email)) {
+                return Json(false);
+            }
+            Console.WriteLine("this item:" + item.ItemId);
+            
+            //adds the item to the accounts cart
+            if(item.Action == true) {
+                 _cartService.InsertToCart(item, id);
+            }
+            else 
+            {
+                Console.WriteLine("remove one item from the cart");
+                _cartService.RemoveOneFromCart(item, id);
+            }
+           
+
+            var toReturn = true;
+            return Json(toReturn);
+        }
+
+        
+        // óþarfi að hafa þetta.. af því að notandi sem er loggaður inn fer aldrei hingað
+        // það er aðeins óinnskráður notandi sem kemur hingað.. þannig að óþarfi að nota ajax og
+        // senda hingað.. núna er bara re-direct inni í .js skránni
+        /*
+        [HttpPost]
+        public IActionResult Buy([FromBody] IEnumerable<CartViewModel> items)
+        {
+            Console.WriteLine("Cart/Buy Post");
+
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            Console.WriteLine(email);
+            var isLoggedIn = false;
+            if(string.IsNullOrEmpty(email)) 
+            {
+                Console.WriteLine("im not logged in");
+                //return RedirectToAction("Login", "Account");
+                
+                return Json(isLoggedIn);
+            } 
+            else 
+            {   
+                isLoggedIn = true;
+                // add to Cart table in database...
+                return Json(isLoggedIn);
+                //Console.WriteLine("im logged in");
+            }
+
+        }
+        */
     }
 }
