@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using BookCave.Services;
 using BookCave.Models.InputModels;
 using BookCave.Models.ViewModels;
+using System.Security.Claims;
 
 namespace BookCave.Controllers
 {
@@ -16,10 +17,14 @@ namespace BookCave.Controllers
     public class CheckoutController : Controller
     {
         private CheckoutService _checkoutService;
+        private AccountService _accountService;
+        private CartService _cartService;
 
         public CheckoutController()
         {
             _checkoutService = new CheckoutService();
+            _accountService = new AccountService();
+            _cartService = new CartService();
         }
 
         [HttpGet]
@@ -30,12 +35,31 @@ namespace BookCave.Controllers
         [HttpPost]
         public IActionResult Billing(BillingInputModel billing)
         {
-            return RedirectToAction("Review", billing);
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int accountId = _accountService.GetAccountId(email);
+            var userCart = _cartService.GetUserCartItems(accountId);
+
+            _checkoutService.CreateBilling(billing,accountId);
+
+            var reviewOrder = _checkoutService.GetReviewOrder(billing, userCart);
+
+            return View("Review", reviewOrder);
         }
-        public IActionResult Review(BillingInputModel billing)
+        [HttpPost]
+        public IActionResult Review(OrderViewModel order)
         {
-            _checkoutService.CreateBilling(billing);
-            return RedirectToAction("Index","Home");
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int accountId = _accountService.GetAccountId(email);
+            var userCart = _cartService.GetUserCartItems(accountId);
+            int billingId = _checkoutService.GetBillingId(accountId);
+
+            _checkoutService.CreateOrder(userCart,accountId,billingId);
+            
+            return RedirectToAction("Index","Home");   
+        }
+        public IActionResult Order()
+        {
+            return View();
         }
     }
 }

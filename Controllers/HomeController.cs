@@ -7,26 +7,40 @@ using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
+using BookCave.Models.InputModels;
+using BookCave.Models.ViewModels;
+using System.Security.Claims;
 
 namespace BookCave.Controllers
 {
     public class HomeController : Controller
     {
         private BookService _bookService;
+        private AccountService _accountService;
         public HomeController()
         {
             _bookService = new BookService();
+            _accountService = new AccountService();
         }
         public IActionResult Index(string SearchString)
         {
             var books = _bookService.GetBooksByString(SearchString);
             return View(books);
         }
-
-        public IActionResult Details(int Id)
+        [HttpGet]
+        public IActionResult Details(int? Id)
         {
             var book = _bookService.GetBooksByID(Id);
             return View(book);
+        }
+        [HttpPost]
+        public IActionResult Details(ReviewInputModel review)
+        {
+            string email = ((ClaimsIdentity) User.Identity).Name;
+           int accountId = _accountService.GetAccountId(email);
+
+            _bookService.PostBookReview(review, accountId);
+            return RedirectToAction("Details", review.Id);
         }
         public IActionResult About()
         {

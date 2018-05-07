@@ -81,6 +81,46 @@ footer > a {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+.grid-container {
+    margin: 5px;
+    display:  flex;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: center;
+    
+  }
+  .grid-container > .grid-account {
+    
+    border-radius: 5%;
+    padding: 5px;
+    margin: 3px;
+    height: auto;
+    width: 350px;
+    display: grid;
+    /*flex-wrap: wrap;
+    /*align-self: center;
+    justify-content: end;
+    /*background-color: blue;*/
+        
+}
+
+.grid-container > .grid-items {
+    
+    border-style: solid;
+    border-radius: 5%;
+    padding: 5px;
+    margin: 3px;
+    background-color: rgba(221, 221, 221, 0.651);
+    height: 350px;
+    width: 250px;
+    display: grid;
+    /*flex-wrap: wrap;
+    /*align-self: center;
+    justify-content: end;
+    /*background-color: blue;*/
+        
 }
 
 /*
@@ -377,6 +417,10 @@ footer > a {
     padding: 1px;
 }
 
+.review-input {
+    background:rgba(255,255,255);
+    border:none;
+}
 
 /* fade in animation */
 .fade-in {

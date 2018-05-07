@@ -1,11 +1,52 @@
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
 @model BookCave.Models.ViewModels.BookDetailViewModel
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+    @{
+        var claim = ((ClaimsIdentity) User.Identity);
+    }
     <h1>@Model.Title</h1>
     <h2>@Model.Author</h2>
     <img src="@Model.Image" alt="Image of @Model.Title" height="300" width="200"> 
     <p>@Model.Description</p>
-    <p>Buy Now @Model.Price$$$</p>
+    <p>Buy Now @Model.Price Kr</p>
 <div id="reviewSection">
     <h3>Reviews</h3>
+     @if(SignInManager.IsSignedIn(User))
+    {
+        <form asp-controller="Home" asp-action="Details" class="form-group row">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                <label class="col-sm-2 col-form-label"></label>
+                <input type="radio" asp-for="@Model.Rating" value="1">
+                <input type="radio" asp-for="@Model.Rating" value="2">
+                <input type="radio" asp-for="@Model.Rating" value="3">
+                <input type="radio" asp-for="@Model.Rating" value="4">
+                <input type="radio" asp-for="@Model.Rating" value="5">
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                <textarea asp-for="@Model.Comment" placeholder="Write a Review" cols="50" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>        
+    }
+    else 
+    {
+        <a asp-controller="Account" asp-action="Login">Login to to Write a review</a>
+    }
         @foreach(var Review in Model.ReviewList)
         {
             <p>[@Review.rating/5] @Review.comment</p>
