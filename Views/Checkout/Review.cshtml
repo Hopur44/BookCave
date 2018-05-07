@@ -1,8 +1,18 @@
-@model BookCave.Models.InputModels.BillingViewModel
-<h2>@Model.StreetAddress</h2>
-<h2>@Model.City</h2>
-<h2>@Model.Country</h2>
-<h2>@Model.ZipCode</h2>
-<form asp-controller="Checkout" asp-action="Review" class="form-horizontal">
-    <input type="submit" value="Save" class="btn btn-default">
+@model BookCave.Models.ViewModels.OrderViewModel
+<div class="grid-cart"> 
+    @foreach(var item in Model.CartList) 
+    {
+        <div class="grid-cart-item-title"> @item.Title </div>
+            <div class="grid-cart-item-price">
+                <div class="user-item-quantity" data-quantity=@item.Quantity> Quantity: @item.Quantity </div>
+                <div class="user-item-price" data-price=@item.Price> Price for each: @item.Price </div> 
+            </div>
+    }
+</div>
+<h3>@Model.Billing.StreetAddress</h3>
+<h3>@Model.Billing.City</h3>
+<h3>@Model.Billing.Country</h3>
+<h3>@Model.Billing.ZipCode</h3>
+<form asp-controller="Checkout" asp-action="Review" class="form-group row">
+    <button type="submit" class="btn btn-primary">Order</button>
 </form>

@@ -32,7 +32,7 @@ namespace BookCave.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterInputModel model)
         {
             if(!ModelState.IsValid) {return View();}
             var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
@@ -55,7 +55,7 @@ namespace BookCave.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginInputModel model)
         {
             if(!ModelState.IsValid) {return View();}
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);

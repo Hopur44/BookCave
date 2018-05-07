@@ -2,6 +2,8 @@ using BookCave.Data;
 using System.Linq;
 using BookCave.Models.ViewModels;
 using System.Collections.Generic;
+using BookCave.Models.InputModels;
+using BookCave.Models.EntityModels;
 
 namespace BookCave.Services
 {
@@ -12,7 +14,18 @@ namespace BookCave.Services
         {
             _db = new DataContext();
         }
-
+        public void PostBookReview(ReviewInputModel review, int accountId)
+        {
+            var newReview = new ReviewEntityModel
+            {
+                BookId = review.Id,
+                CustomerId = accountId,
+                Rating = review.Rating,
+                comment = review.Comment
+            };
+            _db.Add(newReview);
+            _db.SaveChanges();
+        }
         public List<BookViewModel> GetAllBooks()
         {
             var books = (from b in _db.Books
@@ -49,7 +62,7 @@ namespace BookCave.Services
                        }
             return books;
         }
-        public BookDetailViewModel GetBooksByID(int id)
+        public BookDetailViewModel GetBooksByID(int? id)
         {
             var book = (from b in _db.Books
             where b.Id == id
@@ -65,7 +78,7 @@ namespace BookCave.Services
                 }).SingleOrDefault(); 
             return book;
         }
-        public List<ReviewViewModel> GetReviewsByBookID(int id)
+        public List<ReviewViewModel> GetReviewsByBookID(int? id)
         {
             var reviews = (from r in _db.Reviews
             where r.BookId == id

@@ -38,7 +38,7 @@ namespace BookCave.Services
                             select a.Id).FirstOrDefault();
             return id;
          }
-        public void CreateAccount(RegisterViewModel createAccount)
+        public void CreateAccount(RegisterInputModel createAccount)
         {
                     string name = createAccount.FirstName + " " + createAccount.LastName;
                     var newAccount = new AccountEntityModel

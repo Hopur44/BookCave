@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BookCave.Models.InputModels;
 
 namespace BookCave.Models.ViewModels
 {
@@ -13,11 +14,11 @@ namespace BookCave.Models.ViewModels
         public int Price {get; set;}
 
         public int Rating {get; set;}
-
         public string Author {get; set;}
-        public long Description { get; set; }
+        public string Description { get; set; }
         public string Publisher { get; set; }
         public int NumberOfPage { get; set; }
         public List<ReviewViewModel> ReviewList {get; set;}
+        public string Comment {get; set;}
     }
 }

@@ -90,6 +90,20 @@ footer > a {
     justify-content: center;
     
   }
+  .grid-container > .grid-account {
+    
+    border-radius: 5%;
+    padding: 5px;
+    margin: 3px;
+    height: auto;
+    width: 350px;
+    display: grid;
+    /*flex-wrap: wrap;
+    /*align-self: center;
+    justify-content: end;
+    /*background-color: blue;*/
+        
+}
 
 .grid-container > .grid-items {
     
@@ -216,4 +230,8 @@ footer > a {
     
 }
 
+.review-input {
+    background:rgba(255,255,255);
+    border:none;
+}
 
