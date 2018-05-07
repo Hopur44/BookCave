@@ -171,6 +171,42 @@ namespace BookCave.Controllers
             return Json(toReturn);
         }
 
+        // logged in user
+        // adding everything from localStorage to database
+        [HttpPost]
+        public IActionResult AddAllCartItems([FromBody] List<CartViewModel> items)
+        {
+            Console.WriteLine("Cart/AddAllCartItems Post");
+
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+            Console.WriteLine(email);
+            var isLoggedIn = false;
+            if(string.IsNullOrEmpty(email)) 
+            {
+                
+                //return RedirectToAction("Login", "Account");
+                
+                return Json(isLoggedIn);
+            } 
+            else 
+            {   
+                Console.WriteLine("im not logged in and i'm adding everything from local");
+                isLoggedIn = true;
+
+                _cartService.InsertAllItems(items, id);
+                /*
+                foreach(var item in items)
+                {
+                    _cartService.InsertToCart(item, id);
+                }
+                */
+                // add to Cart table in database...
+                return Json(isLoggedIn);
+                //Console.WriteLine("im logged in");
+            }
+
+        }
         
         // óþarfi að hafa þetta.. af því að notandi sem er loggaður inn fer aldrei hingað
         // það er aðeins óinnskráður notandi sem kemur hingað.. þannig að óþarfi að nota ajax og

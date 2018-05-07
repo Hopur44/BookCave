@@ -257,10 +257,32 @@ if ($("#logged-in-empty-cart").length > 0)  {
     if(allItemsFromLocalStorage.length > 0) {
         console.log("we found items that were added on this device when you were not logged in");
         console.log(allItemsFromLocalStorage);
+
+        var dataType = 'application/json; charset=utf-8';
+        
+        $.ajax({
+            type: 'POST',
+            url: '/Cart/AddAllCartItems',
+            dataType: 'json',
+            contentType: dataType,
+            data: JSON.stringify(allItemsFromLocalStorage),
+            success: function(result) {
+                console.log('Data received: ');
+                console.log(result);
+                localStorage.clear();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Cart/LoggedInUserCartAction Post: Status: " + textStatus + " Error: " + errorThrown);
+            } 
+        });
+
+        //AddAllCartItems
         console.log("do you want us to add them to your cart?");
     } else {
         console.log("your localStorage cart is empty");
     }
+
+
         // if yes send everything with ajax 
         // and re-direct the user to cart.
 }

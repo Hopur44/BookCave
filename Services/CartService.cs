@@ -70,7 +70,7 @@ namespace BookCave.Services
             _db.Remove(updateCart);
             _db.SaveChanges();
         }
-
+            
         public void InsertToCart(CartViewModel model, int accountId)
         {
             var quantity = FindQuanity(accountId,model.ItemId);
@@ -88,7 +88,7 @@ namespace BookCave.Services
                 };
                 _db.Add(newItemInCart);
 
-            } 
+            }
             else 
             {
                 var cartId = FindCartId(accountId,model.ItemId);
@@ -103,9 +103,7 @@ namespace BookCave.Services
                 };
                 _db.Update(newItemInCart);
             }
-            
             _db.SaveChanges();
-            
         }
         public void RemoveOneFromCart(CartViewModel model, int accountId)
         {
@@ -134,10 +132,22 @@ namespace BookCave.Services
                 {
                     _db.Update(newItemInCart);
                 }
-                
-            
             _db.SaveChanges();
-            
+        }
+        public void InsertAllItems(List<CartViewModel> model, int accountId)
+        {
+            foreach(var item in model)
+            {
+                var cartItem = new CartEntityModel
+                {
+                    AccountId = accountId,
+                    BookId = item.ItemId,
+                    Quantity = item.Quantity,
+                    Finished = false
+                };
+                _db.Add(cartItem);
+            }
+            _db.SaveChanges();
         }
     }
 }
