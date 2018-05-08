@@ -55,11 +55,11 @@ namespace BookCave
                 db.AddRange(initialAccounts);
                 db.SaveChanges();
             }
-            //if(!db.Books.Any())
+            if(!db.Books.Any())
             {
                 var initialBooks = new List<BookEntityModel>()
                 {
-                    /*new BookEntityModel
+                    new BookEntityModel
                     {
                         Price = 2000,
                         Title = "Harry Potter and the Philosopher's Stone",
@@ -333,7 +333,7 @@ namespace BookCave
                         ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0022/9780002247399.jpg",
                         PublishDate = "2011",
                         PageNumber = 1040
-                    }, */
+                    }, 
                     new BookEntityModel 
                     {
                         Price = 2999,
@@ -476,6 +476,83 @@ namespace BookCave
                         ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/7181/9780718157838.jpg",
                         PublishDate = "2015",
                         PageNumber = 512
+                    }, 
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "Nineteen Eighty-four",
+                        Genre = "Science Fiction",
+                        Description ="Winston Smith works for the Ministry of Truth in London, chief city of Airstrip One. Big Brother stares out from every poster, the Thought Police uncover every act of betrayal. When Winston finds love with Julia, he discovers that life does not have to be dull and deadening, and awakens to new possibilities. Despite the police helicopters that hover and circle overhead, Winston and Julia begin to question the Party; they are drawn towards conspiracy. Yet Big Brother will not tolerate dissent - even in the mind. For those with original thoughts they invented Room 101. . . ",
+                        Author = "‎George Orwell",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1410/9780141036144.jpg",
+                        PublishDate = "2008",
+                        PageNumber = 336
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "Animal Farm",
+                        Genre = "Science Fiction",
+                        Description ="Mr Jones of Manor Farm is so lazy and drunken that one day he forgets to feed his livestock. The ensuing rebellion under the leadership of the pigs Napoleon and Snowball leads to the animals taking over the farm. Vowing to eliminate the terrible inequities of the farmyard, the renamed Animal Farm is organised to benefit all who walk on four legs. But as time passes, the ideals of the rebellion are corrupted, then forgotten. And something new and unexpected emerges. . .",
+                        Author = "‎George Orwell",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1410/9780141036137.jpg",
+                        PublishDate = "2008",
+                        PageNumber = 112
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "Earthsea : The First Four Books",
+                        Genre = "Science Fiction",
+                        Description ="Discover the late Ursula Le Guin's passionate and enthralling story of a young boy sent to a school of wizardry to learn the ways of magic in the opening quartet of the Earthsea story.",
+                        Author = "‎Ursula K. Le Guin",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/2419/9780241956878.jpg",
+                        PublishDate = "2012",
+                        PageNumber = 704
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "Dune",
+                        Genre = "Science Fiction",
+                        Description ="Melange, or 'spice', is the most valuable - and rarest - element in the universe; a drug that does everything from increasing a person's life-span to making intersteller travel possible. And it can only be found on a single planet: the inhospitable desert world Arrakis.Whoever controls Arrakis controls the spice. And whoever controls the spice controls the universe.",
+                        Author = "‎Frank Herbert",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/3409/9780340960196.jpg",
+                        PublishDate = "2015",
+                        PageNumber = 592
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "Fahrenheit 451",
+                        Genre = "Science Fiction",
+                        Description ="Guy Montag is a fireman. His job is to burn books, which are forbidden, being the source of all discord and unhappiness. Even so, Montag is unhappy; there is discord in his marriage. Are books hidden in his house? The Mechanical Hound of the Fire Department, armed with a lethal hypodermic, escorted by helicopters, is ready to track down those dissidents who defy society to preserve and read books.",
+                        Author = "‎Ray Bradbury",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0065/9780006546061.jpg",
+                        PublishDate = "1953",
+                        PageNumber = 592
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 3499,
+                        Title = "I, Robot",
+                        Genre = "Science Fiction",
+                        Description ="In these stories Isaac Asimov creates the Three Laws of Robotics and ushers in the Robot Age.",
+                        Author = "‎Isaac Asimov",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0074/9780007491513.jpg",
+                        PublishDate = "1950",
+                        PageNumber = 256
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 999,
+                        Title = "Journey to the Centre of the Earth",
+                        Genre = "Science Fiction",
+                        Description ="The father of science fiction, Jules Verne, invites you to join the intrepid and eccentric Professor Liedenbrock and his companions on a thrilling and dramatic expedition as they travel down a secret tunnel in a volcano in Iceland on a journey which will lead them to the centre of the earth. Along the way they encounter various hazards and witness many incredible sights such as the underground forest, illuminated by electricity, the Great Geyser, the battle between prehistoric monsters, the strange whispering gallery, giant insects and the vast subterranean sea with its ferocious whirlpool..",
+                        Author = "‎Jules Verne",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/8532/9781853262876.jpg",
+                        PublishDate = "1871",
+                        PageNumber = 208
                     },
                 };
                     db.AddRange(initialBooks);
