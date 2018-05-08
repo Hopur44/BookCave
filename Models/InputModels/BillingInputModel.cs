@@ -11,6 +11,6 @@ namespace BookCave.Models.InputModels
         [Required]
         public string Country {get; set;}
         [Required]
-        public int ZipCode {get; set;}
+        public int? ZipCode {get; set;}
     }
 }

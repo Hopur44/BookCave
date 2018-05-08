@@ -56,6 +56,7 @@ namespace BookCave.Services
         {
             if(BillingIdExist(accountId))
             {
+                //check wether the the existing billing has a order attached to it then do the else statement
                 var billingInput = new BillingEntityModel
                 {
                     Id = GetBillingId(accountId),

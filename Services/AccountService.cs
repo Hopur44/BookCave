@@ -15,7 +15,20 @@ namespace BookCave.Services
         {
             _db = new DataContext();
         }
-
+        public List<UserOrderViewModel> GetUsersOrders(int accountId)
+        {
+            return (from b in _db.Books
+                    join o in _db.Orders on b.Id equals o.BookId
+                    join a in _db.Accounts on o.CustomerId equals a.Id
+                    where a.Id == accountId
+                    select new UserOrderViewModel
+                    {
+                        OrderId = o.Id,
+                        Quantity = o.Quantity,
+                        Title = b.Title,
+                        Price = b.Price
+                    }).ToList();
+        }
         public AccountViewModel GetAccount(string email)
         {
             var account = (from a in _db.Accounts

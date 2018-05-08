@@ -1,0 +1,15 @@
+@model List<BookCave.Models.ViewModels.UserOrderViewModel>
+<div class="user-grid-cart fade-in">
+    <div class="grid-cart">
+            @foreach(var item in Model) 
+            {
+                <div class="grid-cart-item">
+                    <div class="grid-cart-item-title"> @item.Title </div>
+                    <div class="grid-cart-item-price">
+                        <div class="user-item-quantity" data-quantity=@item.Quantity> Quantity: @item.Quantity </div>
+                        <div class="user-item-price" data-price=@item.Price> Price for each: @item.Price </div> 
+                    </div>
+                </div>
+            }
+    </div>
+</div>

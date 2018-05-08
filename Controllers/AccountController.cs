@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using BookCave.Models.ViewModels;
 using System.Security.Claims;
 using BookCave.Models.InputModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookCave.Controllers
 {
@@ -77,18 +78,19 @@ namespace BookCave.Controllers
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult MyAccount()
         {
             string email = ((ClaimsIdentity) User.Identity).Name;
             var account = _accountService.GetAccount(email);
             return View(account);
         }
-
+        [Authorize]
         public IActionResult EditAccount()
         {
             return View();
         }
+        [Authorize]
         [HttpPost]
         public IActionResult EditAccount(EditAccountInputModel model)
         {
@@ -96,7 +98,14 @@ namespace BookCave.Controllers
             _accountService.EditAccount(model, email);
             return RedirectToAction("MyAccount");
         }
-
+        [Authorize]
+        public IActionResult History()
+        {
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int accountId = _accountService.GetAccountId(email);
+            var orders = _accountService.GetUsersOrders(accountId);
+            return View(orders);
+        }
         public IActionResult EditSuccess()
         {
             return Json("Changes Succesfully Made");
