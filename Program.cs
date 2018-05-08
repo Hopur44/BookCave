@@ -55,11 +55,11 @@ namespace BookCave
                 db.AddRange(initialAccounts);
                 db.SaveChanges();
             }
-            //if(!db.Books.Any())
+            if(!db.Books.Any())
             {
                 var initialBooks = new List<BookEntityModel>()
                 {
-                    /*new BookEntityModel
+                    new BookEntityModel
                     {
                         Price = 2000,
                         Title = "Harry Potter and the Philosopher's Stone",
@@ -278,7 +278,7 @@ namespace BookCave
                         ImageLink = "https://upload.wikimedia.org/wikipedia/en/4/48/The_visitor_book.jpg",
                         PublishDate = "2000",
                         PageNumber = 512
-                    },*/
+                    },
                     new BookEntityModel 
                     {
                         Price = 2999,
