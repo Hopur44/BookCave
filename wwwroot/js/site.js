@@ -1,7 +1,63 @@
 ﻿// Write your JavaScript code.
 console.log("javascript code .js");
 
+//var totalCartQuantity = 0;
+//var userTotalCartQuantity = 0;
+/* -------- Header -------- */
+// cart-header
 
+// All Controllers
+// All users
+if ($(".cart-header").length > 0)  {
+    console.log("cart header");
+    //console.log($(".user-cart-header"));
+    console.log($(".cart-header"));
+
+    // localStorage til að sækja total
+    var total = 0;
+    var items = getAllItemsFromLocalStorage();
+    for(var i = 0; i < items.length; i++) {
+        total = total + items[i].quantity;
+    }
+    //console.log("total items from localStorage: " + total);
+    //$(".cart-header").attr('data-amount', total);
+
+    updateCartTotal(total)
+}
+
+if ($(".user-cart-header").length > 0)  {
+    console.log("user cart header");
+    console.log($(".user-cart-header"));
+    //console.log($(".user-cart-header").text("Cart: " + 5 + " items"));
+
+    //console.log("did I go here?");
+    // ajax til að sækja total cart items....
+
+    getTotalUserCartQuantity();
+    
+    
+}
+
+function getTotalUserCartQuantity() {
+    //url: '/Home/AllReviews',
+    //var dataType = 'application/json; charset=utf-8';
+    $.ajax({
+        type: 'GET',
+        url: '/Cart/GetTotalQuantity',
+        //dataType: 'json',
+        //contentType: dataType,
+        //data: JSON.stringify(1),
+        success: function(result) {
+            console.log('Data received: ');
+            console.log(result);
+            updateUserCartTotal(result);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
+            updateUserCartTotal(0);
+        } 
+    });
+}
 /* -------- Cart -------- */
 
 // Controller/Cart/Index
@@ -20,14 +76,35 @@ $(".user-cart-item-add").on("click", function(e) {
         action: true // true is add one more
     };
     
+    console.log("user-add-data");
+    console.log($(".user-cart-header").append("<div> hello </div>"));
+    
+    var amount = $(".user-cart-header").data("amount");
+    console.log("amount: " + amount);
+
     sendActionToCartController(item);
     alert("One item of BookTitle has been added to your cart");
-    // we update the quantity on the screen
+    
+    // we update the total cart items in the header
+    var userTotalCartQuantity = $(".user-cart-header").data("amount");
+    userTotalCartQuantity++;
+    updateUserCartTotal(userTotalCartQuantity); 
+    
+    // we update the item quantity on the screen 
     updateQuantityHtml(this, quantity+1);
     // we update the total price on the screen
     updateCartTotalPrice(item.price, true); // true is add price to totalPrice
 
 });
+
+/*
+function updateTotalQuantity(quantity) {
+    console.log("update total quantity");
+    console.log($(".user-cart-header"));
+    console.log($(".cart-header"));
+
+}
+*/
 
 // Controller/Cart/Index
 // logged in user
@@ -79,6 +156,11 @@ $(".user-cart-item-remove").on("click", function(e) {
     sendActionToCartController(item);
     alert("One item of BookTitle has been removed from your cart ");
     
+    // we update the total cart items in the header
+    var userTotalCartQuantity = $(".user-cart-header").data("amount");
+    userTotalCartQuantity--;
+    updateUserCartTotal(userTotalCartQuantity);
+
     // we update in totalPrice on the screen 
     updateCartTotalPrice(item.price, false); // false is deduct price from totalPrice
     // if quantity is going to be zero then we remove this row from the DOM
@@ -106,6 +188,11 @@ $(".user-cart-item-clear").on("click", function(e) {
     sendActionToCartController(item);
     alert("We removed BookTitle from your cart");
     
+    // we update the total cart items in the header
+    var userTotalCartQuantity = $(".user-cart-header").data("amount");
+    userTotalCartQuantity = userTotalCartQuantity - quantity;
+    updateUserCartTotal(userTotalCartQuantity);
+
     // we update in totalPrice on the screen 
     updateCartTotalPrice(price * quantity, false); // false is deduct price from totalPrice
     updateQuantityHtml(this, quantity-1);  
@@ -122,7 +209,7 @@ $(".user-cart-item-clear-all").on("click", function(e) {
     $("#cart-logged-in-user .grid-cart").remove(); 
     // we set the price to be 0
     setTotalPrice(0);
-    
+    updateUserCartTotal(0);
     //send ajax request to the controller/Cart/ClearCart to remove all
     // alert("we cleared your cart");
 
@@ -138,21 +225,6 @@ $(".user-cart-item-clear-all").on("click", function(e) {
         success: function(result) {
             console.log('Data received: ');
             console.log(result);
-            
-            /*
-            $("#user-comments").append(
-                "<div>" + 
-                    "<p>" + result.user + " said:" + result.comment +  " rating: " + result.rating + "</p>" +
-                "</div>"
-            );
-            */
-            /*
-            if(result === false) {
-                window.location.href = "http://localhost:5000/Account/Login";
-            } else {
-                window.location.href = "http://localhost:5000/Checkout";
-            } 
-            */ 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
@@ -325,11 +397,27 @@ function updateQuantityHtml (_this, quantity) {
     $(_this).parent().parent().prev().children(".user-item-quantity").text("Quantity: " + quantity); //.html("Quantity: " + quantity-1));
 }
 
+// logged in user updates the total cart items
+function updateUserCartTotal(totalCartQuantity) {
+    $(".user-cart-header").data("amount", totalCartQuantity);
+    $(".user-cart-header").attr('data-amount', totalCartQuantity);
+    $(".user-cart-header").text("Cart: " + totalCartQuantity + " items");
+}
+
+// not logged in user updates the total cart items
+function updateCartTotal(cartTotalQuantity) {
+    $(".cart-header").data("amount", cartTotalQuantity);
+    $(".cart-header").attr('data-amount', cartTotalQuantity);
+    $(".cart-header").text("Cart: " + cartTotalQuantity + " items");
+}
 // Controller/Cart/Index
 // not logged in user
 // add one item to the cart
 $(".grid-cart").on('click', ".cart-add", function() {
     
+    var cartTotalQuantity = $(".cart-header").data("amount");
+    cartTotalQuantity++;
+    updateCartTotal(cartTotalQuantity);
     // put the localStorage key together
     var itemToGet = getLocalStorageKey(this, "add");
     console.log("/Cart/Index - not logged in - adding one more book to the cart/localStorage");
@@ -356,6 +444,10 @@ function getLocalStorageKey(_this, action) {
 // not logged in user
 // remove one item from the cart
 $(".grid-cart").on('click', ".cart-remove", function() {
+
+    var cartTotalQuantity = $(".cart-header").data("amount");
+    cartTotalQuantity--;
+    updateCartTotal(cartTotalQuantity);
     // put the localStorage key together
     var itemToGet = getLocalStorageKey(this, "remove");
     console.log("/Cart/Index - not logged in - removing item from the cart");
@@ -382,6 +474,9 @@ $(".grid-cart").on('click', ".cart-remove", function() {
 // not logged in user 
 // clears one item from the cart
 $(".grid-cart").on('click', ".cart-clear-item", function() {
+
+    
+
     // put the localStorage key together
     var itemToGet = getLocalStorageKey(this, "removeall");
     console.log("/Cart/Index - not logged in - clearing item from the cart");
@@ -389,6 +484,11 @@ $(".grid-cart").on('click', ".cart-clear-item", function() {
     // get the item from localStorage
     var item = localStorage.getItem(itemToGet);
     item = JSON.parse(item);
+
+    // update the total cart items in the header
+    var cartTotalQuantity = $(".cart-header").data("amount");
+    cartTotalQuantity = cartTotalQuantity - item.quantity;
+    updateCartTotal(cartTotalQuantity);
 
     // we update the price
     updateCartTotalPrice(item.price * item.quantity, false);
@@ -406,6 +506,8 @@ $(".cart-item-clear-all").on("click", function(e) {
     console.log('im not logged in - clearing all the items from the cart');
     // update the total price on the screen to be "your cart is empty"
     setTotalPrice(0);
+    // we set the total cart items in the header to be 0
+    updateCartTotal(0);
     // clear localStorage
     localStorage.clear(); 
     // Remove all cart items from the DOM
@@ -458,16 +560,27 @@ $(".add-user-book").on("click", function(e) {
         action: true
     };  
     sendActionToCartController(item);
+    alert("we added one book to the cart");
+    // update the total cart items in the header
+    var userTotalCartQuantity = $(".user-cart-header").data("amount");
+    userTotalCartQuantity++;
+    updateUserCartTotal(userTotalCartQuantity);
 });
 
 // Controller/Home/Index
 // not logged in user 
 // adding book from front-page 
 $(".add-book").on("click", function(e) {
+
+    var cartTotalQuantity = $(".cart-header").data("amount");
+    cartTotalQuantity++;
+    updateCartTotal(cartTotalQuantity);
+
     // we get the localStorage key and then the item
     var storageKey = getLocalStorageKey(this, "book");
     var itemFromStorage = localStorage.getItem(storageKey);
     
+
     // if we get some item then the item exist, so we just increment quantity by 1
     if(itemFromStorage) {
         console.log("/Controller/Home/Index - Not logged in user - adding book to cart/localStorage");

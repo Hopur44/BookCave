@@ -13,7 +13,7 @@
     <form asp-action="LogOut" asp-controller="Account" method="POST">
         <ul class="nav navbar-nav navbar-right">
         <li>
-            <a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+            <a class="user-cart-header" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
         </li>
         <li>
         <a asp-area="" asp-controller="Account" asp-action="MyAccount">@claim</a>
@@ -28,7 +28,7 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>
-            <a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+            <a class="cart-header" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
         </li>
         <li>
             <a asp-area="" asp-controller="Account" asp-action="Login">Login/Register</a>
