@@ -45,11 +45,12 @@
         <div class="grid-home-aside-item"> <a asp-controller="Home" asp-action="TopTen"> <button> top 10 </button> </a> </div>
     </aside>
     <main class="grid-home-main">
-        <div class="grid-order-buttons"> 
-            <button class="grid-order-buttons-item btn btn-default btn-xs"> name </button>
-            <button class="grid-order-buttons-item btn btn-default btn-xs"> price </button>
-            <button class="grid-order-buttons-item btn btn-default btn-xs"> rating </button>
-            <button class="grid-order-buttons-item btn btn-default btn-xs"> bestsellers </button>
+        <div class="grid-order-buttons">
+            <span class="grid-order-buttons-item"> Order by: </span> 
+            <button id="order-by-title" class="grid-order-buttons-item btn btn-default btn-xs"> name </button>
+            <button id="order-by-price" class="grid-order-buttons-item btn btn-default btn-xs"> price </button>
+            <button id="order-by-rating" class="grid-order-buttons-item btn btn-default btn-xs"> rating </button>
+            
         </div>
         <div class="grid-container"> 
             @foreach(var book in Model)
@@ -58,8 +59,8 @@
                     <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id"> 
                         <img src="@book.Image" alt="Image of @book.Title"> 
                     </a>
-                    <div class="grid-book-title">@book.Title</div>
-                    <div class="grid-book-rating">@book.Rating</div>
+                    <div data-title="@book.Title" class="grid-book-title">@book.Title</div>
+                    <div data-rating=@book.Rating class="grid-book-rating">@book.Rating</div>
                     <div class="grid-book-price">@book.Price</div>
 
                     @if(SignInManager.IsSignedIn(User))

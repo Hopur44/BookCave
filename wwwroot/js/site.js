@@ -34,9 +34,10 @@ if ($(".user-cart-header").length > 0)  {
     // ajax til að sækja total cart items....
 
     getTotalUserCartQuantity();
-    
-    
 }
+
+
+
 
 function getTotalUserCartQuantity() {
     //url: '/Home/AllReviews',
@@ -714,6 +715,89 @@ $("#book-detail-review-form").on("submit", function(e) {
     */
 });
 
+// https://stackoverflow.com/questions/41439283/sorting-dom-elements-using-pure-js
+$("#order-by-price").on("click", function(e) { 
+    console.log("found order by name button");
+    console.log($(".grid-container"));
+    var parent = document.querySelector('.grid-container');
+    [].slice.call(parent.children)
+
+
+    .sort(function(a, b) {
+        // get text content in .price and return difference
+        return getPrice(a) - getPrice(b);
+        // iterate and append again in new sorted order
+      }).forEach(function(ele) {
+        parent.appendChild(ele);
+      })    
+});
+
+$("#order-by-rating").on("click", function(e) { 
+    console.log("found order by rating button");
+    console.log($(".grid-container"));
+    var parent = document.querySelector('.grid-container');
+    [].slice.call(parent.children)
+
+
+    .sort(function(a, b) {
+        // get text content in .price and return difference
+        return getRating(a) - getRating(b);
+        // iterate and append again in new sorted order
+      }).forEach(function(ele) {
+        parent.appendChild(ele);
+      })    
+});
+
+$("#order-by-title").on("click", function(e) { 
+    console.log("found order by name button");
+    console.log($(".grid-container"));
+    var parent = document.querySelector('.grid-container');
+    [].slice.call(parent.children)
+
+
+    .sort(function(a, b) {
+        // get text content in .price and return difference
+        var a = getName(a);
+        var b = getName(b);
+        if (a < b) {
+            return -1;
+        }
+        else if ( a > b) {
+            return 1;
+        } else {
+            return 0;
+        }
+        //return getName(a) - getName(b);
+        // iterate and append again in new sorted order
+      }).forEach(function(ele) {
+        parent.appendChild(ele);
+      })    
+});
+
+function getPrice(ele) {
+    var _this = ele.children[4];
+    var price = $(_this).data("price");
+    return price;
+}
+
+function getRating(ele) {
+    console.log("getRating");
+    console.log(ele);
+    var _this = ele.children[2];
+    console.log(_this)
+    var rating = $(_this).data("rating");
+    
+    //console.log(_this);
+    //console.log(price);
+    
+    return rating;
+}
+
+function getName(ele) {
+    var _this = ele.children[1];
+    var title = $(_this).data("title");
+    return title;
+}
 /*
     var dataType = 'application/json; charset=utf-8';
 
