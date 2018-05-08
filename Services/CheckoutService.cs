@@ -19,17 +19,24 @@ namespace BookCave.Services
         public int GetBillingId(int accountId)
         {
             return (from b in _db.Billings
-                    where b.AccountId == accountId 
+                    where b.AccountId == accountId && b.Finished == false
                     select b.Id).FirstOrDefault();
         }
-
+        
         public bool BillingIdExist(int accountId)
         {
             return (from b in _db.Billings
-                    where b.AccountId == accountId 
+                    where b.AccountId == accountId && b.Finished == false
                     select b.Id).Any();
         }
 
+        public bool OrderExist(int accountId)
+        {
+            return (from b in _db.Billings
+                    where b.AccountId == accountId && b.Finished == true
+                    select b.Id).Any();
+
+        }
         public BillingInputModel GetBilling(int billingId)
         {
             return (from b in _db.Billings
@@ -39,7 +46,11 @@ namespace BookCave.Services
                         StreetAddress = b.StreetAddress,
                         City = b.City,
                         Country = b.Country,
-                        ZipCode = b.ZipCode
+                        ZipCode = b.ZipCode,
+                        CardNumber = b.CardNumber,
+                        CardOwner = b.CardOwner,
+                        CvCode = b.CvCode,
+                        ExpireDate = b.ExpireDate
                     }).FirstOrDefault();
         }
 
@@ -52,33 +63,57 @@ namespace BookCave.Services
             };
         }
 
+        public void CreateBillingHelperFunction(BillingInputModel billing, int accountId)
+        {
+            var billingInput = new BillingEntityModel
+                {
+                    AccountId = accountId,
+                    StreetAddress = billing.StreetAddress,
+                    City = billing.City,
+                    Country = billing.Country,
+                    ZipCode = billing.ZipCode,
+                    Finished = false,
+                    CardOwner = billing.CardOwner,
+                    CardNumber = billing.CardNumber,
+                    ExpireDate = billing.ExpireDate,
+                    CvCode = billing.CvCode
+                };
+            _db.Add(billingInput);
+            _db.SaveChanges();
+        }
+
         public void CreateBilling(BillingInputModel billing, int accountId)
         {
             if(BillingIdExist(accountId))
             {
-                //check wether the the existing billing has a order attached to it then do the else statement
-                var billingInput = new BillingEntityModel
+                //check wether the the existing billing has an order attached to it then do an else statement
+                if(!OrderExist(accountId))
                 {
-                    Id = GetBillingId(accountId),
-                    AccountId = accountId,
-                    StreetAddress = billing.StreetAddress,
-                    City = billing.City,
-                    Country = billing.Country,
-                    ZipCode = billing.ZipCode
-                };
-                _db.Update(billingInput);               
+                    CreateBillingHelperFunction(billing, accountId);
+                }
+                else
+                {
+                    var billingInput = new BillingEntityModel
+                    {
+                        Id = GetBillingId(accountId),
+                        AccountId = accountId,
+                        StreetAddress = billing.StreetAddress,
+                        City = billing.City,
+                        Country = billing.Country,
+                        Finished = false,
+                        ZipCode = billing.ZipCode,
+                        CardOwner = billing.CardOwner,
+                        CardNumber = billing.CardNumber,
+                        ExpireDate = billing.ExpireDate,
+                        CvCode = billing.CvCode
+                    };
+                    _db.Update(billingInput);    
+                }
+                           
             }
             else
             {
-                var billingInput = new BillingEntityModel
-                {
-                    AccountId = accountId,
-                    StreetAddress = billing.StreetAddress,
-                    City = billing.City,
-                    Country = billing.Country,
-                    ZipCode = billing.ZipCode
-                };
-            _db.Add(billingInput);
+                CreateBillingHelperFunction(billing,accountId);
             }
             _db.SaveChanges();
         }
@@ -98,6 +133,23 @@ namespace BookCave.Services
                 //required to either delete the Cart or changes cart Finished to True
                 _cartService.RemoveCart(item,accountId);
             }
+            var billing = GetBilling(billingId);
+
+            var billingInput = new BillingEntityModel
+            {
+                Id = billingId,
+                AccountId = accountId,
+                StreetAddress = billing.StreetAddress,
+                City = billing.City,
+                Country = billing.Country,
+                Finished = true,
+                ZipCode = billing.ZipCode,
+                CardOwner = billing.CardOwner,
+                CardNumber = billing.CardNumber,
+                ExpireDate = billing.ExpireDate,
+                CvCode = billing.CvCode
+            };
+            _db.Update(billingInput);
             _db.SaveChanges();
         }
     }

@@ -4,6 +4,7 @@ using BookCave.Models.ViewModels;
 using System.Collections.Generic;
 using BookCave.Models.InputModels;
 using BookCave.Models.EntityModels;
+using System;
 
 namespace BookCave.Services
 {
@@ -40,6 +41,17 @@ namespace BookCave.Services
                             }).OrderBy(b => b.Title).ToList();
             return books;
         }
+        public int GetAverageRatingOfBook(int? bookId)
+        {
+            var rating = (from r in _db.Reviews
+            where r.BookId == bookId
+            select r.Rating).ToList();
+            if(rating == null)
+            {
+                return 0;
+            }
+            return Convert.ToInt32(rating.Average());
+        }
         public List<BookViewModel> GetBooksByString(string SearchString)
         {
             var books = (from b in _db.Books
@@ -49,7 +61,6 @@ namespace BookCave.Services
                                 Id = b.Id,
                                 Title = b.Title,
                                 Price = b.Price,
-                                Rating = 5,
                                 Image = b.ImageLink,
                                 Author = b.Author,
                                 Genre = b.Genre
@@ -64,6 +75,9 @@ namespace BookCave.Services
         }
         public BookDetailViewModel GetBooksByID(int? id)
         {
+            var reviewList = GetReviewsByBookID(id);
+            var bookRating = GetAverageRatingOfBook(id);
+            
             var book = (from b in _db.Books
             where b.Id == id
                 select new BookDetailViewModel
@@ -71,10 +85,12 @@ namespace BookCave.Services
                     Id = b.Id,
                     Title = b.Title,
                     Price = b.Price,
-                    Rating = 5,
+                    Description = b.Description,
                     Image = b.ImageLink,
                     Author = b.Author,
-                    ReviewList = GetReviewsByBookID(id)
+                    NumberOfPage = b.PageNumber,
+                    ReviewList = reviewList,
+                    Rating = bookRating
                 }).SingleOrDefault(); 
             return book;
         }

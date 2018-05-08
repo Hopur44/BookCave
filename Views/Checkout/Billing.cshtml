@@ -37,6 +37,14 @@
                             <br/>
                             <input class="form-control" type="text" placeholder="Zip Code" asp-for="ZipCode">
                             <span asp-validation-for="ZipCode"></span>
+                            <input class="form-control" type="text" placeholder="Name of Card owner" asp-for="CardOwner">
+                            <span asp-validation-for="CardOwner"></span>
+                            <input class="form-control" type="text" placeholder="Credit Card Number" asp-for="CardNumber">
+                            <span asp-validation-for="CardNumber"></span>
+                            <input class="form-control" type="text" placeholder="Cvv(3 digits on the card)" asp-for="CvCode">
+                            <span asp-validation-for="CvCode"></span>
+                            <input class="form-control" type="date" asp-for="ExpireDate">
+                            <span asp-validation-for="ExpireDate"></span>
 
                             <input type="submit" value="Register" class="btn btn-default">
                         </div>
