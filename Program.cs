@@ -55,11 +55,11 @@ namespace BookCave
                 db.AddRange(initialAccounts);
                 db.SaveChanges();
             }
-            if(!db.Books.Any())
+            //if(!db.Books.Any())
             {
                 var initialBooks = new List<BookEntityModel>()
                 {
-                    new BookEntityModel
+                    /*new BookEntityModel
                     {
                         Price = 2000,
                         Title = "Harry Potter and the Philosopher's Stone",
@@ -333,7 +333,150 @@ namespace BookCave
                         ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0022/9780002247399.jpg",
                         PublishDate = "2011",
                         PageNumber = 1040
-                    }
+                    }, */
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "A Feast for Crows",
+                        Genre = "Fantasy",
+                        Description ="The Lannisters are in power on the Iron Throne. The war in the Seven Kingdoms has burned itself out, but in its bitter aftermath new conflicts spark to life. The Martells of Dorne and the Starks of Winterfell seek vengeance for their dead. Euron Crow's Eye, as black a pirate as ever raised a sail, returns from the smoking ruins of Valyria to claim the Iron Isles.",
+                        Author = "‎George R. R. Martin",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0064/9780006486121.jpg",
+                        PublishDate = "2005",
+                        PageNumber = 753
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "Furiously Happy: A Funny Book About Horrible Things",
+                        Genre = "Comedy",
+                        Description ="In Furiously Happy, #1 New York Times bestselling author Jenny Lawson explores her lifelong battle with mental illness. A hysterical, ridiculous book about crippling depression and anxiety? That sounds like a terrible idea. But terrible ideas are what Jenny does best.",
+                        Author = "‎Jenny Lawson",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4472/9781447238348.jpg",
+                        PublishDate = "2015",
+                        PageNumber = 352
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "The Life-Changing Magic of Not Giving a F**k",
+                        Genre = "Comedy",
+                        Description ="The bestselling book everyone is talking about, revealing the surprising art of caring less and getting more.Are you stressed out, overbooked and underwhelmed by life? Fed up with pleasing everyone else before you please yourself? Then it's time to stop giving a f**k.",
+                        Author = "‎Jenny Lawson",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/7842/9781784298463.jpg",
+                        PublishDate = "2015",
+                        PageNumber = 224
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1999,
+                        Title = "This is Going to Hurt : Secret Diaries of a Junior Doctor",
+                        Genre = "Comedy",
+                        Description ="Welcome to 97-hour weeks. Welcome to life and death decisions. Welcome to a constant tsunami of bodily fluids. Welcome to earning less than the hospital parking meter. Wave goodbye to your friends and relationships . . . Welcome to the life of a junior doctor.",
+                        Author = "‎Adam Kay",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/5098/9781509858613.jpg",
+                        PublishDate = "2017",
+                        PageNumber = 288
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1490,
+                        Title = "Bossypants",
+                        Genre = "Comedy",
+                        Description ="At last, Tina Fey's story can be told. From her youthful days as a vicious nerd to her tour of duty on Saturday Night Live; from her passionately halfhearted pursuit of physical beauty to her life as a mother eating things off the floor; from her one-sided college romance to her nearly fatal honeymoon -- from the beginning of this paragraph to this final sentence. Tina Fey reveals all, and proves what we've all suspected: you're no one until someone calls you bossy.",
+                        Author = "‎Tina Fey",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/3160/9780316056892.jpg",
+                        PublishDate = "2013",
+                        PageNumber = 250
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1490,
+                        Title = "An Idiot Abroad : The Travel Diaries of Karl Pilkington",
+                        Genre = "Comedy",
+                        Description ="Karl Pilkington isn't keen on travelling. Given the choice, he'll go on holiday to Devon or Wales or, at a push, eat English food on a package holiday in Majorca. Which isn't exactly Michael Palin, is it? So what happened when he was convinced by Ricky Gervais and Stephen Merchant to go on an epic adventure to see the Seven Wonders of the World?",
+                        Author = "‎Karl Pilkington",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/8476/9781847679277.jpg",
+                        PublishDate = "2011",
+                        PageNumber = 240
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1490,
+                        Title = "Wreck This Journal",
+                        Genre = "Comedy",
+                        Description ="Think of Wreck This Journal as the anarchist's Artist's Way -- the book for those who've always wanted to draw outside the lines but were afraid to do it.For anyone who's ever wished to, but had trouble starting, keeping, or finishing a journal or sketchbook comes Wreck This Journal, an illustrated book featuring a subversive collection of suggestions, asking readers to muster up their best mistake - and mess-making abilities to fill the pages of the book (and destroy them).",
+                        Author = "‎Keri Smith",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/1419/9780141976143.jpg",
+                        PublishDate = "2014",
+                        PageNumber = 224
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "Call Me By Your Name",
+                        Genre = "Romance",
+                        Description ="Andre Aciman's Call Me by Your Name is the story of a sudden and powerful romance that blossoms between an adolescent boy and a summer guest at his parents' cliffside mansion on the Italian Riviera. Each is unprepared for the consequences of their attraction, when, during the restless summer weeks, unrelenting currents of obsession, fascination, and desire intensify their passion and test the charged ground between them. Recklessly, the two verge toward the one thing both fear they may never truly find again: total intimacy. It is an instant classic and one of the great love stories of our time.",
+                        Author = "‎Andre Aciman",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/7864/9781786495259.jpg",
+                        PublishDate = "2018",
+                        PageNumber = 256
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "The Husband's Secret",
+                        Genre = "Romance",
+                        Description ="Mother of three and wife of John-Paul, Cecilia discovers an old envelope in the attic. Written in her husband's hand, it says: to be opened only in the event of my death. Curious, she opens it - and time stops.John-Paul's letter confesses to a terrible mistake which, if revealed, would wreck their family as well as the lives of others.Cecilia wants to do the right thing, but right for who? If she protects her family by staying silent, the truth will worm through her heart. But if she reveals her husband's secret, she will hurt those she loves most . . .",
+                        Author = "‎Liane Moriarty",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4059/9781405911665.jpg",
+                        PublishDate = "2017",
+                        PageNumber = 432
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "The Course of Love",
+                        Genre = "Romance",
+                        Description ="This is a love story with a difference. From dating to marriage, from having kids to having affairs, it follows the progress of a single ordinary relationship: tender, messy, hilarious, painful, and entirely un-Romantic. It is a love story for the modern world, chronicling the daily intimacies, the blazing rows, the endless tiny gestures that make up a life shared between two people. Moving and deeply insightful, The Course of Love offers us a window into essential truths about the nature of love.",
+                        Author = "‎Alain de Botton",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/2419/9780241962138.jpg",
+                        PublishDate = "2017",
+                        PageNumber = 240
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "Six of Crows",
+                        Genre = "Romance",
+                        Description ="Criminal prodigy Kaz Brekker is offered a chance at a deadly heist that could make him rich beyond his wildest dreams - but he can't pull it off alone.",
+                        Author = "‎Leigh Bardugo",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/7806/9781780622286.jpg",
+                        PublishDate = "2016",
+                        PageNumber = 512
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "After You",
+                        Genre = "Romance",
+                        Description ="How do you move on after losing the person you loved? How do you build a life worth living? Louisa Clark is no longer just an ordinary girl living an ordinary life. After the transformative six months spent with Will Traynor, she is struggling without him. When an extraordinary accident forces Lou to return home to her family, she can’t help but feel she’s right back where she started.",
+                        Author = "‎Jojo Moyes",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4059/9781405909075.jpg",
+                        PublishDate = "2016",
+                        PageNumber = 448
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "Me Before You",
+                        Genre = "Romance",
+                        Description ="Will needed Lou as much as she needed him, but will her love be enough to save his life?",
+                        Author = "‎Jojo Moyes",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/7181/9780718157838.jpg",
+                        PublishDate = "2015",
+                        PageNumber = 512
+                    },
                 };
                     db.AddRange(initialBooks);
                     db.SaveChanges();  
