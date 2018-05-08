@@ -46,7 +46,7 @@ namespace BookCave.Services
             var rating = (from r in _db.Reviews
             where r.BookId == bookId
             select r.Rating).ToList();
-            if(rating == null)
+            if(rating.Count() == 0)
             {
                 return 0;
             }
