@@ -11,6 +11,8 @@ namespace BookCave.Models.InputModels
         [Required]
         public string LastName {get; set;}
         [Required]
+        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$",
+         ErrorMessage = "Must be atleast 8 characters, one lowercase, one uppercase and 1 number")]
         public string Password {get; set;}
         public string FavouriteBook {get; set;}
         public string Image {get; set;}

@@ -1,4 +1,5 @@
 @model BookCave.Models.ViewModels.OrderViewModel
+<h1>Orders Been Confirmed</h1>
 <div class="stepwizard">
         <div class="stepwizard-step">
             <a asp-controller="Checkout" asp-action="Billing" type="button" class="btn btn-success btn-circle">1</a>
@@ -9,7 +10,7 @@
             <p>Review Order</p>
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-default btn-circle">3</button>
+            <button type="button" class="btn btn-success btn-circle" disabled="disabled">3</button>
             <p>Order Confirmed</p>
         </div>
 </div>
@@ -30,7 +31,5 @@
     <h3>@Model.Billing.City</h3>
     <h3>@Model.Billing.Country</h3>
     <h3>@Model.Billing.ZipCode</h3>
-    <form asp-controller="Checkout" asp-action="Review" class="form-group row">
-        <button type="submit" class="btn btn-primary">Order</button>
-    </form>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Return to Home</a>
 </div>

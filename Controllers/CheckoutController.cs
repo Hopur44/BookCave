@@ -54,8 +54,15 @@ namespace BookCave.Controllers
             int billingId = _checkoutService.GetBillingId(accountId);
 
             _checkoutService.CreateOrder(userCart,accountId,billingId);
+            var billing = _checkoutService.GetBilling(billingId);
+            var confirmedOrder = _checkoutService.GetReviewOrder(billing, userCart);
             
-            return RedirectToAction("Index","Home");   
+            return View("Confirmed", confirmedOrder);   
+        }
+
+        public IActionResult Confirmed(OrderViewModel order)
+        {
+            return View(order);
         }
         public IActionResult Order()
         {

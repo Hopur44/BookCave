@@ -134,7 +134,92 @@ namespace BookCave.Controllers
             return Json(toReturn);
         }
 
+        // Logged in user clearing his cart
+        [HttpPost]
+        public IActionResult LoggedInUserCartClear()
+        {
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+            if(string.IsNullOrEmpty(email)) {
+                return Json(false);
+            }
+            Console.WriteLine("Logged in user clearing his cart");
+            
+            var userCart = _cartService.GetUserCartItems(id);
+
+            foreach(var item in userCart)
+            {
+                _cartService.RemoveCart(item, id);
+            }
+            /* 
+            // item þarf er model af cartViewModel
+            foreach með userCart og nota _.cartService.RemoveCart(item, id) 
+             */
+            /*
+            //adds the item to the accounts cart
+            if(item.Action == true) {
+                 _cartService.InsertToCart(item, id);
+            }
+            else 
+            {
+                Console.WriteLine("remove one item from the cart");
+                _cartService.RemoveOneFromCart(item, id);
+            }
+            */
+
+            var toReturn = true;
+            return Json(toReturn);
+        }
+
+        // logged in user
+        // adding everything from localStorage to database
+        [HttpPost]
+        public IActionResult AddAllCartItems([FromBody] List<CartViewModel> items)
+        {
+            Console.WriteLine("Cart/AddAllCartItems Post");
+
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+            Console.WriteLine(email);
+            var isLoggedIn = false;
+            if(string.IsNullOrEmpty(email)) 
+            {
+                
+                //return RedirectToAction("Login", "Account");
+                
+                return Json(isLoggedIn);
+            } 
+            else 
+            {   
+                Console.WriteLine("im not logged in and i'm adding everything from local");
+                isLoggedIn = true;
+
+                _cartService.InsertAllItems(items, id);
+                /*
+                foreach(var item in items)
+                {
+                    _cartService.InsertToCart(item, id);
+                }
+                */
+                // add to Cart table in database...
+                return Json(isLoggedIn);
+                //Console.WriteLine("im logged in");
+            }
+
+        }
         
+        public IActionResult GetTotalQuantity()
+        {
+            //var item = 33;
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+            var userCart = _cartService.GetUserCartItems(id);
+
+            int Quantity = _cartService.GetTotalCartItems(userCart);
+
+            return Json(Quantity);
+            //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
         // óþarfi að hafa þetta.. af því að notandi sem er loggaður inn fer aldrei hingað
         // það er aðeins óinnskráður notandi sem kemur hingað.. þannig að óþarfi að nota ajax og
         // senda hingað.. núna er bara re-direct inni í .js skránni

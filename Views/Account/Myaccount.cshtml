@@ -9,4 +9,13 @@
         <p>Email: @Model.Email</p>
         <p>Favourite Book: @Model.FavouriteBook</p>
     </div>
+    
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <a asp-controller="Account" asp-action="History" type="button" class="btn btn-success">Order history</a>
+    </div>
+    <div class="col-md-6">
+        <a asp-controller="Account" asp-action="EditAccount" type="button" class="btn btn-danger">Edit profile</a>
+    </div>
 </div>
