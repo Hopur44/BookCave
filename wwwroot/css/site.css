@@ -559,3 +559,43 @@ footer > a {
   line-height: 1.428571429;
   border-radius: 20px;
 }
+
+#MyAccountListHeader {
+    font-size: 25px;
+    font-weight: bold;    
+}
+
+#AccountImage {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    height:160px;
+    width:160px;
+    border: 3px solid black;
+    border-radius: 25px;
+    float: left;
+
+}
+.card {
+    margin-left: 210px;
+}
+
+.MyAccountHeader {
+    font-weight: bold;
+    float: left;
+    
+}
+
+#AccHistoryBtn {
+    float:left;
+    margin-left: 235px;
+    margin-bottom: 10px;
+}
+
+#AccEditBtn {
+    float: left;
+    margin-left: 235px;
+}
+
+#MyAccTitle {
+    margin-left: 50px;
+}

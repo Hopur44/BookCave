@@ -1,21 +1,23 @@
 @model BookCave.Models.ViewModels.AccountViewModel
 <div class="row">
-    <h2>@Model.Name</h2>
-    <div class="col-md-3">
-        <img src="@Model.Image" alt="Image of MonkaShake" height="400" width="240"> 
-    </div>
-    <div class="col-md-3">
-        <p>Address: @Model.Address</p>
-        <p>Email: @Model.Email</p>
-        <p>Favourite Book: @Model.FavouriteBook</p>
+    <h2 id="MyAccTitle">My Account</h2>
+    <img src="@Model.Image" alt="Image of MonkaShake" id="AccountImage"> 
+    <div class="card" style="width: 50rem">
+        <ul>
+            <li class="list-group-item" id="MyAccountListHeader">General Information</li>
+            <li class="list-group-item"><div class="MyAccountHeader">Name: </div> @Model.Name</li>
+            <li class="list-group-item"><div class="MyAccountHeader">Address: </div> @Model.Address</li>
+            <li class="list-group-item"><div class="MyAccountHeader">Email: </div>@Model.Email</li>
+            <li class="list-group-item"><div class="MyAccountHeader">Favourite Book: </div>@Model.FavouriteBook</li>
+        </ul>
     </div>
     
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" id="AccHistoryBtn">
         <a asp-controller="Account" asp-action="History" type="button" class="btn btn-success">Order history</a>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" id="AccEditBtn">
         <a asp-controller="Account" asp-action="EditAccount" type="button" class="btn btn-danger">Edit profile</a>
     </div>
 </div>
