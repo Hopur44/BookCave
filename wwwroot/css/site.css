@@ -431,6 +431,11 @@ footer > a {
     -ms-animation: fadeIn ease 2s;
   }
 
+.user-empty-cart-container {
+    padding: 20px;
+    border-style: solid;
+}
+
 @keyframes fadeIn {
     0% {
         opacity:0;
