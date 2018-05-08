@@ -168,7 +168,62 @@ namespace BookCave
                         ImageLink = "https://images-na.ssl-images-amazon.com/images/I/41o4XTRBFVL._AC_US327_FMwebp_QL65_.jpg",
                         PublishDate = "2017",
                         PageNumber = 496
-                    }                 
+                    },  
+                    new BookEntityModel 
+                    {
+                        Price = 3499,
+                        Title = "The Fallen",
+                        Genre = "Mystery",
+                        Description ="Something sinister is going on in Baronville. The rust belt town has seen four bizarre murders in the space of two weeks. Cryptic clues left at the scenes--obscure bible verses, odd symbols--have the police stumped.",
+                        Author = "‎David Baldacci",
+                        ImageLink = "https://prodimage.images-bn.com/pimages/9781538761397_p0_v3_s600x595.jpg",
+                        PublishDate = "2018",
+                        PageNumber = 433
+                    },    
+                     new BookEntityModel 
+                    {
+                        Price = 3499,
+                        Title = "Ready Player One",
+                        Genre = "Science fiction",
+                        Description ="In the year 2045, reality is an ugly place. The only time teenage Wade Watts really feels alive is when he's jacked into the virtual utopia known as the OASIS. Wade's devoted his life to studying the puzzles hidden within this world's digital confines, puzzles that are based on their creator's obsession with the pop culture of decades past and that promise massive power and fortune to whoever can unlock them. When Wade stumbles upon the first clue, he finds himself beset by players willing to kill to take this ultimate prize. The race is on, and if Wade's going to survive, he'll have to win—and confront the real world he's always been so desperate to escape.",
+                        Author = "‎Ernest Cline",
+                        ImageLink = "https://en.wikipedia.org/wiki/Ready_Player_One#/media/File:Ready_Player_One_cover.jpg",
+                        PublishDate = "2011",
+                        PageNumber = 384
+                    },  
+                     new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "Origin: A Novel",
+                        Genre = "Mystery",
+                        Description ="",
+                        Author = "‎Dan Brown",
+                        ImageLink = "https://en.wikipedia.org/wiki/Origin_(Brown_novel)#/media/File:Origin_(Dan_Brown_novel_cover).jpg",
+                        PublishDate = "2017",
+                        PageNumber = 480
+                    },       
+                     new BookEntityModel 
+                    {
+                        Price = 3999,
+                        Title = "Twisted Prey",
+                        Genre = "Mystery",
+                        Description ="Lucas Davenport confronts an old nemesis, now a powerful U.S. senator, in this thrilling #1 New York Times-bestselling new novel in the Prey series.",
+                        Author = "‎John Sandford",
+                        ImageLink = "https://prodimage.images-bn.com/pimages/9780525538547_p0_v1_s600x595.jpg",
+                        PublishDate = "2018",
+                        PageNumber = 400
+                    },
+                      new BookEntityModel 
+                    {
+                        Price = 3999,
+                        Title = "The Midnight Line: A Jack Reacher Novel",
+                        Genre = "Mystery",
+                        Description ="Lee Child returns with a gripping new powerhouse thriller featuring Jack Reacher, “one of this century’s most original, tantalizing pop-fiction heroes”",
+                        Author = "‎Lee Child",
+                        ImageLink = "https://en.wikipedia.org/wiki/The_Midnight_Line#/media/File:The_Midnight_Line_-_book_cover.jpg",
+                        PublishDate = "2017",
+                        PageNumber = 384
+                    }
                 };
                     db.AddRange(initialBooks);
                     db.SaveChanges();  
