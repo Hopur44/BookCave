@@ -34,9 +34,10 @@ if ($(".user-cart-header").length > 0)  {
     // ajax til að sækja total cart items....
 
     getTotalUserCartQuantity();
-    
-    
 }
+
+
+
 
 function getTotalUserCartQuantity() {
     //url: '/Home/AllReviews',
@@ -314,6 +315,7 @@ if ($("#cart").length > 0)  {
     });
 }
 
+
 // Controller/Cart/Index
 // logged in user 
 // This user cart is empty
@@ -325,39 +327,60 @@ if ($("#logged-in-empty-cart").length > 0)  {
     // check localStorage if we find something there
         // then we ask the user if he wants to load the items that he/ or someone added on this device
         // to the database?
-    var allItemsFromLocalStorage = getAllItemsFromLocalStorage();
-    if(allItemsFromLocalStorage.length > 0) {
+    
+    var items = getAllItemsFromLocalStorage();
+    if(items.length > 0) {
         console.log("we found items that were added on this device when you were not logged in");
-        console.log(allItemsFromLocalStorage);
 
-        var dataType = 'application/json; charset=utf-8';
-        
-        $.ajax({
-            type: 'POST',
-            url: '/Cart/AddAllCartItems',
-            dataType: 'json',
-            contentType: dataType,
-            data: JSON.stringify(allItemsFromLocalStorage),
-            success: function(result) {
-                console.log('Data received: ');
-                console.log(result);
-                localStorage.clear();
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                console.log("Cart/LoggedInUserCartAction Post: Status: " + textStatus + " Error: " + errorThrown);
-            } 
-        });
+        // sýna á skjá bækurnar sem við fundum?
+        // takki -> viltu bæta þeim við í körfuna þína?
 
-        //AddAllCartItems
-        console.log("do you want us to add them to your cart?");
-    } else {
-        console.log("your localStorage cart is empty");
+        //$("#logged-in-empty-cart").append("div class=\"user-empty-cart-container\"></div>");
+        $("#logged-in-empty-cart").append("<div class=\"user-empty-cart-container\"></div>");
+        $(".logged-in-empty-cart").append("<p> We found items that were added on this device when you were not logged in </p>");
+        for(var j = 0; j < items.length; j++) {
+            $(".user-empty-cart-container").append(
+                "<p>" + (j + 1) + ". " + items[j].title + " quantity: " + items[j].quantity + "</p>");
+        }
+        console.log(items);
+        $(".user-empty-cart-container").append("<span> Do you want to add them too your cart? </span>");
+        $(".user-empty-cart-container").append("<span class=\"user-storage-add-yes btn btn-default\"> yes </span>");
+        $(".user-empty-cart-container").append("<span class=\"user-storage-add-no\ btn btn-default\"> no </span>");
     }
-
-
-        // if yes send everything with ajax 
-        // and re-direct the user to cart.
 }
+
+$('.user-empty-cart-container').on('click', '.user-storage-add-no', function() {
+    console.log("this user did not want to add items from localStorage to his cart");
+    ($(".user-empty-cart-container")).fadeOut();
+    localStorage.clear();
+});
+
+// Controller/Cart/Index
+// logged in user 
+// This users wants to add items from localStorage to his cart
+$('.user-empty-cart-container').on('click', '.user-storage-add-yes', function() {
+    console.log("user wants to add items from localS to database");
+
+    var dataType = 'application/json; charset=utf-8';
+    var items = getAllItemsFromLocalStorage();
+    $.ajax({
+        type: 'POST',
+        url: '/Cart/AddAllCartItems',
+        dataType: 'json',
+        contentType: dataType,
+        data: JSON.stringify(items),
+        success: function(result) {
+            console.log('Data received: ');
+            console.log(result);
+            window.location.href = "http://localhost:5000/Cart";
+            localStorage.clear();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Cart/LoggedInUserCartAction Post: Status: " + textStatus + " Error: " + errorThrown);
+        } 
+    });
+        
+});
 
 // Controller/Cart/Index
 // we set the total price 
@@ -474,9 +497,6 @@ $(".grid-cart").on('click', ".cart-remove", function() {
 // not logged in user 
 // clears one item from the cart
 $(".grid-cart").on('click', ".cart-clear-item", function() {
-
-    
-
     // put the localStorage key together
     var itemToGet = getLocalStorageKey(this, "removeall");
     console.log("/Cart/Index - not logged in - clearing item from the cart");
@@ -721,6 +741,89 @@ $("#book-detail-review-form").on("submit", function(e) {
     */
 });
 
+// https://stackoverflow.com/questions/41439283/sorting-dom-elements-using-pure-js
+$("#order-by-price").on("click", function(e) { 
+    console.log("found order by name button");
+    console.log($(".grid-container"));
+    var parent = document.querySelector('.grid-container');
+    [].slice.call(parent.children)
+
+
+    .sort(function(a, b) {
+        // get text content in .price and return difference
+        return getPrice(a) - getPrice(b);
+        // iterate and append again in new sorted order
+      }).forEach(function(ele) {
+        parent.appendChild(ele);
+      })    
+});
+
+$("#order-by-rating").on("click", function(e) { 
+    console.log("found order by rating button");
+    console.log($(".grid-container"));
+    var parent = document.querySelector('.grid-container');
+    [].slice.call(parent.children)
+
+
+    .sort(function(a, b) {
+        // get text content in .price and return difference
+        return getRating(a) - getRating(b);
+        // iterate and append again in new sorted order
+      }).forEach(function(ele) {
+        parent.appendChild(ele);
+      })    
+});
+
+$("#order-by-title").on("click", function(e) { 
+    console.log("found order by name button");
+    console.log($(".grid-container"));
+    var parent = document.querySelector('.grid-container');
+    [].slice.call(parent.children)
+
+
+    .sort(function(a, b) {
+        // get text content in .price and return difference
+        var a = getName(a);
+        var b = getName(b);
+        if (a < b) {
+            return -1;
+        }
+        else if ( a > b) {
+            return 1;
+        } else {
+            return 0;
+        }
+        //return getName(a) - getName(b);
+        // iterate and append again in new sorted order
+      }).forEach(function(ele) {
+        parent.appendChild(ele);
+      })    
+});
+
+function getPrice(ele) {
+    var _this = ele.children[4];
+    var price = $(_this).data("price");
+    return price;
+}
+
+function getRating(ele) {
+    console.log("getRating");
+    console.log(ele);
+    var _this = ele.children[2];
+    console.log(_this)
+    var rating = $(_this).data("rating");
+    
+    //console.log(_this);
+    //console.log(price);
+    
+    return rating;
+}
+
+function getName(ele) {
+    var _this = ele.children[1];
+    var title = $(_this).data("title");
+    return title;
+}
 /*
     var dataType = 'application/json; charset=utf-8';
 

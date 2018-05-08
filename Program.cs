@@ -168,7 +168,172 @@ namespace BookCave
                         ImageLink = "https://images-na.ssl-images-amazon.com/images/I/41o4XTRBFVL._AC_US327_FMwebp_QL65_.jpg",
                         PublishDate = "2017",
                         PageNumber = 496
-                    }                 
+                    },  
+                    new BookEntityModel 
+                    {
+                        Price = 3499,
+                        Title = "The Fallen",
+                        Genre = "Mystery",
+                        Description ="Something sinister is going on in Baronville. The rust belt town has seen four bizarre murders in the space of two weeks. Cryptic clues left at the scenes--obscure bible verses, odd symbols--have the police stumped.",
+                        Author = "‎David Baldacci",
+                        ImageLink = "https://prodimage.images-bn.com/pimages/9781538761397_p0_v3_s600x595.jpg",
+                        PublishDate = "2018",
+                        PageNumber = 433
+                    },    
+                     new BookEntityModel 
+                    {
+                        Price = 3499,
+                        Title = "Ready Player One",
+                        Genre = "Science fiction",
+                        Description ="In the year 2045, reality is an ugly place. The only time teenage Wade Watts really feels alive is when he's jacked into the virtual utopia known as the OASIS. Wade's devoted his life to studying the puzzles hidden within this world's digital confines, puzzles that are based on their creator's obsession with the pop culture of decades past and that promise massive power and fortune to whoever can unlock them. When Wade stumbles upon the first clue, he finds himself beset by players willing to kill to take this ultimate prize. The race is on, and if Wade's going to survive, he'll have to win—and confront the real world he's always been so desperate to escape.",
+                        Author = "‎Ernest Cline",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/a/a4/Ready_Player_One_cover.jpg",
+                        PublishDate = "2011",
+                        PageNumber = 384
+                    },  
+                     new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "Origin: A Novel",
+                        Genre = "Mystery",
+                        Description ="“Origin” marks the fifth outing for Harvard professor Robert Langdon, the symbologist who uncovered stunning secrets and shocking conspiracies in “The Da Vinci Code” and Brown’s other phenomenally best-selling novels.",
+                        Author = "‎Dan Brown",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/6/67/Origin_%28Dan_Brown_novel_cover%29.jpg",
+                        PublishDate = "2017",
+                        PageNumber = 480
+                    },       
+                     new BookEntityModel 
+                    {
+                        Price = 3999,
+                        Title = "Twisted Prey",
+                        Genre = "Mystery",
+                        Description ="Lucas Davenport confronts an old nemesis, now a powerful U.S. senator, in this thrilling #1 New York Times-bestselling new novel in the Prey series.",
+                        Author = "‎John Sandford",
+                        ImageLink = "https://prodimage.images-bn.com/pimages/9780525538547_p0_v1_s600x595.jpg",
+                        PublishDate = "2018",
+                        PageNumber = 400
+                    },
+                      new BookEntityModel 
+                    {
+                        Price = 3999,
+                        Title = "The Midnight Line: A Jack Reacher Novel",
+                        Genre = "Mystery",
+                        Description ="Lee Child returns with a gripping new powerhouse thriller featuring Jack Reacher, “one of this century’s most original, tantalizing pop-fiction heroes”",
+                        Author = "‎Lee Child",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/e/ed/The_Midnight_Line_-_book_cover.jpg",
+                        PublishDate = "2017",
+                        PageNumber = 384
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1999,
+                        Title = "Killing Floor",
+                        Genre = "Mystery",
+                        Description ="Ex-military policeman Jack Reacher finds himself in Margrave, Georgia, where he is almost immediately arrested for murder; after being released, he joins with a straight-arrow detective and a beautiful lady cop to unearth a conspiracy that stretches through the small town and beyond.",
+                        Author = "‎Lee Child",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/c/c9/Killing_Floor_Cover.jpg",
+                        PublishDate = "1997",
+                        PageNumber = 552
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1999,
+                        Title = "Die Trying",
+                        Genre = "Mystery",
+                        Description ="In a plot to overthrow the U.S. government, Montana neo-Nazis abduct the daughter of the nation's top general and her male companion, Jack Reacher, a former military policeman who turns the tables on the captors.",
+                        Author = "‎Lee Child",
+                        ImageLink = "https://d30a6s96kk7rhm.cloudfront.net/original/readings/978/055/350/9780553505412.jpg",
+                        PublishDate = "1998",
+                        PageNumber = 374
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1999,
+                        Title = "Tripwire",
+                        Genre = "Mystery",
+                        Description ="Ex military policeman Jack Reacher is enjoying the lazy anonymity of Key West when a stranger shows up asking for him. He’s got a lot of questions. Reacher does too, especially after the guy turns up dead. The answers lead Reacher on a cold trail back to New York, to the tenuous confidence of an alluring woman, and the dangerous corners of his own past.",
+                        Author = "‎Lee Child",
+                        ImageLink = "https://moly.hu/system/covers/big/covers_250363.jpg",
+                        PublishDate = "1999",
+                        PageNumber = 343
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1999,
+                        Title = "The Visitor",
+                        Genre = "Mystery",
+                        Description ="Sergeant Amy Callan and Lieutenant Caroline Cooke have a lot in common. Both were army high-flyers. Both were aquainted with Jack Reacher. Both were forced to resign from the service. Now they're both dead. Found in their own homes, naked, in a bath full of paint. Apparent victims of an army man. A loner, a smart guy with a score to settle, a ruthless vigilante. A man just like Jack Reacher.",
+                        Author = "‎Lee Child",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/4/48/The_visitor_book.jpg",
+                        PublishDate = "2000",
+                        PageNumber = 512
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1999,
+                        Title = "The Visitor",
+                        Genre = "Mystery",
+                        Description ="Sergeant Amy Callan and Lieutenant Caroline Cooke have a lot in common. Both were army high-flyers. Both were aquainted with Jack Reacher. Both were forced to resign from the service. Now they're both dead. Found in their own homes, naked, in a bath full of paint. Apparent victims of an army man. A loner, a smart guy with a score to settle, a ruthless vigilante. A man just like Jack Reacher.",
+                        Author = "‎Lee Child",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/4/48/The_visitor_book.jpg",
+                        PublishDate = "2000",
+                        PageNumber = 512
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "A Game of Thrones",
+                        Genre = "Fantasy",
+                        Description ="Long ago, in a time forgotten, a preternatural event threw the seasons out of balance. In a land where summers can last decades and winters a lifetime, trouble is brewing. The cold is returning, and in the frozen wastes to the north of Winterfell, sinister forces are massing beyond the kingdom's protective Wall. To the south, the king's powers are failing - his most trusted adviser dead under mysterious circumstances and his enemies emerging from the shadows of the throne. The first book in the 'a song of ice and fire' series",
+                        Author = "‎George R. R. Martin",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/9/93/AGameOfThrones.jpg",
+                        PublishDate = "1996",
+                        PageNumber = 694
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "A Clash of Kings",
+                        Genre = "Fantasy",
+                        Description ="A Clash of Kings depicts the Seven Kingdoms of Westeros in civil war, while the Night's Watch mounts a reconnaissance to investigate the mysterious people known as wildlings. Meanwhile, Daenerys Targaryen continues her plan to reconquer the Seven Kingdoms.",
+                        Author = "‎George R. R. Martin",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/3/39/AClashOfKings.jpg",
+                        PublishDate = "1998",
+                        PageNumber = 768
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "A Storm Of Swords",
+                        Genre = "Fantasy",
+                        Description ="Of the five contenders for power, one is dead, another in disfavor, and still the wars rage, as alliances are made and broken. Joffrey sits on the Iron Throne, the uneasy ruler of the Seven Kingdoms. His most bitter rival, Lord Stannis, stands defeated and disgraced, victim of the sorceress who holds him in her thrall. Young Robb still rules the North from the fortress of Riverrun. Meanwhile, making her way across a blood-drenched continent is the exiled queen, Daenerys, mistress of the only three dragons left in the world. And as opposing forces maneuver for the final showdown, an army of barbaric wildlings arrives from the outermost limits of civilization, accompanied by a horde of mythical Others—a supernatural army of the living dead whose animated corpses are unstoppable. As the future of the land hangs in the balance, no one will rest until the Seven Kingdoms have exploded in a veritable storm of swords.",
+                        Author = "‎George R. R. Martin",
+                        ImageLink = "https://upload.wikimedia.org/wikipedia/en/2/24/AStormOfSwords.jpg",
+                        PublishDate = "2000",
+                        PageNumber = 973
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "A Feast for Crows",
+                        Genre = "Fantasy",
+                        Description ="The Lannisters are in power on the Iron Throne. The war in the Seven Kingdoms has burned itself out, but in its bitter aftermath new conflicts spark to life. The Martells of Dorne and the Starks of Winterfell seek vengeance for their dead. Euron Crow's Eye, as black a pirate as ever raised a sail, returns from the smoking ruins of Valyria to claim the Iron Isles.",
+                        Author = "‎George R. R. Martin",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0064/9780006486121.jpg",
+                        PublishDate = "2005",
+                        PageNumber = 753
+                    },
+                       new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "A Dance with Dragons",
+                        Genre = "Fantasy",
+                        Description ="The last of the Targaryons, Daenerys Stormborn, the Unburnt, has brought the young dragons in her care to their terrifying maturity. Now the war-torn landscape of the Seven Kingdoms is threatened by destruction as vast as in the violent past. Tyrion Lannister, a dwarf with half a nose and a scar from eye to chin, has slain his father and escaped the Red Keep in King\'s Landing to wage war from the Free Cities beyond the narrow sea. The last war fought with dragons was a cataclysm powerful enough to shatter the Valyrian peninsula into a smoking, demon-haunted ruin half drowned by the sea. A DANCE WITH DRAGONS brings to life dark magic, complex political intrigue and horrific bloodshed as events at the Wall and beyond the sea threaten the ancient land of Westeros.",
+                        Author = "‎George R. R. Martin",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0022/9780002247399.jpg",
+                        PublishDate = "2011",
+                        PageNumber = 1040
+                    }
                 };
                     db.AddRange(initialBooks);
                     db.SaveChanges();  
