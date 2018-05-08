@@ -74,6 +74,7 @@ namespace BookCave.Services
                     Rating = 5,
                     Image = b.ImageLink,
                     Author = b.Author,
+                    Description = b.Description,
                     ReviewList = GetReviewsByBookID(id)
                 }).SingleOrDefault(); 
             return book;
@@ -106,6 +107,21 @@ namespace BookCave.Services
 
             return books;
 
+        }
+        public List<BookViewModel> GetBooksByGenre(string genre)
+        {
+             var books = (from b in _db.Books
+                where b.Genre == genre
+                select new BookViewModel
+                    {
+                        Id = b.Id,
+                        Title = b.Title,
+                        Price = b.Price,
+                        Rating = 5,
+                        Image = b.ImageLink,
+                        Author = b.Author
+                    }).ToList();
+            return books;
         }
     }
 }
