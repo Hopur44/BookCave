@@ -134,6 +134,11 @@ namespace BookCave.Services
                 }
             _db.SaveChanges();
         }
+        public int GetTotalCartItems(List<CartViewModel> model)
+        {
+            return (from c in model
+                    select c.Quantity).Sum();
+        }
         public void InsertAllItems(List<CartViewModel> model, int accountId)
         {
             foreach(var item in model)
@@ -149,5 +154,7 @@ namespace BookCave.Services
             }
             _db.SaveChanges();
         }
+
+
     }
 }

@@ -208,6 +208,18 @@ namespace BookCave.Controllers
 
         }
         
+        public IActionResult GetTotalQuantity()
+        {
+            //var item = 33;
+            string email = ((ClaimsIdentity) User.Identity).Name;
+            int id = _accountService.GetAccountId(email);
+            var userCart = _cartService.GetUserCartItems(id);
+
+            int Quantity = _cartService.GetTotalCartItems(userCart);
+
+            return Json(Quantity);
+            //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
         // óþarfi að hafa þetta.. af því að notandi sem er loggaður inn fer aldrei hingað
         // það er aðeins óinnskráður notandi sem kemur hingað.. þannig að óþarfi að nota ajax og
         // senda hingað.. núna er bara re-direct inni í .js skránni

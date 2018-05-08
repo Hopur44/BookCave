@@ -88,9 +88,14 @@ namespace BookCave.Services
                     Description = b.Description,
                     Image = b.ImageLink,
                     Author = b.Author,
+<<<<<<< HEAD
                     NumberOfPage = b.PageNumber,
                     ReviewList = reviewList,
                     Rating = bookRating
+=======
+                    Description = b.Description,
+                    ReviewList = GetReviewsByBookID(id)
+>>>>>>> 50003acf6cf99a4331157e66128dd8e37342b159
                 }).SingleOrDefault(); 
             return book;
         }
@@ -123,6 +128,21 @@ namespace BookCave.Services
 
             return books;
 
+        }
+        public List<BookViewModel> GetBooksByGenre(string genre)
+        {
+             var books = (from b in _db.Books
+                where b.Genre == genre
+                select new BookViewModel
+                    {
+                        Id = b.Id,
+                        Title = b.Title,
+                        Price = b.Price,
+                        Rating = 5,
+                        Image = b.ImageLink,
+                        Author = b.Author
+                    }).ToList();
+            return books;
         }
     }
 }
