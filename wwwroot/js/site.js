@@ -604,6 +604,13 @@ $(".add-book").on("click", function(e) {
     }
 });
 
+//Controller/Home/Index
+//Filters books to only show one genre by using it as a search string
+$("#genre-filter a").click(function() {
+   var SearchString = $(this).data('genre');
+   console.log(SearchString)
+   window.location.href = "/Home/Index?SearchString=" + SearchString;
+});
 
 
 // Controller/Home/Details
