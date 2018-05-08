@@ -88,14 +88,9 @@ namespace BookCave.Services
                     Description = b.Description,
                     Image = b.ImageLink,
                     Author = b.Author,
-<<<<<<< HEAD
                     NumberOfPage = b.PageNumber,
                     ReviewList = reviewList,
                     Rating = bookRating
-=======
-                    Description = b.Description,
-                    ReviewList = GetReviewsByBookID(id)
->>>>>>> 50003acf6cf99a4331157e66128dd8e37342b159
                 }).SingleOrDefault(); 
             return book;
         }
