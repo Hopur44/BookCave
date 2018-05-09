@@ -614,8 +614,9 @@ $(".add-book").on("click", function(e) {
         console.log("/Controller/Home/Index - Not logged in user - adding new book to cart/localStorage");
         var bookId = $(this).data("book");
         var price = $(this).data("price");
+        var title = $(this).data("title");
         // get the title
-        var title = $(this).prev().prev().prev().text();
+        //var title = $(this).prev().prev().prev().text();
         var bookToAdd = {};
         bookToAdd['itemId'] = bookId;
         bookToAdd['quantity'] = 1;
