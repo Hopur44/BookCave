@@ -55,11 +55,11 @@ namespace BookCave
                 db.AddRange(initialAccounts);
                 db.SaveChanges();
             }
-            if(!db.Books.Any())
+            //if(!db.Books.Any())
             {
                 var initialBooks = new List<BookEntityModel>()
                 {
-                    new BookEntityModel
+                    /*new BookEntityModel
                     {
                         Price = 2000,
                         Title = "Harry Potter and the Philosopher's Stone",
@@ -554,6 +554,73 @@ namespace BookCave
                         PublishDate = "1871",
                         PageNumber = 208
                     },
+                    */
+                    new BookEntityModel 
+                    {
+                        Price = 1499,
+                        Title = "Adventure Time: Volume 3",
+                        Genre = "Adventure",
+                        Description ="This graphic novel not only collects the out-of-control, adventure packed third story arc, it also includes the unforgettable 'choose your own adventure' story",
+                        Author = "‎Ryan North",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/7827/9781782760337.jpg",
+                        PublishDate = "2013",
+                        PageNumber = 160
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "Virgins : An Outlander Short Story",
+                        Genre = "Adventure",
+                        Description ="Young Jamie Fraser has left Scotland and, with his best friend Ian Murray, is running with a band of mercenaries in France.Both men have good reason not to go back to their homeland: both are nursing wounds, and despite their best efforts to remedy the situation, both are still virgins.So when a Jewish doctor hires them to escort his granddaughter to Paris, they readily agree. Both men are instantly drawn to the beautiful young lady. What neither know is that their lives and their friendships are about to become infinitely more complicated - and a lot more dangerous ...",
+                        Author = "‎Diana Gabaldon",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/7808/9781780896618.jpg",
+                        PublishDate = "2016",
+                        PageNumber = 256
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1999,
+                        Title = "The Lost World : A Novel",
+                        Genre = "Adventure",
+                        Description ="From the author of Timeline, Sphere, and Congo comes the sequel to the smash-hit Jurassic Park, a thriller that's been millions of years in the making.",
+                        Author = "‎Michael Crichton",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/3455/9780345538994.jpg",
+                        PublishDate = "2012",
+                        PageNumber = 416
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 1499,
+                        Title = "A Whole Life",
+                        Genre = "Adventure",
+                        Description ="Andreas lives his whole life in the Austrian Alps, where he arrives as a young boy taken in by a farming family. He is a man of very few words and so, when he falls in love with Marie, he doesn't ask for her hand in marriage, but instead has some of his friends light her name at dusk across the mountain. When Marie dies in an avalanche, pregnant with their first child, Andreas' heart is broken. He leaves his valley just once more, to fight in WWII - where he is taken prisoner in the Caucasus - and returns to find that modernity has reached his remote haven . . .",
+                        Author = "‎Robert Seethaler",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4472/9781447283904.jpg",
+                        PublishDate = "2016",
+                        PageNumber = 160
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2999,
+                        Title = "The Painted Man",
+                        Genre = "Adventure",
+                        Description ="Sometimes there is very good reason to be afraid of the dark..",
+                        Author = "‎Peter V. Brett",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/0074/9780007492541.jpg",
+                        PublishDate = "2013",
+                        PageNumber = 560
+                    },
+                    new BookEntityModel 
+                    {
+                        Price = 2499,
+                        Title = "Neverwhere",
+                        Genre = "Adventure",
+                        Description ="When Richard Mayhew helps a mysterious girl he finds bleeding on the pavement, his boring life changes in an instant. Her name is Door, she's on the run from two assassins in black suits and she comes from London Below. His act of kindness leads him to a place filled with monsters and angels, a Beast in a labyrinth and an Earl who holds Court in a Tube train. It is strangely familiar yet utterly bizarre.",
+                        Author = "‎Neil Gaiman",
+                        ImageLink = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4722/9781472228413.jpg",
+                        PublishDate = "2016",
+                        PageNumber = 448
+                    }
                 };
                     db.AddRange(initialBooks);
                     db.SaveChanges();  
