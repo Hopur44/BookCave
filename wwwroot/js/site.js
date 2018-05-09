@@ -176,11 +176,13 @@ $(".user-cart-item-remove").on("click", function(e) {
 // clears the cart of book with this Id
 $(".user-cart-item-clear").on("click", function(e) {
 
-    console.log("Logged in user clearing: " + bookId + " from his cart");
+    
     var quantity = getUserQuantity(this); 
     var price = getUserPrice(this);
     var bookId = getUserBookId(this, "useritemclear");
-    var item = createItemForAjax(bookId, 1, price, false); 
+    var item = createItemForAjax(bookId, 1, price, false);
+    console.log("Logged in user clearing: " + bookId + " from his cart");
+    console.log(item);
     //console.log(item);
     
     // we send the action to the controller to remove one item
@@ -334,12 +336,15 @@ if ($("#logged-in-empty-cart").length > 0)  {
 
         //$("#logged-in-empty-cart").append("div class=\"user-empty-cart-container\"></div>");
         $("#logged-in-empty-cart").append("<div class=\"user-empty-cart-container\"></div>");
-        $(".logged-in-empty-cart").append("<p> We found items that were added on this device when you were not logged in </p>");
+        //$(".logged-in-empty-cart").append("<p> We found items that were added on this device when you were not logged in </p>");
+        $(".user-empty-cart-container").append("<h3> We found items that were added on this device when you were not logged in </h3>");
+        
         for(var j = 0; j < items.length; j++) {
             $(".user-empty-cart-container").append(
-                "<p>" + (j + 1) + ". " + items[j].title + " quantity: " + items[j].quantity + "</p>");
+                "<p>" + (j + 1) + ". " + items[j].title + ". Quantity: " + items[j].quantity + "</p>");
         }
         console.log(items);
+        
         $(".user-empty-cart-container").append("<span> Do you want to add them too your cart? </span>");
         $(".user-empty-cart-container").append("<span class=\"user-storage-add-yes btn btn-default\"> yes </span>");
         $(".user-empty-cart-container").append("<span class=\"user-storage-add-no\ btn btn-default\"> no </span>");

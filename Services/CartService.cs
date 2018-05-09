@@ -107,7 +107,8 @@ namespace BookCave.Services
         }
         public void RemoveOneFromCart(CartViewModel model, int accountId)
         {
-            var quantity =  FindQuanity(accountId,model.ItemId);
+            //var quantity =  FindQuanity(accountId,model.ItemId);
+            var quantity = model.Quantity;
             var cartId = FindCartId(accountId,model.ItemId);
             if(quantity == 0)
             {
