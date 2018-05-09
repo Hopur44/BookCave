@@ -417,6 +417,18 @@ footer > a {
     padding: 1px;
 }
 
+#cart > .clear-cart {
+    display: flex;
+    justify-content: space-between;
+}
+
+#cart-items > span {
+    padding: 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: end;
+}
+
 .review-input {
     background:rgba(255,255,255);
     border:none;

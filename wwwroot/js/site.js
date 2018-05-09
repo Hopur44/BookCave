@@ -84,8 +84,7 @@ $(".user-cart-item-add").on("click", function(e) {
     console.log("amount: " + amount);
 
     sendActionToCartController(item);
-    alert("One item of BookTitle has been added to your cart");
-    
+
     // we update the total cart items in the header
     var userTotalCartQuantity = $(".user-cart-header").data("amount");
     userTotalCartQuantity++;
@@ -155,7 +154,6 @@ $(".user-cart-item-remove").on("click", function(e) {
     
     // we send the action to the controller to remove one item
     sendActionToCartController(item);
-    alert("One item of BookTitle has been removed from your cart ");
     
     // we update the total cart items in the header
     var userTotalCartQuantity = $(".user-cart-header").data("amount");
@@ -187,7 +185,6 @@ $(".user-cart-item-clear").on("click", function(e) {
     
     // we send the action to the controller to remove one item
     sendActionToCartController(item);
-    alert("We removed BookTitle from your cart");
     
     // we update the total cart items in the header
     var userTotalCartQuantity = $(".user-cart-header").data("amount");
@@ -309,7 +306,7 @@ if ($("#cart").length > 0)  {
     //console.log("all items in the cart");
     //console.log(allItemsInCart);
 
-    $(".buy-books").on("click", function(e) {
+    $(".close-cart-modal").on("click", function(e) {
         console.log("buy all books");
         window.location.href = "http://localhost:5000/Account/Login";
     });
@@ -580,7 +577,7 @@ $(".add-user-book").on("click", function(e) {
         action: true
     };  
     sendActionToCartController(item);
-    alert("we added one book to the cart");
+    //alert("we added one book to the cart");
     // update the total cart items in the header
     var userTotalCartQuantity = $(".user-cart-header").data("amount");
     userTotalCartQuantity++;
@@ -824,6 +821,7 @@ function getName(ele) {
     var title = $(_this).data("title");
     return title;
 }
+
 /*
     var dataType = 'application/json; charset=utf-8';
 
