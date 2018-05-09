@@ -3,7 +3,8 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: lightgray;
+    background-color: 
+     rgb(240, 238, 225);
 }
 
 /* Wrapping element */
@@ -37,17 +38,23 @@ body {
     }
 }
 
+#navbar {
+    background-color:rgb(49, 29, 5);
+}
+
+
 footer{
-    background-color: gray;
+    background-color: rgb(230, 224, 203);
 }
 
 footer > p {
-    color: white;
+    color:rgb(119, 121, 108);
 }
 
 footer > a {
-    color: white;
+    color:rgb(119, 121, 108);
 }
+
 .search-bar {
     padding-top:8px;
 }
