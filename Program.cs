@@ -55,11 +55,11 @@ namespace BookCave
                 db.AddRange(initialAccounts);
                 db.SaveChanges();
             }
-            //if(!db.Books.Any())
+            if(!db.Books.Any())
             {
                 var initialBooks = new List<BookEntityModel>()
                 {
-                    /*new BookEntityModel
+                    new BookEntityModel
                     {
                         Price = 2000,
                         Title = "Harry Potter and the Philosopher's Stone",
@@ -554,7 +554,6 @@ namespace BookCave
                         PublishDate = "1871",
                         PageNumber = 208
                     },
-                    */
                     new BookEntityModel 
                     {
                         Price = 1499,
