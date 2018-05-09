@@ -10,21 +10,6 @@
 
 <div class="grid-home-container">
     <aside class="grid-home-aside">
-        
-        <div class="grid-home-aside-item"> 
-            
-            
-            @Html.DropDownList(
-                "Foo", 
-                new SelectList(
-                    Model.Select(x => new { Value = x.Title, Text = x.Title }),
-                    "Value",
-                    "Text"
-                ),
-                new {@class="home-dropdown"}
-            )
-            
-        </div>
         <div class="grid-home-aside-item">
             <div class="dropdown">
                 <button class="dropbtn">Categories-dropdown</button>
@@ -62,11 +47,26 @@
 
                     @if(SignInManager.IsSignedIn(User))
                     {
-                        <button class="add-user-book btn btn-success" data-book=@book.Id data-price=@book.Price> im logged in add</button>
+                        <button class="add-user-book btn btn-success" data-toggle="modal" data-target="#userHomeAdd" data-book=@book.Id data-price=@book.Price> im logged in add</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="userHomeAdd" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"> We added book to your cart.</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     }
                     else 
                     {
-                        <button class="add-book btn btn-danger" data-book=@book.Id data-price=@book.Price> im not logged in add</button>
+                        <button class="add-book btn btn-danger" data-title="@book.Title" data-book=@book.Id data-price=@book.Price> im not logged in add</button>
                     }
                     
                 </div>       

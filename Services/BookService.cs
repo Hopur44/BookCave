@@ -64,10 +64,12 @@ namespace BookCave.Services
                             Author = b.Author,
                             Genre = b.Genre
                         }).ToList();
-      /*      foreach (var item in books)
+            /*
+            foreach (var item in books)
             {
                 item.Rating = GetAverageRatingOfBook(item.Id);
-            }*/
+            }
+            */
                         if(!string.IsNullOrEmpty(SearchString))
                         {
                             books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) 

@@ -84,8 +84,7 @@ $(".user-cart-item-add").on("click", function(e) {
     console.log("amount: " + amount);
 
     sendActionToCartController(item);
-    alert("One item of BookTitle has been added to your cart");
-    
+
     // we update the total cart items in the header
     var userTotalCartQuantity = $(".user-cart-header").data("amount");
     userTotalCartQuantity++;
@@ -155,7 +154,6 @@ $(".user-cart-item-remove").on("click", function(e) {
     
     // we send the action to the controller to remove one item
     sendActionToCartController(item);
-    alert("One item of BookTitle has been removed from your cart ");
     
     // we update the total cart items in the header
     var userTotalCartQuantity = $(".user-cart-header").data("amount");
@@ -178,16 +176,17 @@ $(".user-cart-item-remove").on("click", function(e) {
 // clears the cart of book with this Id
 $(".user-cart-item-clear").on("click", function(e) {
 
-    console.log("Logged in user clearing: " + bookId + " from his cart");
+    
     var quantity = getUserQuantity(this); 
     var price = getUserPrice(this);
     var bookId = getUserBookId(this, "useritemclear");
-    var item = createItemForAjax(bookId, 1, price, false); 
+    var item = createItemForAjax(bookId, 1, price, false);
+    console.log("Logged in user clearing: " + bookId + " from his cart");
+    console.log(item);
     //console.log(item);
     
     // we send the action to the controller to remove one item
     sendActionToCartController(item);
-    alert("We removed BookTitle from your cart");
     
     // we update the total cart items in the header
     var userTotalCartQuantity = $(".user-cart-header").data("amount");
@@ -309,7 +308,7 @@ if ($("#cart").length > 0)  {
     //console.log("all items in the cart");
     //console.log(allItemsInCart);
 
-    $(".buy-books").on("click", function(e) {
+    $(".close-cart-modal").on("click", function(e) {
         console.log("buy all books");
         window.location.href = "http://localhost:5000/Account/Login";
     });
@@ -337,12 +336,15 @@ if ($("#logged-in-empty-cart").length > 0)  {
 
         //$("#logged-in-empty-cart").append("div class=\"user-empty-cart-container\"></div>");
         $("#logged-in-empty-cart").append("<div class=\"user-empty-cart-container\"></div>");
-        $(".logged-in-empty-cart").append("<p> We found items that were added on this device when you were not logged in </p>");
+        //$(".logged-in-empty-cart").append("<p> We found items that were added on this device when you were not logged in </p>");
+        $(".user-empty-cart-container").append("<h3> We found items that were added on this device when you were not logged in </h3>");
+        
         for(var j = 0; j < items.length; j++) {
             $(".user-empty-cart-container").append(
-                "<p>" + (j + 1) + ". " + items[j].title + " quantity: " + items[j].quantity + "</p>");
+                "<p>" + (j + 1) + ". " + items[j].title + ". Quantity: " + items[j].quantity + "</p>");
         }
         console.log(items);
+        
         $(".user-empty-cart-container").append("<span> Do you want to add them too your cart? </span>");
         $(".user-empty-cart-container").append("<span class=\"user-storage-add-yes btn btn-default\"> yes </span>");
         $(".user-empty-cart-container").append("<span class=\"user-storage-add-no\ btn btn-default\"> no </span>");
@@ -580,7 +582,7 @@ $(".add-user-book").on("click", function(e) {
         action: true
     };  
     sendActionToCartController(item);
-    alert("we added one book to the cart");
+    //alert("we added one book to the cart");
     // update the total cart items in the header
     var userTotalCartQuantity = $(".user-cart-header").data("amount");
     userTotalCartQuantity++;
@@ -612,8 +614,9 @@ $(".add-book").on("click", function(e) {
         console.log("/Controller/Home/Index - Not logged in user - adding new book to cart/localStorage");
         var bookId = $(this).data("book");
         var price = $(this).data("price");
+        var title = $(this).data("title");
         // get the title
-        var title = $(this).prev().prev().prev().text();
+        //var title = $(this).prev().prev().prev().text();
         var bookToAdd = {};
         bookToAdd['itemId'] = bookId;
         bookToAdd['quantity'] = 1;
@@ -824,6 +827,7 @@ function getName(ele) {
     var title = $(_this).data("title");
     return title;
 }
+
 /*
     var dataType = 'application/json; charset=utf-8';
 
