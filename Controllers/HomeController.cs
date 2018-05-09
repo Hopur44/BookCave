@@ -24,6 +24,10 @@ namespace BookCave.Controllers
         }
         public IActionResult Index(string SearchString)
         {
+            if(TempData["alert"] != null)
+            {
+                ViewBag.Message = TempData["alert"].ToString();
+            }
             var books = _bookService.GetBooksByString(SearchString);
             return View(books);
         }

@@ -107,15 +107,14 @@ namespace BookCave.Services
                         ExpireDate = billing.ExpireDate,
                         CvCode = billing.CvCode
                     };
-                    _db.Update(billingInput);    
-                }
-                           
+                    _db.Update(billingInput);
+                    _db.SaveChanges();    
+                }     
             }
             else
             {
                 CreateBillingHelperFunction(billing,accountId);
-            }
-            _db.SaveChanges();
+            }         
         }
         public void CreateOrder(List<CartViewModel> cart, int accountId, int billingId)
         {

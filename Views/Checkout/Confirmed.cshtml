@@ -1,7 +1,7 @@
 @model BookCave.Models.ViewModels.OrderViewModel
 <div class="stepwizard">
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-success btn-circle" disabled="disabled">1</a>
+            <button type="button" class="btn btn-success btn-circle" disabled="disabled">1</button>
             <p>Billing</p>
         </div>
         <div class="stepwizard-step">
@@ -37,27 +37,25 @@
     </div>
 </div>
 <div class="user-grid-cart fade-in">
-        @foreach(var item in Model.CartList) 
-        {
-        <div class="grid-cart-item">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price for each</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@item.Title</td>
-                        <td>@item.Quantity</td>
-                        <td>@item.Price</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        }
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price for each</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.CartList) 
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
     <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Return to Home</a>
 </div>

@@ -35,13 +35,21 @@ namespace BookCave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterInputModel model)
         {
-            if(!ModelState.IsValid) {return View();}
+            if(!ModelState.IsValid) 
+            {
+                return View();
+            }
             var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
             var result = await _userManager.CreateAsync(user, model.Password);
             if(result.Succeeded)
             {
                 //The user successfully registered
                 // add the concatenated first and last name as fullName in claims
+                TempData["alert"] = "<div class=\"alert alert-success\"" + "role="+"alert" +">"
+                    +"Account Created"+
+                    "<button type=\"button\""+"class=\"close\""+" data-dismiss=\"alert\""+" aria-label=\"Close\"" +">"+
+                    "<span aria-hidden=\"true\">&times;</span>"+"</button></div>";
+                    
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _signInManager.SignInAsync(user, false);
                 _accountService.CreateAccount(model);
@@ -58,11 +66,14 @@ namespace BookCave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginInputModel model)
         {
-            if(!ModelState.IsValid) {return View();}
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             if(result.Succeeded)
             {
-                return RedirectToAction("MyAccount", "Account");
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }
@@ -83,6 +94,10 @@ namespace BookCave.Controllers
         {
             string email = ((ClaimsIdentity) User.Identity).Name;
             var account = _accountService.GetAccount(email);
+            if(TempData["alert"] != null)
+            {
+                ViewBag.Message = TempData["alert"].ToString();
+            }
             return View(account);
         }
         [Authorize]
@@ -96,6 +111,10 @@ namespace BookCave.Controllers
         {
             string email = ((ClaimsIdentity) User.Identity).Name;
             _accountService.EditAccount(model, email);
+            TempData["alert"] = "<div class=\"alert alert-success\"" + "role="+"alert" +">"
+                    +"Your Edit was successful"+
+                    "<button type=\"button\""+"class=\"close\""+" data-dismiss=\"alert\""+" aria-label=\"Close\"" +">"+
+                    "<span aria-hidden=\"true\">&times;</span>"+"</button></div>";
             return RedirectToAction("MyAccount");
         }
         [Authorize]
