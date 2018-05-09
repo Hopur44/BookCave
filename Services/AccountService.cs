@@ -53,50 +53,50 @@ namespace BookCave.Services
          }
         public void CreateAccount(RegisterInputModel createAccount)
         {
-                    string name = createAccount.FirstName + " " + createAccount.LastName;
-                    var newAccount = new AccountEntityModel
-                    {
-                        Name = name, 
-                        Address = createAccount.Address, 
-                        Image = createAccount.Image,
-                        Email = createAccount.Email,
-                        FavouriteBook = createAccount.FavouriteBook
-                    };
-                    _db.Add(newAccount);
-                    _db.SaveChanges();
-                    Console.WriteLine("new account Success");
+            string name = createAccount.FirstName + " " + createAccount.LastName;
+            var newAccount = new AccountEntityModel
+            {
+                Name = name, 
+                Address = createAccount.Address, 
+                Image = createAccount.Image,
+                Email = createAccount.Email,
+                FavouriteBook = createAccount.FavouriteBook
+            };
+            _db.Add(newAccount);
+            _db.SaveChanges();
+            Console.WriteLine("new account Success");
         }
 
          public void EditAccount(EditAccountInputModel editAccount, string email)
         {
-                    var account = GetAccount(email);
-                    /*three if statements to check if string from the textboxes are empty
-                        and gives them their right values if they are empty
-                    */ 
-                    if(editAccount.Address == null)
-                    {
-                        editAccount.Address = account.Address;
-                    }
-                    if(editAccount.Image == null)
-                    {
-                        editAccount.Image = account.Image;
-                    }
-                    if(editAccount.FavouriteBook == null)
-                    {
-                        editAccount.FavouriteBook = account.FavouriteBook;
-                    }
-                    var editedAccount = new AccountEntityModel
-                    {
-                        Id = account.Id,
-                        Name = account.Name,
-                        Email = account.Email,
-                        Address = editAccount.Address, 
-                        Image = editAccount.Image,
-                        FavouriteBook = editAccount.FavouriteBook
-                    };
-                    _db.Update(editedAccount);
-                    _db.SaveChanges();
-                    Console.WriteLine("Account was Successfully Edited");
+            var account = GetAccount(email);
+            /*three if statements to check if string from the textboxes are empty
+                and gives them their right values if they are empty
+            */ 
+            if(editAccount.Address == null)
+            {
+                editAccount.Address = account.Address;
+            }
+            if(editAccount.Image == null)
+            {
+                editAccount.Image = account.Image;
+            }
+            if(editAccount.FavouriteBook == null)
+            {
+                editAccount.FavouriteBook = account.FavouriteBook;
+            }
+            var editedAccount = new AccountEntityModel
+            {
+                Id = account.Id,
+                Name = account.Name,
+                Email = account.Email,
+                Address = editAccount.Address, 
+                Image = editAccount.Image,
+                FavouriteBook = editAccount.FavouriteBook
+            };
+            _db.Update(editedAccount);
+            _db.SaveChanges();
+            Console.WriteLine("Account was Successfully Edited");
         }
     }
 }

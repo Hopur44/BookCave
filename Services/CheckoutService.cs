@@ -62,7 +62,7 @@ namespace BookCave.Services
                 Billing = billing
             };
         }
-
+        //function creates a new billing
         public void CreateBillingHelperFunction(BillingInputModel billing, int accountId)
         {
             var billingInput = new BillingEntityModel
@@ -86,7 +86,7 @@ namespace BookCave.Services
         {
             if(BillingIdExist(accountId))
             {
-                //check wether the the existing billing has an order attached to it then do an else statement
+                //check wether the the existing billing has an order attached to it
                 if(!OrderExist(accountId))
                 {
                     CreateBillingHelperFunction(billing, accountId);

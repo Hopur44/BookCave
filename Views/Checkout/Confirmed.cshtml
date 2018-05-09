@@ -1,8 +1,7 @@
 @model BookCave.Models.ViewModels.OrderViewModel
-<h1>Orders Been Confirmed</h1>
 <div class="stepwizard">
         <div class="stepwizard-step">
-            <a asp-controller="Checkout" asp-action="Billing" type="button" class="btn btn-success btn-circle">1</a>
+            <button type="button" class="btn btn-success btn-circle" disabled="disabled">1</a>
             <p>Billing</p>
         </div>
         <div class="stepwizard-step">
@@ -14,22 +13,51 @@
             <p>Order Confirmed</p>
         </div>
 </div>
+<center>
+    <hr/>
+    <h1>Success - your order is confirmed!</h1>
+    <hr/>
+</center>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-6">
+                <address>
+                    <strong>Shipping Address: @Model.Billing.StreetAddress</strong><br>
+                    @Model.Billing.CardOwner<br>
+                    ZIP: @Model.Billing.ZipCode, City: @Model.Billing.City, Country: @Model.Billing.Country
+                </address>
+        </div>
+            <div class="col-xs-6">
+                Credit Card: @Model.Billing.CardNumber<br>
+                Cvv: @Model.Billing.CvCode <br>
+                Expiring Date: @Model.Billing.ExpireDate
+            </div>
+        </div>
+    </div>
+</div>
 <div class="user-grid-cart fade-in">
-    <div class="grid-cart"> 
         @foreach(var item in Model.CartList) 
         {
         <div class="grid-cart-item">
-            <div class="grid-cart-item-title"> @item.Title </div>
-            <div class="grid-cart-item-price">
-                <div class="user-item-quantity" data-quantity=@item.Quantity> Quantity: @item.Quantity </div>
-                <div class="user-item-price" data-price=@item.Price> Price for each: @item.Price </div> 
-            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price for each</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         }
-    </div>
-    <h3>@Model.Billing.StreetAddress</h3>
-    <h3>@Model.Billing.City</h3>
-    <h3>@Model.Billing.Country</h3>
-    <h3>@Model.Billing.ZipCode</h3>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Return to Home</a>
+</div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Return to Home</a>
 </div>

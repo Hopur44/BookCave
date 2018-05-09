@@ -35,7 +35,7 @@ namespace BookCave.Services
                                 Id = b.Id,
                                 Title = b.Title,
                                 Price = b.Price,
-                                Rating = 5,
+                                Rating = GetAverageRatingOfBook(b.Id),
                                 Image = b.ImageLink,
                                 Author = b.Author
                             }).OrderBy(b => b.Title).ToList();
@@ -55,16 +55,19 @@ namespace BookCave.Services
         public List<BookViewModel> GetBooksByString(string SearchString)
         {
             var books = (from b in _db.Books
-
-                            select new BookViewModel
-                            {
-                                Id = b.Id,
-                                Title = b.Title,
-                                Price = b.Price,
-                                Image = b.ImageLink,
-                                Author = b.Author,
-                                Genre = b.Genre
-                            }).ToList();
+                        select new BookViewModel
+                        {
+                            Id = b.Id,
+                            Title = b.Title,
+                            Price = b.Price,
+                            Image = b.ImageLink,
+                            Author = b.Author,
+                            Genre = b.Genre
+                        }).ToList();
+            foreach (var item in books)
+            {
+                item.Rating = GetAverageRatingOfBook(item.Id);
+            }
                         if(!string.IsNullOrEmpty(SearchString))
                         {
                             books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) 
@@ -116,10 +119,13 @@ namespace BookCave.Services
                         Id = b.Id,
                         Title = b.Title,
                         Price = b.Price,
-                        Rating = 5,
                         Image = b.ImageLink,
                         Author = b.Author
                     }).OrderByDescending(b => b.Rating).Take(n).ToList();
+            foreach (var item in books)
+            {
+                item.Rating = GetAverageRatingOfBook(item.Id);
+            }
 
             return books;
 
@@ -133,10 +139,13 @@ namespace BookCave.Services
                         Id = b.Id,
                         Title = b.Title,
                         Price = b.Price,
-                        Rating = 5,
                         Image = b.ImageLink,
                         Author = b.Author
                     }).ToList();
+            foreach (var item in books)
+            {
+                item.Rating = GetAverageRatingOfBook(item.Id);
+            }
             return books;
         }
     }

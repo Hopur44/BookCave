@@ -39,11 +39,15 @@ namespace BookCave.Controllers
             int accountId = _accountService.GetAccountId(email);
             var userCart = _cartService.GetUserCartItems(accountId);
 
-            _checkoutService.CreateBilling(billing,accountId);
+            if(ModelState.IsValid)
+            {
+                _checkoutService.CreateBilling(billing,accountId);
+                
+                var reviewOrder = _checkoutService.GetReviewOrder(billing, userCart);
 
-            var reviewOrder = _checkoutService.GetReviewOrder(billing, userCart);
-
-            return View("Review", reviewOrder);
+                return View("Review", reviewOrder);
+            }
+            return View();
         }
         [HttpPost]
         public IActionResult Review(OrderViewModel order)

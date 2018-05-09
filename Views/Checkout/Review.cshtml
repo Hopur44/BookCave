@@ -13,23 +13,49 @@
             <p>Order Confirmed</p>
         </div>
 </div>
+<hr/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-6">
+                <address>
+                    <strong>Shipping Address: @Model.Billing.StreetAddress</strong><br>
+                    @Model.Billing.CardOwner<br>
+                    ZIP: @Model.Billing.ZipCode, City: @Model.Billing.City, Country: @Model.Billing.Country
+                </address>
+        </div>
+            <div class="col-xs-6">
+                Credit Card: @Model.Billing.CardNumber<br>
+                Cvv: @Model.Billing.CvCode <br>
+                Expiring Date: @Model.Billing.ExpireDate
+            </div>
+        </div>
+    </div>
+</div>
 <div class="user-grid-cart fade-in">
-    <div class="grid-cart"> 
         @foreach(var item in Model.CartList) 
         {
         <div class="grid-cart-item">
-            <div class="grid-cart-item-title"> @item.Title </div>
-            <div class="grid-cart-item-price">
-                <div class="user-item-quantity" data-quantity=@item.Quantity> Quantity: @item.Quantity </div>
-                <div class="user-item-price" data-price=@item.Price> Price for each: @item.Price </div> 
-            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price for each</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         }
     </div>
-    <h3>@Model.Billing.StreetAddress</h3>
-    <h3>@Model.Billing.City</h3>
-    <h3>@Model.Billing.Country</h3>
-    <h3>@Model.Billing.ZipCode</h3>
+   
     <form asp-controller="Checkout" asp-action="Review" class="form-group row">
         <button type="submit" class="btn btn-primary">Order</button>
     </form>
