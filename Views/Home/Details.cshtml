@@ -6,26 +6,52 @@
     @{
         var claim = ((ClaimsIdentity) User.Identity);
     }
+    
+<style>
+ {
+    box-sizing: border-box;
+}
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 330px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+</style>
+
+    
 <div class="book-details-container">
     <div class="book-details-grid-title">
         <h1>@Model.Title</h1>
-    </div>  
+    </div>
+ </div>
+ <div class="row">
+  <div class="column" style="background-color:#aaa;" align="center">
     <div class="book-details-grid-image">
         <img src="@Model.Image" alt="Image of @Model.Title" height="300" width="">
     </div>
+  </div>
+
+        
+  <div class="column" style="background-color:#bbb;">
     <div class="book-details-grid-author">
         <h2>Author: @Model.Author</h2>
     </div>
     <div class="">Description: @Model.Description</div>
-    <div class="">Price: @Model.Price Kr</div>
-    <div class="">@Model.Title</div>
-    <div class=""> Release date </div>
-    <div class=""> Publisher</div>
-
+    <div class="">Pages: @Model.NumberOfPage</div>
+    <div class="">Publisher: @Model.Publisher</div>
+    <div class="">Price: @Model.Price Kr.</div>
     @if(SignInManager.IsSignedIn(User))
     {
-        <button class="add-user-book btn btn-success" data-toggle="modal" data-target="#userDetailAdd" data-book=@Model.Id data-price=@Model.Price> im logged in add</button>
-
+        <center>
+            <button class="add-user-book btn btn-success"  data-toggle="modal" data-target="#userDetailAdd" data-book=@Model.Id data-price=@Model.Price> im logged in add</button>
+        </center>
         <!-- Modal -->
         <div class="modal fade" id="userDetailAdd" role="dialog">
             <div class="modal-dialog">
@@ -46,21 +72,31 @@
     {
         <button class="add-book btn btn-danger" data-title="@Model.Title" data-book=@Model.Id data-price=@Model.Price> im not logged in add</button>
     }
+            
+  </div>
+ </div>
+
+
+
 
     <div id="reviewSection" data-isbn=@Model.Id>
         <h3>Reviews</h3>
+
+        
         @if(SignInManager.IsSignedIn(User))
         {
             <form id="book-detail-review-form" class="form-group row">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
+                    Rating 1-5:
                     <label class="col-sm-2 col-form-label"></label>
                     <input type="radio" name="rating" value="1">
                     <input type="radio" name="rating" value="2">
                     <input type="radio" name="rating" value="3">
                     <input type="radio" name="rating" value="4">
                     <input type="radio" name="rating" value="5">
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label"></label>
@@ -82,4 +118,4 @@
         }
         <div id="user-comments"></div>
     </div>
-</div>
+
