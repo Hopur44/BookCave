@@ -33,13 +33,67 @@
                         </div>
                         <div class="grid-cart-buttons">
                             <div>
-                                <button data-useritemadd=@item.ItemId class="user-cart-item-add btn btn-default fas fa-plus"></button>
+                                <button data-useritemadd=@item.ItemId data-toggle="modal" data-target="#userAdd" class="user-cart-item-add btn btn-default fas fa-plus"></button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="userAdd" role="dialog">
+                                    <div class="modal-dialog">
+                                    
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"> We added one copy of this book to your cart.</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
                             </div>
                             <div>
-                                <button data-useritemremove=@item.ItemId class="user-cart-item-remove btn btn-default fas fa-minus"></button>
+                                <button data-useritemremove=@item.ItemId data-toggle="modal" data-target="#userRemove" class="user-cart-item-remove btn btn-default fas fa-minus"></button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="userRemove" role="dialog">
+                                    <div class="modal-dialog">
+                                    
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"> We removed one copy of this book from your cart.</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
                             </div>
                             <div>
-                                <button data-useritemclear=@item.ItemId class="user-cart-item-clear btn btn-default fa fa-trash"></button>
+                                <button data-useritemclear=@item.ItemId data-toggle="modal" data-target="#userClear" class="user-cart-item-clear btn btn-default fa fa-trash"></button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="userClear" role="dialog">
+                                    <div class="modal-dialog">
+                                    
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"> We removed all copies of this book from your cart.</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,8 +109,25 @@
                     </h4>  
                 </div>
                 <div class="user-clear-cart">
-                    <button class="user-cart-item-clear-all btn btn-default"> clear cart </button>
+                    <button class="user-cart-item-clear-all btn btn-default" data-toggle="modal" data-target="#userClearAll"> clear cart </button>
+
                     <a asp-controller="Checkout" asp-action="Billing" class="user-cart-checkout btn btn-default"> checkout </a>
+
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="userClearAll" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"> We cleared all the items from your cart.</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -71,10 +142,34 @@ else
          
         <div class="grid-cart fade-in"></div>
         <div id="cart-items" class="fade-in"> </div>
-        <button class="buy-books"> not logged in user -> Checkout </button>
+        
 
         <div class="clear-cart">
             <button class="cart-item-clear-all btn btn-default"> clear cart</button>
+            <button type="button" class="buy-books btn btn-default" data-toggle="modal" data-target="#myModal">Checkout</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">You need to login to buy the books.</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Your items will be in the cart after you login.</p>
+                            <p>Do you want us to send you to the login page?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="close-cart-modal btn btn-default" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
         </div>
     </div>
 }
