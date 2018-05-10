@@ -70,12 +70,12 @@ namespace BookCave.Services
                 item.Rating = GetAverageRatingOfBook(item.Id);
             }
             */
-                        if(!string.IsNullOrEmpty(SearchString))
-                        {
-                            books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) 
-                            || b.Author.ToLower().Contains(SearchString.ToLower()) 
-                            || b.Genre.ToLower().Contains(SearchString.ToLower())).ToList();      
-                       }
+            if(!string.IsNullOrEmpty(SearchString))
+            {
+                books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) 
+                || b.Author.ToLower().Contains(SearchString.ToLower()) 
+                || b.Genre.ToLower().Contains(SearchString.ToLower())).ToList();      
+            }
             return books;
         }
         public BookDetailViewModel GetBooksByID(int? id)

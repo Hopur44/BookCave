@@ -5,7 +5,7 @@ namespace BookCave.Models.InputModels
     public class LoginInputModel
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Required valid email address something@something.com")]
         public string Email {get; set;}
         [Required]
         public string Password {get; set;}

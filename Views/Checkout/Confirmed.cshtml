@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-xs-6">
                 <address>
-                    <strong>Shipping Address: @Model.Billing.StreetAddress</strong><br>
+                    <strong>Shipping Address: </strong> @Model.Billing.StreetAddress<br>
                     @Model.Billing.CardOwner<br>
                     ZIP: @Model.Billing.ZipCode, City: @Model.Billing.City, Country: @Model.Billing.Country
                 </address>
@@ -54,6 +54,11 @@
                     <td>@item.Price</td>
                 </tr>
             }
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Total price: @Model.TotalPrice</td>
+            </tr>
         </tbody>
     </table>
 </div>
