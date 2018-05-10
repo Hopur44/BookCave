@@ -1,52 +1,30 @@
 ﻿// Write your JavaScript code.
 console.log("javascript code .js");
 
-//var totalCartQuantity = 0;
-//var userTotalCartQuantity = 0;
-/* -------- Header -------- */
-// cart-header
-
 // All Controllers
 // All users
+// We update cart total price
 if ($(".cart-header").length > 0)  {
-    console.log("cart header");
-    //console.log($(".user-cart-header"));
-    console.log($(".cart-header"));
-
-    // localStorage til að sækja total
+    
     var total = 0;
     var items = getAllItemsFromLocalStorage();
     for(var i = 0; i < items.length; i++) {
         total = total + items[i].quantity;
     }
-    //console.log("total items from localStorage: " + total);
-    //$(".cart-header").attr('data-amount', total);
-
     updateCartTotal(total)
 }
 
+// Logged in user
+// We get total cart quantity
 if ($(".user-cart-header").length > 0)  {
-    console.log("user cart header");
-    console.log($(".user-cart-header"));
-    //console.log($(".user-cart-header").text("Cart: " + 5 + " items"));
-
-    //console.log("did I go here?");
-    // ajax til að sækja total cart items....
-
+    console.log("user cart header");    
     getTotalUserCartQuantity();
 }
 
-
-
-
 function getTotalUserCartQuantity() {
-
     $.ajax({
         type: 'GET',
         url: '/Cart/GetTotalQuantity',
-        //dataType: 'json',
-        //contentType: dataType,
-        //data: JSON.stringify(1),
         success: function(result) {
             console.log('Data received: ');
             console.log(result);
@@ -77,11 +55,8 @@ $(".user-cart-item-add").on("click", function(e) {
     };
     
     console.log("user-add-data");
-    console.log($(".user-cart-header").append("<div> hello </div>"));
     
     var amount = $(".user-cart-header").data("amount");
-    console.log("amount: " + amount);
-
     sendActionToCartController(item);
 
     // we update the total cart items in the header
@@ -95,15 +70,6 @@ $(".user-cart-item-add").on("click", function(e) {
     updateCartTotalPrice(item.price, true); // true is add price to totalPrice
 
 });
-
-/*
-function updateTotalQuantity(quantity) {
-    console.log("update total quantity");
-    console.log($(".user-cart-header"));
-    console.log($(".cart-header"));
-
-}
-*/
 
 // Controller/Cart/Index
 // logged in user
@@ -145,9 +111,9 @@ function createItemForAjax(bookId, quantity, price, actionToTake) {
 // logged in user 
 // removes one book from his cart
 $(".user-cart-item-remove").on("click", function(e) {
-    var quantity = getUserQuantity(this); //$(this).parent().parent().prev().children(".user-item-quantity").data("quantity");
-    var price = getUserPrice(this);//$(this).parent().parent().prev().children(".user-item-price").data("price");
-    var bookId = getUserBookId(this, "useritemremove"); //$(this).data("useritemremove");
+    var quantity = getUserQuantity(this);
+    var price = getUserPrice(this); 
+    var bookId = getUserBookId(this, "useritemremove");
     console.log("Logged in user removing: " + bookId + " and price: " + price + " and quantity: " + quantity);
     var item = createItemForAjax(bookId, quantity, price, false);
     
@@ -163,7 +129,6 @@ $(".user-cart-item-remove").on("click", function(e) {
     updateCartTotalPrice(item.price, false); // false is deduct price from totalPrice
     // if quantity is going to be zero then we remove this row from the DOM
     if(quantity - 1 === 0 ) {
-        //console.log("zero");
         $(this).parent().parent().parent().remove();
     } else {
         updateQuantityHtml(this, quantity-1);  
@@ -175,14 +140,11 @@ $(".user-cart-item-remove").on("click", function(e) {
 // clears the cart of book with this Id
 $(".user-cart-item-clear").on("click", function(e) {
 
-    
     var quantity = getUserQuantity(this); 
     var price = getUserPrice(this);
     var bookId = getUserBookId(this, "useritemclear");
     var item = createItemForAjax(bookId, 1, price, false);
     console.log("Logged in user clearing: " + bookId + " from his cart");
-    console.log(item);
-    //console.log(item);
     
     // we send the action to the controller to remove one item
     sendActionToCartController(item);
@@ -209,11 +171,8 @@ $(".user-cart-item-clear-all").on("click", function(e) {
     // we set the price to be 0
     setTotalPrice(0);
     updateUserCartTotal(0);
-    //send ajax request to the controller/Cart/ClearCart to remove all
-    // alert("we cleared your cart");
 
-    //Cart/LoggedInUserCartClear
-
+    // we tell the controller to clear the cart
     var dataType = 'application/json; charset=utf-8';
     $.ajax({
         type: 'POST',
@@ -290,7 +249,6 @@ if ($("#cart").length > 0)  {
 
     var allItems = getAllItemsFromLocalStorage();
     console.log("Controller/Cart/Index - not logged in user - getting all items from localStorage");
-    console.log(allItems);
 
     $("#cart-items").html("<h4> Your cart is empty </h4>");
     var addItemData = ""; 
@@ -304,47 +262,30 @@ if ($("#cart").length > 0)  {
     }
 
     setTotalPrice(totalPrice);
-    //console.log("all items in the cart");
-    //console.log(allItemsInCart);
 
     $(".close-cart-modal").on("click", function(e) {
-        console.log("buy all books");
         window.location.href = "http://localhost:5000/Account/Login";
     });
 }
-
 
 // Controller/Cart/Index
 // logged in user 
 // This user cart is empty
 if ($("#logged-in-empty-cart").length > 0)  {
-    console.log("not implemented yet - found logged in user with empty cart");
-    console.log(" /Controller/Cart/Index - logged in user your - with empty cart");
-     // we found empty cart for logged in user
-
-    // check localStorage if we find something there
-        // then we ask the user if he wants to load the items that he/ or someone added on this device
-        // to the database?
     
+    // we get all items from localStorage
     var items = getAllItemsFromLocalStorage();
     if(items.length > 0) {
-        console.log("we found items that were added on this device when you were not logged in");
 
-        // sýna á skjá bækurnar sem við fundum?
-        // takki -> viltu bæta þeim við í körfuna þína?
-
-        //$("#logged-in-empty-cart").append("div class=\"user-empty-cart-container\"></div>");
         $("#logged-in-empty-cart").append("<div class=\"user-empty-cart-container\"></div>");
-        //$(".logged-in-empty-cart").append("<p> We found items that were added on this device when you were not logged in </p>");
-        $(".user-empty-cart-container").append("<h3> We found items that were added on this device when you were not logged in </h3>");
+        $(".user-empty-cart-container").append("<h4>We found these items that were added to cart on this device when you were not logged in. </h4>");
         
         for(var j = 0; j < items.length; j++) {
             $(".user-empty-cart-container").append(
                 "<p>" + (j + 1) + ". " + items[j].title + ". Quantity: " + items[j].quantity + "</p>");
         }
-        console.log(items);
         
-        $(".user-empty-cart-container").append("<span> Do you want to add them too your cart? </span>");
+        $(".user-empty-cart-container").append("<strong> Do you want to add them too your cart? </strong>");
         $(".user-empty-cart-container").append("<span class=\"user-storage-add-yes btn btn-default\"> yes </span>");
         $(".user-empty-cart-container").append("<span class=\"user-storage-add-no\ btn btn-default\"> no </span>");
     }
@@ -438,7 +379,6 @@ function updateCartTotal(cartTotalQuantity) {
 // not logged in user
 // add one item to the cart
 $(".grid-cart").on('click', ".cart-add", function() {
-    
     var cartTotalQuantity = $(".cart-header").data("amount");
     cartTotalQuantity++;
     updateCartTotal(cartTotalQuantity);
@@ -456,7 +396,6 @@ $(".grid-cart").on('click', ".cart-add", function() {
     updateCartTotalPrice(item.price, true);
 });
 
-
 // we put localStorage key together using _this (the position in the DOM)
 // and we use "action" can stand for add, remove, bookId
 function getLocalStorageKey(_this, action) {
@@ -468,7 +407,6 @@ function getLocalStorageKey(_this, action) {
 // not logged in user
 // remove one item from the cart
 $(".grid-cart").on('click', ".cart-remove", function() {
-
     var cartTotalQuantity = $(".cart-header").data("amount");
     cartTotalQuantity--;
     updateCartTotal(cartTotalQuantity);
@@ -535,7 +473,6 @@ $(".cart-item-clear-all").on("click", function(e) {
     $(".grid-cart").remove();
 })
 /* -------------------------------- */
-
 /* -------- Home/Index (frontpage) -------- */
 
 // Controller/Home/Index
@@ -544,7 +481,6 @@ $(".cart-item-clear-all").on("click", function(e) {
 // we send the info to Controller/Cart/LoggedInUserCartAction too update the database-table
 function sendActionToCartController(item) {
     var dataType = 'application/json; charset=utf-8';
-
     if(!item && !item.itemId) {
         return;
     }
@@ -601,7 +537,6 @@ $(".add-book").on("click", function(e) {
     var storageKey = getLocalStorageKey(this, "book");
     var itemFromStorage = localStorage.getItem(storageKey);
     
-
     // if we get some item then the item exist, so we just increment quantity by 1
     if(itemFromStorage) {
         console.log("/Controller/Home/Index - Not logged in user - adding book to cart/localStorage");
@@ -633,7 +568,6 @@ $("#genre-filter a").click(function() {
    window.location.href = "/Home/Index?SearchString=" + SearchString;
 });
 
-
 // Controller/Home/Details
 // all users
 // getting all comments
@@ -652,7 +586,6 @@ if ($("#user-comments").length > 0)  {
         success: function(result) {
             console.log('Data received: ');
             console.log(result);
-
             for(var i = 0; i < result.length; i++) {
                 $("#user-comments").append(
                     "<div class=comments>" +
@@ -661,15 +594,6 @@ if ($("#user-comments").length > 0)  {
                     "</div>"
                 );
             }
-            // for-loop í gegnum öll komment
-            // og appenda þeim inn
-            /*
-            $("#user-comments").append(
-                "<div>" + 
-                    "<p>" + result.user + " said:" + result.comment +  " rating: " + result.rating + "</p>" +
-                "</div>"
-            );
-            */
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
@@ -685,21 +609,15 @@ $("#book-detail-review-form").on("submit", function(e) {
     console.log("/Controller/Home/Details - logged in user - submit rating and comment");
     console.log($(this).find("#review-submit").data("id"));
     var bookId = $(this).find("#review-submit").data("id");
-    //console.log($("#user-comment").val());
-    //console.log($("#"))
-    //console.log(e);
     
+    // we create the object with bookId, comment and rating to send to the controller
     var dataArray = $("#book-detail-review-form").serializeArray();
-    // parseInt(text, 10);
     var rating = parseInt(dataArray[0].value, 10);
-    //console.log(dataArray);
     item = { 
         id: bookId, 
         rating: rating, 
         comment: dataArray[1].value
     }
-
-    console.log(item);
 
     var dataType = 'application/json; charset=utf-8';
     $.ajax({
@@ -709,10 +627,13 @@ $("#book-detail-review-form").on("submit", function(e) {
         contentType: dataType,
         data: JSON.stringify(item),
         success: function(result) {
+
+            
             console.log('Data received: ');
             console.log(result);
             var name = result.user.split("@");
-
+            alert("You already made a comment about this book.")
+            
             $("#user-comments").append(
                 "<div class=comments>" +
                         "<p>"+ "<strong> " + name[0] + "</strong>. Rating: " + result.rating +  " stars.</p>" +
@@ -724,28 +645,15 @@ $("#book-detail-review-form").on("submit", function(e) {
             console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
         } 
     });
-    /*
-    var failed = false;
-    $.post("Home/AddComment", dataArray, function(data, status) {
-        console.log(status);
-    }).fail(function(err) {
-        console.log(err);
-        failed = true;
-    });
-    if(failed === false) {
-        var markup = "<div> success </div>";
-        console.log(markup);
-    }
-    */
 });
 
+// All users
+// We sort the books by price
 // https://stackoverflow.com/questions/41439283/sorting-dom-elements-using-pure-js
 $("#order-by-price").on("click", function(e) { 
     console.log("found order by name button");
-    console.log($(".grid-container"));
     var parent = document.querySelector('.grid-container');
     [].slice.call(parent.children)
-
 
     .sort(function(a, b) {
         // get text content in .price and return difference
@@ -756,12 +664,14 @@ $("#order-by-price").on("click", function(e) {
       })    
 });
 
+// All users
+// We sort the books by rating
+// https://stackoverflow.com/questions/41439283/sorting-dom-elements-using-pure-js
 $("#order-by-rating").on("click", function(e) { 
     console.log("found order by rating button");
     console.log($(".grid-container"));
     var parent = document.querySelector('.grid-container');
     [].slice.call(parent.children)
-
 
     .sort(function(a, b) {
         // get text content in .price and return difference
@@ -772,12 +682,14 @@ $("#order-by-rating").on("click", function(e) {
       })    
 });
 
+// All users
+// We sort the books by title
+// https://stackoverflow.com/questions/41439283/sorting-dom-elements-using-pure-js
 $("#order-by-title").on("click", function(e) { 
     console.log("found order by name button");
     console.log($(".grid-container"));
     var parent = document.querySelector('.grid-container');
     [].slice.call(parent.children)
-
 
     .sort(function(a, b) {
         // get text content in .price and return difference
@@ -791,7 +703,6 @@ $("#order-by-title").on("click", function(e) {
         } else {
             return 0;
         }
-        //return getName(a) - getName(b);
         // iterate and append again in new sorted order
       }).forEach(function(ele) {
         parent.appendChild(ele);
@@ -805,15 +716,8 @@ function getPrice(ele) {
 }
 
 function getRating(ele) {
-    console.log("getRating");
-    console.log(ele);
     var _this = ele.children[2];
-    console.log(_this)
-    var rating = $(_this).data("rating");
-    
-    //console.log(_this);
-    //console.log(price);
-    
+    var rating = $(_this).data("rating");    
     return rating;
 }
 
@@ -822,163 +726,3 @@ function getName(ele) {
     var title = $(_this).data("title");
     return title;
 }
-
-/*
-    var dataType = 'application/json; charset=utf-8';
-
-    $.ajax({
-        type: 'POST',
-        url: '/Cart',
-        dataType: 'json',
-        contentType: dataType,
-        data: JSON.stringify(allItemsInCart),
-        success: function(result) {
-            $("#cart #cart-loader").toggleClass("loader");
-            console.log('Data received: ');
-            console.log(result);
-            var totalPrice = 0;
-            var addItemData = "";
-            var removeItemData = "";
-            var quantityItemData = "";
-            for(var j = 0; j < result.length; j++) {
-                totalPrice = totalPrice + result[j].price * result[j].quantity;
-                addItemData = "data-add="+ result[j].itemId;
-                removeItemData = "data-remove="+ result[j].itemId;
-                /*
-                $(".grid-cart").append(
-                    "<div class=grid-cart-item>" +
-                        "<div class=grid-cart-item-title>" + result[j].title + "</div>" +
-                        "<div class=grid-cart-item-price>" +
-                            "<div class=cart-quantity>" + "Quantity: " + result[j].quantity + "</div>" +
-                            "<div>" + "Price for each: " + result[j].price + "</div>" +
-                        "</div>" +
-                        "<div class=grid-cart-buttons>" +
-                            "<div>" + "<button " + addItemData + " class=\"cart-add btn btn-success\"> + </button>" + "</div>" +
-                            "<div>" + "<button " + removeItemData + " class=\"cart-remove btn btn-danger\"> - </button>" + "</div>" +
-                        "</div>" +
-                    "</div>");
-                
-            }     
-            
-            setTotalPrice(totalPrice)
-            //getTotalPrice(totalPrice);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            $("#cart #cart-loader").toggleClass("loader");
-            $("#cart-items").html("<h4> Something went wrong. </h4>");
-            console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
-        } 
-    });
-    */
-
-        //var allItemsInCart = [];
-    /*
-    for (var i = 0; i < localStorage.length; i++) {
-        itemStoreId = localStorage.getItem(localStorage.key(i));
-        key = localStorage.key(i);
-        if(key.startsWith('itemId')) {
-            if(itemStoreId !== 'INFO' && itemStoreId !== null && itemStoreId !== undefined) {
-                singleItem = JSON.parse(itemStoreId);
-                var item = { 
-                    itemId: singleItem.itemId, 
-                    quantity: singleItem.quantity, 
-                    price: singleItem.price,
-                    title: singleItem.title
-                };
-                totalPrice = totalPrice + singleItem.price * singleItem.quantity;
-                allItemsInCart.push(item);
-                addItemData = "data-add="+ singleItem.itemId;
-                removeItemData = "data-remove="+ singleItem.itemId;
-                clearItemData = "data-removeall="+ singleItem.itemId;
-                $(".grid-cart").append(
-                    "<div class=grid-cart-item>" +
-                        "<div class=grid-cart-item-title>" + singleItem.title + "</div>" +
-                        "<div class=grid-cart-item-price>" +
-                            "<div class=cart-quantity>" + "Quantity: " + singleItem.quantity + "</div>" +
-                            "<div>" + "Price for each: " + singleItem.price + "</div>" +
-                        "</div>" +
-                        "<div class=grid-cart-buttons>" +
-                            "<div>" + 
-                                "<button " + addItemData + " class=\"cart-add btn btn-default fas fa-plus\"></button>" + 
-                            "</div>" +
-                            "<div>" + 
-                                "<button " + removeItemData + " class=\"cart-remove btn btn-default fas fa-minus\"></button>" + 
-                            "</div>" +
-                            "<div>" + 
-                                "<button " + clearItemData + " class=\"cart-clear-item btn btn-default fa fa-trash\"></button>" + 
-                            "</div>" +
-                        "</div>" +
-                    "</div>");
-            }
-        }
-    }
-    */
-
-    /*
-        addItemData = "data-add="+ allItems[j].itemId;
-        removeItemData = "data-remove="+ allItems[j].itemId;
-        clearItemData = "data-removeall="+ allItems[j].itemId;
-        console.log(addItemData);
-        
-        $(".grid-cart").append(
-            "<div class=grid-cart-item>" +
-                "<div class=grid-cart-item-title>" + allItems[j].title + "</div>" +
-                "<div class=grid-cart-item-price>" +
-                    "<div class=cart-quantity>" + "Quantity: " + allItems[j].quantity + "</div>" +
-                    "<div>" + "Price for each: " + allItems[j].price + "</div>" +
-                "</div>" +
-                "<div class=grid-cart-buttons>" +
-                    "<div>" + 
-                        "<button " + addItemData + " class=\"cart-add btn btn-default fas fa-plus\"></button>" + 
-                    "</div>" +
-                    "<div>" + 
-                        "<button " + removeItemData + " class=\"cart-remove btn btn-default fas fa-minus\"></button>" + 
-                    "</div>" +
-                    "<div>" + 
-                        "<button " + clearItemData + " class=\"cart-clear-item btn btn-default fa fa-trash\"></button>" + 
-                    "</div>" +
-                "</div>" +
-            "</div>");
-        */
-
-/*      
-        
-        // þetta er óþarfi
-        //var dataType = 'application/json; charset=utf-8';
-        $.ajax({
-            type: 'POST',
-            url: '/Cart/Buy',
-            dataType: 'json',
-            contentType: dataType,
-            //data: JSON.stringify(allItemsInCart),
-            success: function(result) {
-                console.log('Data received: ');
-                console.log(result);
-                if(result === false) {
-                    window.location.href = "http://localhost:5000/Account/Login";
-                } else {
-                    window.location.href = "http://localhost:5000/Checkout";
-                }  
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
-            } 
-        });
-        */
-
-        //console.log("hello javascript code min.js");
-/*
-/* sign-in  
-$("#signin-active").hide();
-$("#signin-active").on("click", function(e) {
-    console.log("hello submit button");
-});
-
-$("#sign-in-disabled").on("click", function(e) {
-    console.log("hello disabled submit button");
-    //$(".formtest #user-form span.name-req").show();
-    //$(".formtest #user-form span.sem-req").show();
-    // <span class="name-req"> Name is required my friend </span>
-});
-*/
-/* -------------------------------- */

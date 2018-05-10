@@ -47,7 +47,7 @@
 
                     @if(SignInManager.IsSignedIn(User))
                     {
-                        <button class="add-user-book btn btn-success" data-toggle="modal" data-target="#userHomeAdd" data-book=@book.Id data-price=@book.Price> add to cart</button>
+                        <button class="add-user-book custom-btn btn btn-success" data-toggle="modal" data-target="#userHomeAdd" data-book=@book.Id data-price=@book.Price> add to cart</button>
                         <!-- Modal -->
                         <div class="modal fade" id="userHomeAdd" role="dialog">
                             <div class="modal-dialog">
@@ -66,7 +66,7 @@
                     }
                     else 
                     {
-                        <button class="add-book btn btn-success" data-title="@book.Title" data-book=@book.Id data-price=@book.Price> add to cart</button>
+                        <button class="add-book btn custom-btn btn-success" data-title="@book.Title" data-book=@book.Id data-price=@book.Price> add to cart</button>
                     }
                     
                 </div>       

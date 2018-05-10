@@ -36,8 +36,12 @@ body {
     }
 }
 
-#navbar {
-    /*background-color:rgb(49, 29, 5);*/
+.custom-btn {
+    width: 120px;
+    height: 40px;
+    border-radius: 15px;
+    margin: auto;
+    background-color: rgb(221, 153, 87);
 }
 
 .dropdown > .dropdown-content > a:hover {
@@ -638,10 +642,6 @@ footer > a {
 
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-.dropdown:hover .dropbtn {
-    /*background-color: rgba(154, 156, 40, 0.63);*/
 }
 
 /* https://bootsnipp.com/snippets/featured/process-steps */
