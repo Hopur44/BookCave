@@ -658,14 +658,14 @@ namespace BookCave
                         CustomerId = 1,
                         BookId = 1,
                         Rating = 5,
-                        comment = "Great Book, Great fun mumford and sons"
+                        Comment = "Great Book, Great fun mumford and sons"
                     },
                     new ReviewEntityModel
                     {
                         CustomerId = 2,
                         BookId = 3,
                         Rating = 3,
-                        comment = "I Read this book and found it to be above average"
+                        Comment = "I Read this book and found it to be above average"
                     }
                 };
                     db.AddRange(initialReviews);

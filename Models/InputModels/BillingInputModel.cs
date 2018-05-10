@@ -22,6 +22,10 @@ namespace BookCave.Models.InputModels
         [RegularExpression("^([1-8][0-9]{2}|9[0-8][0-9]|99[0-9])$", ErrorMessage = "must be a number between 100-999")]
         public string CvCode {get; set;}
         [Required]
-        public string ExpireDate {get; set;}
+        [RegularExpression("^(0[1-9]|1[0-2])$",ErrorMessage = "Month must be between 01-12")]
+        public string ExpireMonth {get; set;}
+        [Required]
+        [RegularExpression("^(1[89]|[2-9][0-9])$",ErrorMessage = "Tear must be between 18-99")] 
+        public string ExpireYear{get; set;}
     }
 }

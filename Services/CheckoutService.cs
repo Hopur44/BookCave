@@ -50,7 +50,8 @@ namespace BookCave.Services
                         CardNumber = b.CardNumber,
                         CardOwner = b.CardOwner,
                         CvCode = b.CvCode,
-                        ExpireDate = b.ExpireDate
+                        ExpireYear = b.ExpireDate.Substring(3,2),
+                        ExpireMonth = b.ExpireDate.Substring(0,2)
                     }).FirstOrDefault();
         }
 
@@ -75,7 +76,7 @@ namespace BookCave.Services
                     Finished = false,
                     CardOwner = billing.CardOwner,
                     CardNumber = billing.CardNumber,
-                    ExpireDate = billing.ExpireDate,
+                    ExpireDate = billing.ExpireMonth+"/"+billing.ExpireYear,
                     CvCode = billing.CvCode
                 };
             _db.Add(billingInput);
@@ -104,7 +105,7 @@ namespace BookCave.Services
                         ZipCode = billing.ZipCode,
                         CardOwner = billing.CardOwner,
                         CardNumber = billing.CardNumber,
-                        ExpireDate = billing.ExpireDate,
+                        ExpireDate = billing.ExpireMonth+"/"+billing.ExpireYear,
                         CvCode = billing.CvCode
                     };
                     _db.Update(billingInput);
@@ -145,7 +146,7 @@ namespace BookCave.Services
                 ZipCode = billing.ZipCode,
                 CardOwner = billing.CardOwner,
                 CardNumber = billing.CardNumber,
-                ExpireDate = billing.ExpireDate,
+                ExpireDate = billing.ExpireMonth+"/"+billing.ExpireYear,
                 CvCode = billing.CvCode
             };
             _db.Update(billingInput);

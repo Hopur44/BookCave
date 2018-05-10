@@ -22,10 +22,10 @@
                     </div> 
                     <form asp-controller="Checkout" asp-action="Billing">
                         <div class="panel-body">
-                            <input class="form-control" type="text" placeholder="Street Address" asp-for="StreetAddress">
+                            <input class="form-control" type="text" placeholder="Street Address" asp-for="StreetAddress" />
                             <span asp-validation-for="StreetAddress"></span>
                             <br/>
-                            <input class="form-control" type="text" placeholder="City" asp-for="City">
+                            <input class="form-control" type="text" placeholder="City" asp-for="City" />
                             <span asp-validation-for="City"></span>
                             <br/>
                             <select class="form-control" asp-for="Country">
@@ -35,21 +35,27 @@
                                 <option value="Denmark">Denmark</option>
                             </select>
                             <br/>
-                            <input class="form-control" type="text" placeholder="Zip Code" asp-for="ZipCode">
+                            <input class="form-control" type="text" placeholder="Zip Code" asp-for="ZipCode" />
                             <span asp-validation-for="ZipCode"></span>
                             <br/>
-                            <input class="form-control" type="text" placeholder="Name of Card owner" asp-for="CardOwner">
+                            <input class="form-control" type="text" placeholder="Name of Card owner" asp-for="CardOwner" />
                             <span asp-validation-for="CardOwner"></span>
                             <br/>
-                            <input class="form-control" type="text" placeholder="Credit Card Number" asp-for="CardNumber">
+                            <input class="form-control" type="text" placeholder="Credit Card Number(Only MasterCard)" asp-for="CardNumber" />
                             <span asp-validation-for="CardNumber"></span>
                             <br/>
-                            <input class="form-control" type="text" placeholder="Cvv(3 digits on the card)" asp-for="CvCode">
+                            <input class="form-control" type="text" placeholder="Cvv(3 digits on the card)" asp-for="CvCode" />
                             <span asp-validation-for="CvCode"></span>
                             <br/>
-                            <input class="form-control" type="date" asp-for="ExpireDate">
-                            <span asp-validation-for="ExpireDate"></span>
+                            <span class="expiration">
+                                <input type="text" class="" asp-for="ExpireMonth" placeholder="MM" maxlength="2" size="2" />
+                                <span>/</span>
+                                <input type="text" class="" asp-for="ExpireYear" placeholder="YY" maxlength="2" size="2" />
+                            </span>
+                            <span asp-validation-for="ExpireMonth"></span>
                             <br/>
+                            <br/>
+                            <span asp-validation-for="ExpireYear"></span>
                             <input type="submit" value="Register" class="btn btn-default">
                         </div>
                     </form>

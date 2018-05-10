@@ -22,7 +22,7 @@ namespace BookCave.Services
                 BookId = review.Id,
                 CustomerId = accountId,
                 Rating = review.Rating,
-                comment = review.Comment
+                Comment = review.Comment
             };
             _db.Add(newReview);
             _db.SaveChanges();
@@ -105,11 +105,11 @@ namespace BookCave.Services
             where r.BookId == id
             select new ReviewViewModel
             {
-                bookID = r.BookId,
-                customerID = r.CustomerId,
+                BookID = r.BookId,
+                CustomerID = r.CustomerId,
                 //customerName = r
-                rating = r.Rating,
-                comment = r.comment
+                Rating = r.Rating,
+                Comment = r.Comment
             }).ToList();
             return reviews;
         }  

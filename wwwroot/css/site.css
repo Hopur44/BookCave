@@ -623,3 +623,9 @@ footer > a {
 #MyAccTitle {
     margin-left: 50px;
 }
+/*http://jsfiddle.net/BrianDillingham/6we0hvzL/*/
+.expiration input {
+    border: 0;
+    text-align: center;
+    outline: 0; /* remove if you want input highlight */
+}

@@ -10,6 +10,6 @@ namespace BookCave.Models.EntityModels
 
         public int Rating {get; set;}
 
-        public string comment {get; set;}
+        public string Comment {get; set;}
     }
 }
