@@ -52,13 +52,8 @@ namespace BookCave.Controllers
                 var objs = new { user = email, comment = review.Comment, rating = review.Rating, firstComment = true  };
                 return Json(objs);
             }
-<<<<<<< HEAD
-
-            var obj = new { user = email, comment = review.Comment, rating = review.Rating, firstComment = true  };
-=======
             
             var obj = new { user = email, comment = review.Comment, rating = review.Rating, firstComment = false };
->>>>>>> d04911ed9c67b4d1e08eaa0991f8d6b4f35e3046
             return Json(obj);
         }
 
