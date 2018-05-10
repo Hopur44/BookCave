@@ -135,13 +135,13 @@ namespace BookCave.Services
                         Price = b.Price,
                         Image = b.ImageLink,
                         Author = b.Author
-                    }).OrderByDescending(b => b.Rating).Take(n).ToList();
+                    }).ToList();
             foreach (var item in books)
             {
                 item.Rating = GetAverageRatingOfBook(item.Id);
             }
-
-            return books;
+            
+            return books.OrderByDescending(b => b.Rating).Take(n).ToList();
 
         }
         public List<BookViewModel> GetBooksByGenre(string genre)

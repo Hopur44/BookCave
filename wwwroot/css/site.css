@@ -705,6 +705,7 @@ footer > a {
 }
 .card {
     margin-left: 210px;
+    width: 50rem;
 }
 
 .MyAccountHeader {
