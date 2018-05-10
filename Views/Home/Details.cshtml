@@ -20,8 +20,8 @@
         </div>
         <div class="book-details-desc">Description: @Model.Description</div>
         <div class="book-details-price-rel-button"> 
-            <div class="book-details-price">Price: @Model.Price Kr</div>
-            <div class="book-details-rel"> Release date: @Model.PublishDate </div>
+            <div class="book-details-price">Price: @Model.Price kr.</div>
+            <div class="book-details-rel">Release date: @Model.PublishDate </div>
             @if(SignInManager.IsSignedIn(User))
             {
                 <button class="book-details-button add-user-book btn btn-success" data-book=@Model.Id data-price=@Model.Price data-toggle="modal" data-target="#userDetailAdd"> add to cart</button>
