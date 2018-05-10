@@ -45,22 +45,15 @@ namespace BookCave.Controllers
             string email = ((ClaimsIdentity) User.Identity).Name;
             int accountId = _accountService.GetAccountId(email);
             Console.WriteLine("did we go here? " + review.Id + " " + review.Rating + " " + review.Comment);
+            
             if(_bookService.PostBookReview(review, accountId) == true)
             {
-                TempData["alert"] = "<div class=\"alert alert-danger\"" + "role="+"alert" +">"
-                    +"You have already Written a review!"+
-                    "<button type=\"button\""+"class=\"close\""+" data-dismiss=\"alert\""+" aria-label=\"Close\"" +">"+
-                    "<span aria-hidden=\"true\">&times;</span>"+"</button></div>";
-                return RedirectToAction("Details",review.Id);
+
+                var objs = new { user = email, comment = review.Comment, rating = review.Rating, firstComment = true  };
+                return Json(objs);
             }
             
-<<<<<<< HEAD
-            _bookService.PostBookReview(review, accountId);
-=======
-            //var item = true;
->>>>>>> 01669740f935f5fec0d91b1e037b6e691e7d4607
-
-            var obj = new { user = email, comment = review.Comment, rating = review.Rating, firstComment = true  };
+            var obj = new { user = email, comment = review.Comment, rating = review.Rating, firstComment = false };
             return Json(obj);
         }
 
