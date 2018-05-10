@@ -11,6 +11,7 @@
 <div class="grid-home-container">
     
     <aside class="grid-home-aside">
+        <div class="grid-home-aside-item"> <a class="top-ten-button" asp-controller="Home" asp-action="TopTen"> Top ten </a> </div>
         <div class="grid-home-aside-item">
             <div class="dropdown">
                 <button class="dropbtn">Genres</button>
@@ -24,14 +25,13 @@
                 </div>
             </div>    
         </div> 
-        <div class="grid-home-aside-item"> <a class="top-ten-button" asp-controller="Home" asp-action="TopTen"> top ten </a> </div>
     </aside>
     <main class="grid-home-main">
         <div class="grid-order-buttons">
             <span class="grid-order-buttons-item"> Order by: </span> 
-            <button id="order-by-title" class="grid-order-buttons-item btn btn-default btn-xs"> name </button>
-            <button id="order-by-price" class="grid-order-buttons-item btn btn-default btn-xs"> price </button>
-            <button id="order-by-rating" class="grid-order-buttons-item btn btn-default btn-xs"> rating </button>
+            <button id="order-by-title" class="grid-order-buttons-item btn btn-default btn-xs"> Name </button>
+            <button id="order-by-price" class="grid-order-buttons-item btn btn-default btn-xs"> Price </button>
+            <button id="order-by-rating" class="grid-order-buttons-item btn btn-default btn-xs"> Rating </button>
             
         </div>
         <div class="grid-container"> 
@@ -42,7 +42,7 @@
                         <img src="@book.Image" alt="Image of @book.Title"> 
                     </a>
                     <div data-title="@book.Title" class="grid-book-title">@book.Title</div>
-                    <div data-rating=@book.Rating class="grid-book-rating">@book.Rating</div>
+                    <div data-rating=@book.Rating class="grid-book-rating">[@book.Rating/5]</div>
                     <div class="grid-book-price">@book.Price</div>
 
                     @if(SignInManager.IsSignedIn(User))

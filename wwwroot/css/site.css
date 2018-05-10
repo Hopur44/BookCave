@@ -3,6 +3,7 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* Wrapping element */
@@ -36,12 +37,22 @@ body {
     }
 }
 
+.navbar {
+    background-color: rgb(230, 230, 230);
+
+}
+
 .custom-btn {
     width: 120px;
     height: 40px;
     border-radius: 15px;
     margin: auto;
     background-color: rgb(221, 153, 87);
+    border-color: rgb(139, 99, 58)
+}
+
+.custom-btn:hover {
+    background-color: rgb(214, 118, 22);
 }
 
 .dropdown > .dropdown-content > a:hover {
@@ -599,8 +610,9 @@ footer > a {
 }
 
 .top-ten-button {
+    margin-top: 45px;
     border-radius: 5%;
-    background-color: rgb(177, 173, 173);
+    background-color: rgb(230, 230, 230);
     color: black;
     padding: 16px;
     font-size: 16px;
@@ -610,7 +622,7 @@ footer > a {
 /* dropdown list */
 .dropbtn {
     border-radius: 5%;
-    background-color: rgb(177, 173, 173);
+    background-color: rgb(230, 230, 230);
     color: black;
     padding: 16px;
     font-size: 16px;
