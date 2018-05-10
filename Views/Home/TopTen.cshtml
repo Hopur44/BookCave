@@ -7,8 +7,8 @@
         var claim = ((ClaimsIdentity) User.Identity);
     }
 
-<h1>These are the top 10 books</h1>
-<h2>of all time</h2>
+<center> <h2> Top 10</h2></center>
+
 
 <main class="grid-home-main">
     <div class="grid-container">
@@ -25,7 +25,7 @@
                 
                 @if(SignInManager.IsSignedIn(User))
                 {
-                    <button class="add-user-book btn btn-success" data-toggle="modal" data-target="#userTopAdd" data-book=@book.Id data-price=@book.Price> im logged in add</button>
+                    <button class="add-user-book btn btn-success" data-toggle="modal" data-target="#userTopAdd" data-book=@book.Id data-price=@book.Price> add to cart</button>
                     <!-- Modal -->
                     <div class="modal fade" id="userTopAdd" role="dialog">
                         <div class="modal-dialog">
@@ -45,7 +45,7 @@
                 }
                 else 
                 {
-                    <button class="add-book btn btn-danger" data-title="@book.Title" data-book=@book.Id data-price=@book.Price> im not logged in add</button>
+                    <button class="add-book btn btn-success" data-title="@book.Title" data-book=@book.Id data-price=@book.Price>add to cart</button>
                 }
             </div>
         }
