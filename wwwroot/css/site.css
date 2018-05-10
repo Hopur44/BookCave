@@ -40,8 +40,8 @@ body {
     /*background-color:rgb(49, 29, 5);*/
 }
 
-.dropdown {
-    
+.dropdown > .dropdown-content > a:hover {
+    cursor: pointer;
 }
 
 footer{
