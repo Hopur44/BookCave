@@ -628,18 +628,20 @@ $("#book-detail-review-form").on("submit", function(e) {
         data: JSON.stringify(item),
         success: function(result) {
 
+            if(result.firstComment === false) {
+                console.log('Data received: ');
+                console.log(result);
+                var name = result.user.split("@");
+                $("#user-comments").append(
+                    "<div class=comments>" +
+                            "<p>"+ "<strong> " + name[0] + "</strong>. Rating: " + result.rating +  " stars.</p>" +
+                            "<p>  " + result.comment +  ".</p>" + 
+                        "</div>"
+                );
+            } else {
+                alert("Thank you but you already made a comment about this book.");
+            }
             
-            console.log('Data received: ');
-            console.log(result);
-            var name = result.user.split("@");
-            alert("You already made a comment about this book.")
-            
-            $("#user-comments").append(
-                "<div class=comments>" +
-                        "<p>"+ "<strong> " + name[0] + "</strong>. Rating: " + result.rating +  " stars.</p>" +
-                        "<p>  " + result.comment +  ".</p>" + 
-                    "</div>"
-            );
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
