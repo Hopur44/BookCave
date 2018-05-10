@@ -40,8 +40,7 @@ if ($(".user-cart-header").length > 0)  {
 
 
 function getTotalUserCartQuantity() {
-    //url: '/Home/AllReviews',
-    //var dataType = 'application/json; charset=utf-8';
+
     $.ajax({
         type: 'GET',
         url: '/Cart/GetTotalQuantity',
@@ -656,8 +655,9 @@ if ($("#user-comments").length > 0)  {
 
             for(var i = 0; i < result.length; i++) {
                 $("#user-comments").append(
-                    "<div>" + 
-                        "<p> User: " + result[i].customerID + " said: " + result[i].comment +  " rating: " + result[i].rating + "</p>" +
+                    "<div class=comments>" +
+                        "<p>"+ "<strong> " + result[i].customerName + "</strong>. Rating: " + result[i].rating +  " stars.</p>" +
+                        "<p>  " + result[i].comment +  ".</p>" + 
                     "</div>"
                 );
             }
@@ -701,7 +701,6 @@ $("#book-detail-review-form").on("submit", function(e) {
 
     console.log(item);
 
-    // þetta er óþarfi
     var dataType = 'application/json; charset=utf-8';
     $.ajax({
         type: 'POST',
@@ -712,18 +711,14 @@ $("#book-detail-review-form").on("submit", function(e) {
         success: function(result) {
             console.log('Data received: ');
             console.log(result);
+            var name = result.user.split("@");
+
             $("#user-comments").append(
-                "<div>" + 
-                    "<p>" + result.user + " said:" + result.comment +  " rating: " + result.rating + "</p>" +
-                "</div>"
+                "<div class=comments>" +
+                        "<p>"+ "<strong> " + name[0] + "</strong>. Rating: " + result.rating +  " stars.</p>" +
+                        "<p>  " + result.comment +  ".</p>" + 
+                    "</div>"
             );
-            /*
-            if(result === false) {
-                window.location.href = "http://localhost:5000/Account/Login";
-            } else {
-                window.location.href = "http://localhost:5000/Checkout";
-            } 
-            */ 
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);

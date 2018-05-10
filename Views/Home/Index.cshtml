@@ -13,7 +13,7 @@
     <aside class="grid-home-aside">
         <div class="grid-home-aside-item">
             <div class="dropdown">
-                <button class="dropbtn">Categories-dropdown</button>
+                <button class="dropbtn">Genres</button>
                 <div class="dropdown-content" id="genre-filter">
                     <a data-genre="adventure">Adventure</a>
                     <a data-genre="mystery">Mystery</a> 
@@ -24,8 +24,7 @@
                 </div>
             </div>    
         </div> 
-        <div class="grid-home-aside-item"> <button> best sellers </button> </div>
-        <div class="grid-home-aside-item"> <a asp-controller="Home" asp-action="TopTen"> <button> top 10 </button> </a> </div>
+        <div class="grid-home-aside-item"> <a class="top-ten-button" asp-controller="Home" asp-action="TopTen"> top ten </a> </div>
     </aside>
     <main class="grid-home-main">
         <div class="grid-order-buttons">
@@ -48,7 +47,7 @@
 
                     @if(SignInManager.IsSignedIn(User))
                     {
-                        <button class="add-user-book btn btn-success" data-toggle="modal" data-target="#userHomeAdd" data-book=@book.Id data-price=@book.Price> im logged in add</button>
+                        <button class="add-user-book btn btn-success" data-toggle="modal" data-target="#userHomeAdd" data-book=@book.Id data-price=@book.Price> add to cart</button>
                         <!-- Modal -->
                         <div class="modal fade" id="userHomeAdd" role="dialog">
                             <div class="modal-dialog">
@@ -67,7 +66,7 @@
                     }
                     else 
                     {
-                        <button class="add-book btn btn-danger" data-title="@book.Title" data-book=@book.Id data-price=@book.Price> im not logged in add</button>
+                        <button class="add-book btn btn-success" data-title="@book.Title" data-book=@book.Id data-price=@book.Price> add to cart</button>
                     }
                     
                 </div>       

@@ -16,7 +16,8 @@ namespace BookCave.Models.ViewModels
         public int Rating {get; set;}
         public string Author {get; set;}
         public string Description { get; set; }
-        public string Publisher { get; set; }
+
+        public string PublishDate { get; set; }
         public int NumberOfPage { get; set; }
         public List<ReviewViewModel> ReviewList {get; set;}
         public string Comment {get; set;}

@@ -95,19 +95,21 @@ namespace BookCave.Services
                     Author = b.Author,
                     NumberOfPage = b.PageNumber,
                     ReviewList = reviewList,
-                    Rating = bookRating
+                    Rating = bookRating,
+                    PublishDate = b.PublishDate
                 }).SingleOrDefault(); 
             return book;
         }
         public List<ReviewViewModel> GetReviewsByBookID(int? id)
         {
             var reviews = (from r in _db.Reviews
+            join c in _db.Accounts on r.CustomerId equals c.Id
             where r.BookId == id
             select new ReviewViewModel
             {
                 BookID = r.BookId,
                 CustomerID = r.CustomerId,
-                //customerName = r
+                CustomerName = c.Name,
                 Rating = r.Rating,
                 Comment = r.Comment
             }).ToList();
