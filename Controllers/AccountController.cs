@@ -125,9 +125,5 @@ namespace BookCave.Controllers
             var orders = _accountService.GetUsersOrders(accountId);
             return View(orders);
         }
-        public IActionResult EditSuccess()
-        {
-            return Json("Changes Succesfully Made");
-        }
     }
 }

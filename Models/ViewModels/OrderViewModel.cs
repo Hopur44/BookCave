@@ -9,5 +9,7 @@ namespace BookCave.Models.ViewModels
         public List<CartViewModel> CartList {get; set;}
 
         public BillingInputModel Billing {get; set;}
+
+        public int TotalPrice {get; set;}
     }
 }

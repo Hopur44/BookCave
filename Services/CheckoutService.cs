@@ -57,10 +57,24 @@ namespace BookCave.Services
 
         public OrderViewModel GetReviewOrder(BillingInputModel billing, List<CartViewModel> userCart)
         {
+            var price = new List<int>();
+            foreach (var item in userCart)
+            {
+                if(item.Quantity != 1)
+                {
+                    price.Add(item.Price * item.Quantity);
+                }
+                else
+                {
+                    price.Add(item.Price);                    
+                }
+
+            }
             return new OrderViewModel
             {
                 CartList = userCart,
-                Billing = billing
+                Billing = billing,
+                TotalPrice = price.Sum()
             };
         }
         //function creates a new billing

@@ -19,14 +19,14 @@
         <div class="row">
             <div class="col-xs-6">
                 <address>
-                    <strong>Shipping Address: @Model.Billing.StreetAddress</strong><br>
-                    @Model.Billing.CardOwner<br>
+                    <strong>Shipping Address: </strong>@Model.Billing.StreetAddress<br/>
+                    @Model.Billing.CardOwner<br/>
                     ZIP: @Model.Billing.ZipCode, City: @Model.Billing.City, Country: @Model.Billing.Country
                 </address>
         </div>
             <div class="col-xs-6">
-                Credit Card: @Model.Billing.CardNumber<br>
-                Cvv: @Model.Billing.CvCode <br>
+                Credit Card: @Model.Billing.CardNumber<br/>
+                Cvv: @Model.Billing.CvCode <br/>
                 Expiring Date: @Model.Billing.ExpireMonth/@Model.Billing.ExpireYear
             </div>
         </div>
@@ -50,6 +50,11 @@
                     <td>@item.Price</td>
                 </tr>
             }
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Total price: @Model.TotalPrice</td>
+            </tr>
         </tbody>
     </table>
 </div>
