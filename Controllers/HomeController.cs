@@ -53,12 +53,6 @@ namespace BookCave.Controllers
                     "<span aria-hidden=\"true\">&times;</span>"+"</button></div>";
                 return RedirectToAction("Details",review.Id);
             }
-            
-<<<<<<< HEAD
-            _bookService.PostBookReview(review, accountId);
-=======
-            //var item = true;
->>>>>>> 01669740f935f5fec0d91b1e037b6e691e7d4607
 
             var obj = new { user = email, comment = review.Comment, rating = review.Rating, firstComment = true  };
             return Json(obj);
