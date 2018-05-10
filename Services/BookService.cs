@@ -11,12 +11,21 @@ namespace BookCave.Services
     public class BookService
     {
         private DataContext _db;
+        private DataContext reviewDB;
         public BookService()
         {
             _db = new DataContext();
+            reviewDB = new DataContext();
         }
-        public void PostBookReview(ReviewInputModel review, int accountId)
+        public bool PostBookReview(ReviewInputModel review, int accountId)
         {
+            var accountIdexist = (from r in _db.Reviews
+            where r.CustomerId == accountId && r.BookId == review.Id
+            select r.CustomerId).Any();
+            if(accountIdexist)
+            {
+                return true;
+            }
             var newReview = new ReviewEntityModel
             {
                 BookId = review.Id,
@@ -26,6 +35,7 @@ namespace BookCave.Services
             };
             _db.Add(newReview);
             _db.SaveChanges();
+            return false;
         }
         public List<BookViewModel> GetAllBooks()
         {
@@ -43,7 +53,7 @@ namespace BookCave.Services
         }
         public int GetAverageRatingOfBook(int? bookId)
         {
-            var rating = (from r in _db.Reviews
+            var rating = (from r in reviewDB.Reviews
             where r.BookId == bookId
             select r.Rating).ToList();
             if(rating.Count() == 0)
@@ -55,6 +65,7 @@ namespace BookCave.Services
         public List<BookViewModel> GetBooksByString(string SearchString)
         {
             var books = (from b in _db.Books
+                        //join r in _db.Reviews on b.Id equals r.BookId
                         select new BookViewModel
                         {
                             Id = b.Id,
@@ -62,14 +73,13 @@ namespace BookCave.Services
                             Price = b.Price,
                             Image = b.ImageLink,
                             Author = b.Author,
+                            Rating = GetAverageRatingOfBook(b.Id),
                             Genre = b.Genre
                         }).ToList();
-            /*
-            foreach (var item in books)
-            {
-                item.Rating = GetAverageRatingOfBook(item.Id);
-            }
-            */
+            // foreach (var item in books)
+            // {
+            //     item.Rating = GetAverageRatingOfBook(item.Id);
+            // }
             if(!string.IsNullOrEmpty(SearchString))
             {
                 books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) 
