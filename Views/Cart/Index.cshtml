@@ -12,7 +12,7 @@
 @if(SignInManager.IsSignedIn(User))
 {
     <!-- logged in user gets items from List.. this is HttpGet request -->
-    <h2> hello signed in user </h2>
+    <h2> Your Cart </h2>
     <div id="cart-logged-in-user" class="user-grid-cart fade-in">
         @if( !Model.Any() )
         {

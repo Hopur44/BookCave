@@ -683,7 +683,7 @@ $("#order-by-rating").on("click", function(e) {
 
     .sort(function(a, b) {
         // get text content in .price and return difference
-        return getRating(a) - getRating(b);
+        return getRating(b) - getRating(a);
         // iterate and append again in new sorted order
       }).forEach(function(ele) {
         parent.appendChild(ele);
