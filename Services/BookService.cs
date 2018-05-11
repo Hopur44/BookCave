@@ -33,9 +33,36 @@ namespace BookCave.Services
                 Rating = review.Rating,
                 Comment = review.Comment
             };
+            UpdateBookRating(review.Id, review.Rating);
             _db.Add(newReview);
             _db.SaveChanges();
             return false;
+        }
+        public void UpdateBookRating(int bookId, int rating)
+        {
+            var bookRating = (from r in _db.Reviews
+                        where r.BookId == bookId
+                        select r.Rating).ToList();
+            bookRating.Add(rating);
+            var newRating = Convert.ToInt32(bookRating.Average());
+            var book = (from b in _db.Books
+                        where b.Id == bookId
+                        select new BookEntityModel
+                        {
+                            Id = b.Id,
+                            Price = b.Price,
+                            Title = b.Title,
+                            Genre = b.Genre,
+                            Description = b.Description,
+                            Rating = newRating,
+                            Author = b.Author,
+                            ImageLink = b.ImageLink, 
+                            PublishDate = b.PublishDate,
+                            PageNumber = b.PageNumber
+                        }).SingleOrDefault();
+                        _db.Update(book);
+                        _db.SaveChanges();
+
         }
         public List<BookViewModel> GetAllBooks()
         {
@@ -45,7 +72,7 @@ namespace BookCave.Services
                                 Id = b.Id,
                                 Title = b.Title,
                                 Price = b.Price,
-                                Rating = GetAverageRatingOfBook(b.Id),
+                                Rating = b.Rating,
                                 Image = b.ImageLink,
                                 Author = b.Author
                             }).OrderBy(b => b.Title).ToList();
@@ -73,7 +100,7 @@ namespace BookCave.Services
                             Price = b.Price,
                             Image = b.ImageLink,
                             Author = b.Author,
-                            Rating = GetAverageRatingOfBook(b.Id),
+                            Rating = b.Rating,
                             Genre = b.Genre
                         }).ToList();
             // foreach (var item in books)
@@ -134,12 +161,9 @@ namespace BookCave.Services
                         Title = b.Title,
                         Price = b.Price,
                         Image = b.ImageLink,
+                        Rating = b.Rating,
                         Author = b.Author
                     }).ToList();
-            foreach (var item in books)
-            {
-                item.Rating = GetAverageRatingOfBook(item.Id);
-            }
             
             return books.OrderByDescending(b => b.Rating).Take(n).ToList();
 
@@ -154,12 +178,9 @@ namespace BookCave.Services
                         Title = b.Title,
                         Price = b.Price,
                         Image = b.ImageLink,
-                        Author = b.Author
+                        Author = b.Author,
+                        Rating = b.Rating
                     }).ToList();
-            foreach (var item in books)
-            {
-                item.Rating = GetAverageRatingOfBook(item.Id);
-            }
             return books;
         }
     }

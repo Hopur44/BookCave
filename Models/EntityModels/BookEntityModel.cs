@@ -14,6 +14,8 @@ namespace BookCave.Models.EntityModels
 
         public string Description {get; set;}
 
+        public int Rating{get; set;}
+
         public string Author {get; set;}
 
         public string ImageLink {get; set;}
