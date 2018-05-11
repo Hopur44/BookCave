@@ -73,6 +73,10 @@ namespace BookCave.Services
             /*three if statements to check if string from the textboxes are empty
                 and gives them their right values if they are empty
             */ 
+            if(editAccount.Name == null)
+            {
+                editAccount.Name = account.Name;
+            }
             if(editAccount.Address == null)
             {
                 editAccount.Address = account.Address;
@@ -88,7 +92,7 @@ namespace BookCave.Services
             var editedAccount = new AccountEntityModel
             {
                 Id = account.Id,
-                Name = account.Name,
+                Name = editAccount.Name,
                 Email = account.Email,
                 Address = editAccount.Address, 
                 Image = editAccount.Image,

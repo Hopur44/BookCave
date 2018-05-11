@@ -3,14 +3,17 @@
     <form method="post">
         <div class="form-group">
             <div class="col-md-3">
-                <input class="form-control" type="text" placeholder="Address" asp-for="Address">
+                <input class="form-control" type="text" placeholder="Address" asp-for="Address"/>
                 <span asp-validation-for="Address"></span>
                 <br/>
-                <input class="form-control" type="text" placeholder="Enter Image Link here" asp-for="Image">
+                <input class="form-control" type="text" placeholder="Enter Image Link here" asp-for="Image"/>
                 <span asp-validation-for="Image"></span>
                 <br/>
-                <input class="form-control" type="text" placeholder="Favourite Book" asp-for="FavouriteBook">
+                <input class="form-control" type="text" placeholder="Favourite Book" asp-for="FavouriteBook"/>
                 <span asp-validation-for="FavouriteBook"></span>
+                <br/>
+                <input class="form-control" type="text" placeholder="Name" asp-for="Name"/>
+                <span asp-validation-for="Name"></span>
                 <br/>
                 <input id="edit-button" type="submit" value="Submit Changes" class="btn btn-danger">
             </div>
