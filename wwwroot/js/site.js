@@ -612,41 +612,47 @@ $("#book-detail-review-form").on("submit", function(e) {
     
     // we create the object with bookId, comment and rating to send to the controller
     var dataArray = $("#book-detail-review-form").serializeArray();
-    var rating = parseInt(dataArray[0].value, 10);
-    item = { 
-        id: bookId, 
-        rating: rating, 
-        comment: dataArray[1].value
+    console.log(dataArray)
+    if(dataArray[0].value === "" || dataArray[1].value === "") {
+        alert("Please comment and rate the book")
+    } else {
+        var rating = parseInt(dataArray[0].value, 10);
+        item = { 
+            id: bookId, 
+            rating: rating, 
+            comment: dataArray[1].value
+        }
+
+        var dataType = 'application/json; charset=utf-8';
+        $.ajax({
+            type: 'POST',
+            url: '/Home/AddComment',
+            dataType: 'json',
+            contentType: dataType,
+            data: JSON.stringify(item),
+            success: function(result) {
+
+                if(result.firstComment === false) {
+                    console.log('Data received: ');
+                    console.log(result);
+                    var name = result.user.split("@");
+                    $("#user-comments").append(
+                        "<div class=comments>" +
+                                "<p>"+ "<strong> " + name[0] + "</strong>. Rating: " + result.rating +  " stars.</p>" +
+                                "<p>  " + result.comment +  ".</p>" + 
+                            "</div>"
+                    );
+                } else {
+                    alert("Thank you but you already made a comment about this book.");
+                }
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
+            } 
+        });    
     }
-
-    var dataType = 'application/json; charset=utf-8';
-    $.ajax({
-        type: 'POST',
-        url: '/Home/AddComment',
-        dataType: 'json',
-        contentType: dataType,
-        data: JSON.stringify(item),
-        success: function(result) {
-
-            if(result.firstComment === false) {
-                console.log('Data received: ');
-                console.log(result);
-                var name = result.user.split("@");
-                $("#user-comments").append(
-                    "<div class=comments>" +
-                            "<p>"+ "<strong> " + name[0] + "</strong>. Rating: " + result.rating +  " stars.</p>" +
-                            "<p>  " + result.comment +  ".</p>" + 
-                        "</div>"
-                );
-            } else {
-                alert("Thank you but you already made a comment about this book.");
-            }
-            
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log("Cart Post: Status: " + textStatus + " Error: " + errorThrown);
-        } 
-    });
+    
 });
 
 // All users

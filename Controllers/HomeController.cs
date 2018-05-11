@@ -45,6 +45,11 @@ namespace BookCave.Controllers
             string email = ((ClaimsIdentity) User.Identity).Name;
             int accountId = _accountService.GetAccountId(email);
             Console.WriteLine("did we go here? " + review.Id + " " + review.Rating + " " + review.Comment);
+            if(!ModelState.IsValid)
+            {
+                var objs2 = new { user = email, comment = "r", rating = 1, firstComment = true  };
+                return Json(objs2);
+            }
             
             if(_bookService.PostBookReview(review, accountId) == true)
             {
