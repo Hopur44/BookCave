@@ -54,7 +54,7 @@ namespace BookCave.Services
                         ExpireMonth = b.ExpireDate.Substring(0,2)
                     }).FirstOrDefault();
         }
-
+        //Gets the order to display during checkout
         public OrderViewModel GetReviewOrder(BillingInputModel billing, List<CartViewModel> userCart)
         {
             var price = new List<int>();
@@ -102,10 +102,12 @@ namespace BookCave.Services
             if(BillingIdExist(accountId))
             {
                 //check wether the the existing billing has an order attached to it
+                // if it doesnt exist built a new billing
                 if(!OrderExist(accountId))
                 {
                     CreateBillingHelperFunction(billing, accountId);
                 }
+                //else it updates the the old billing
                 else
                 {
                     var billingInput = new BillingEntityModel
@@ -144,11 +146,11 @@ namespace BookCave.Services
                     Price = item.Quantity * item.Price
                 };
                 _db.Add(newOrder);
-                //required to either delete the Cart or changes cart Finished to True
+                //deletes the cart
                 _cartService.RemoveCart(item,accountId);
             }
             var billing = GetBilling(billingId);
-
+            //updates the cart to finished so this billing wont be changed
             var billingInput = new BillingEntityModel
             {
                 Id = billingId,

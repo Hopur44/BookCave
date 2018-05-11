@@ -76,7 +76,7 @@ namespace BookCave.Services
             var quantity = FindQuanity(accountId,model.ItemId);
             Console.WriteLine("I'm inserting to cart table in database");
             Console.WriteLine("quantity is: " + quantity);
-            
+            //if there is no cart create a new one
             if(quantity == 0) 
             {
                 var newItemInCart = new CartEntityModel
@@ -89,6 +89,7 @@ namespace BookCave.Services
                 _db.Add(newItemInCart);
 
             }
+            //update an existing cart
             else 
             {
                 var cartId = FindCartId(accountId,model.ItemId);

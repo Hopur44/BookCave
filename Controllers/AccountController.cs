@@ -75,6 +75,7 @@ namespace BookCave.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            //sends an alert if the user fails to login
             ViewBag.alert = "<div class=\"alert alert-warning\"" + "role="+"alert" +">"
                     +"Wrong password or email"+
                     "<button type=\"button\""+"class=\"close\""+" data-dismiss=\"alert\""+" aria-label=\"Close\"" +">"+

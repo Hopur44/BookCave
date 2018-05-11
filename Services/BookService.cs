@@ -43,7 +43,9 @@ namespace BookCave.Services
             var bookRating = (from r in _db.Reviews
                         where r.BookId == bookId
                         select r.Rating).ToList();
+
             bookRating.Add(rating);
+
             var newRating = Convert.ToInt32(bookRating.Average());
             var book = (from b in _db.Books
                         where b.Id == bookId
@@ -92,7 +94,6 @@ namespace BookCave.Services
         public List<BookViewModel> GetBooksByString(string SearchString)
         {
             var books = (from b in _db.Books
-                        //join r in _db.Reviews on b.Id equals r.BookId
                         select new BookViewModel
                         {
                             Id = b.Id,
@@ -103,10 +104,7 @@ namespace BookCave.Services
                             Rating = b.Rating,
                             Genre = b.Genre
                         }).ToList();
-            // foreach (var item in books)
-            // {
-            //     item.Rating = GetAverageRatingOfBook(item.Id);
-            // }
+
             if(!string.IsNullOrEmpty(SearchString))
             {
                 books = books.Where(b => b.Title.ToLower().Contains(SearchString.ToLower()) 
