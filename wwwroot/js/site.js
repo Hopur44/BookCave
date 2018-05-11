@@ -734,3 +734,9 @@ function getName(ele) {
     var title = $(_this).data("title");
     return title;
 }
+
+$("#review-loader").hide();
+$("#review-order").on("click", function(e) {
+    $("#review-loader").show();
+    $(this).hide();
+})
