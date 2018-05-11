@@ -21,7 +21,7 @@ namespace BookCave.Models.ViewModels
         public string PublishDate { get; set; }
         public int NumberOfPage { get; set; }
         public List<ReviewViewModel> ReviewList {get; set;}
-        [Required]
+        
         public string Comment {get; set;}
     }
 }

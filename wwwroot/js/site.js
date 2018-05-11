@@ -613,8 +613,8 @@ $("#book-detail-review-form").on("submit", function(e) {
     // we create the object with bookId, comment and rating to send to the controller
     var dataArray = $("#book-detail-review-form").serializeArray();
     console.log(dataArray)
-    if(dataArray[0].value === "" || dataArray[1].value === "") {
-        alert("Please comment and rate the book")
+    if(dataArray[0].value === "") {
+        alert("Please rate the book")
     } else {
         var rating = parseInt(dataArray[0].value, 10);
         item = { 
